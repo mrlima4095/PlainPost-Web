@@ -4,7 +4,7 @@ window.onload = () => {
 
     const fetchRequest = async (action, extraData = {}) => {
         try {
-            const resposta = await fetch("https://servidordomal.fun/api/mail", {
+            const resposta = await fetch("https://archsource.xyz/api/mail", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Authorization": token },
                 body: JSON.stringify({ action, ...extraData })

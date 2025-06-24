@@ -5,7 +5,7 @@ window.onload = () => {
     document.getElementById("back").addEventListener("click", () => { window.location.href = "/mail"; });
     document.getElementById("mural").addEventListener("click", async () => { 
         try {
-            const resposta = await fetch("https://servidordomal.fun/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "status" }), });
+            const resposta = await fetch("https://archsource.xyz/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "status" }), });
             const dados = await resposta.json();
 
             if (resposta.status == 200) window.location.href = "/mural/" + dados.response;
@@ -18,7 +18,7 @@ window.onload = () => {
         if (!file_id) return Swal.fire('Erro', 'O ID não pode estar vazio!', 'error');
         
         try {
-            const resposta = await fetch("https://servidordomal.fun/api/mural", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ file_id }), });
+            const resposta = await fetch("https://archsource.xyz/api/mural", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ file_id }), });
 
             if (resposta.status == 200) Swal.fire('Sucesso', 'A pagina do seu mural foi alterada!', 'success');
             else if (resposta.status == 404) Swal.fire('Erro', 'O arquivo não foi encontrado, ou você não é o dono dele!', 'error');
@@ -33,7 +33,7 @@ window.onload = () => {
         if (!content) return Swal.fire('Erro', 'Sua biografia não pode estar vazia!', 'error');
         
         try {
-            const resposta = await fetch("https://servidordomal.fun/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "changebio", bio: content }), });
+            const resposta = await fetch("https://archsource.xyz/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "changebio", bio: content }), });
 
             if (resposta.status == 200) Swal.fire('Sucesso', 'Sua biografia foi alterada!', 'success');
             else if (resposta.status == 401) Swal.fire('Erro', 'O destinatário não foi encontrado!', 'error');
