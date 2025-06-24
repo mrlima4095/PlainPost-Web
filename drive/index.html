@@ -14,7 +14,7 @@
 
         async function status() {
             const token = localStorage.getItem("Mail-Token");
-            if (!token) { window.location.href = "/mail/login"; }
+            if (!token) { window.location.href = "/login"; }
 
             try {
                 const resposta = await fetch("https://archsource.xyz/api/mail", {
@@ -24,14 +24,14 @@
                 });
 
                 if (resposta.status == 200) { return; }
-                else if (resposta.status == 401) { window.location.href = "/mail/login"; }
+                else if (resposta.status == 401) { window.location.href = "/login"; }
                 else { Swal.fire("Erro", "Ocorreu um erro interno!", "error"); }
             } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); } 
         }
 
         async function upload() {
             const token = localStorage.getItem("Mail-Token");
-            if (!token) { window.location.href = "/mail/login"; }
+            if (!token) { window.location.href = "/login"; }
 
             const file = document.getElementById('fileInput').files[0];
             if (!file) return Swal.fire("Erro", "Selecione um arquivo!", "error");
