@@ -2,7 +2,7 @@ window.onload = () => {
     const token = localStorage.getItem("Mail-Token");
     if (!token) { window.location.href = "login"; return; }
 
-    document.getElementById("back").addEventListener("click", () => { window.location.href = "/mail"; });
+    document.getElementById("back").addEventListener("click", () => { window.location.href = "/"; });
     document.getElementById("mural").addEventListener("click", async () => { 
         try {
             const resposta = await fetch("https://archsource.xyz/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "status" }), });
