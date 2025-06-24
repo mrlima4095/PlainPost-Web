@@ -9,7 +9,7 @@ window.onload = () => {
             const dados = await resposta.json();
 
             if (resposta.status == 200) window.location.href = "/mural/" + dados.response;
-            else if (resposta.status == 401) window.location.href = "/mail";
+            else if (resposta.status == 401) window.location.href = "/";
             else { Swal.fire('Erro', 'Ocorreu um erro interno.', 'error'); }
         } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); }
     });
