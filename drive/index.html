@@ -75,7 +75,7 @@
         function mostrarPropriedades(arquivo) { Swal.fire({ title: 'Propriedades do Arquivo', html: `<b>Nome:</b> ${arquivo.filename}<br> <b>Tamanho:</b> ${(arquivo.size / 1024 / 1024).toFixed(2)} MB<br> <b>Enviado em:</b> ${formatarData(arquivo.upload_time)}<br> <b>Expira em:</b> ${arquivo.expire_time ? formatarData(arquivo.expire_time) : 'Permanente'} `, icon: 'info' }); }
         function baixar(fileId) { window.open(`${apiBase}/download/${fileId}`, '_blank'); }
 
-        function plainpost() { window.location.href = "/mail"; }
+        function plainpost() { window.location.href = "/"; }
 
         async function deletar(fileId) {
             const result = await Swal.fire({ title: "Tem certeza?", text: "Tem certeza que deseja apagar o arquivo? (Esta ação é irreversível!)", icon: "warning", showCancelButton: true, confirmButtonText: "Sim, apagar", cancelButtonText: "Cancelar" });
