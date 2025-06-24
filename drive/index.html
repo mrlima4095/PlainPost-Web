@@ -48,7 +48,7 @@
 
         async function listar() {
             const token = localStorage.getItem("Mail-Token");
-            if (!token) { window.location.href = "/mail/login"; }
+            if (!token) { window.location.href = "/login"; }
 
             const res = await fetch(`${apiBase}/list`, { method: "GET", headers: { "Authorization": token } });
             const arquivos = await res.json();
