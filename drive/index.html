@@ -10,14 +10,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        const apiBase = 'https://servidordomal.fun/api/drive';
+        const apiBase = 'https://archsource.xyz/api/drive';
 
         async function status() {
             const token = localStorage.getItem("Mail-Token");
             if (!token) { window.location.href = "/mail/login"; }
 
             try {
-                const resposta = await fetch("https://servidordomal.fun/api/mail", {
+                const resposta = await fetch("https://archsource.xyz/api/mail", {
                     method: "POST",
                     headers: { "Content-Type": "application/json", "Authorization": token },
                     body: JSON.stringify({ action: "status" })
