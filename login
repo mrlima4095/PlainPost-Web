@@ -26,7 +26,7 @@
 
             <button type="button">Entrar</button>
             <button type="button">Registrar-se</button>
-            <br><a href="/mail/privacy">Política de Privacidade</a>
+            <br><a href="privacy">Política de Privacidade</a>
         </form>
     </div>
 </body>
