@@ -73,7 +73,7 @@
       const token = localStorage.getItem("Mail-Token");
 
       if (!token) {
-        alert("Token JWT não encontrado no localStorage como 'Mail-Token'. Faça login primeiro.");
+         window.document.location = "/login"
         return;
       }
 
