@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />                  
-<<<<<<< HEAD
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Agente S.</title>
 
@@ -20,64 +19,5 @@
 
         <div id="response">Resposta aparecerá aqui...</div>
     </div>
-=======
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>             <title>Ollama Web Client</title>
-    <title>IA Agent</title>
-
-    <link rel="stylesheet" href="style.css">
-    
-</head>
-<body>
-  <div id="container">
-    <h1>🧠 Ollama Client</h1>
-
-    <label for="prompt">💬 Prompt:</label>
-    <textarea id="prompt" placeholder="Digite sua pergunta..."></textarea>
-
-    <button onclick="sendPrompt()">Enviar</button>
-
-    <div class="response" id="response">Resposta aparecerá aqui...</div>
-  </div>
-
-  <script>
-    async function sendPrompt() {
-      const prompt = document.getElementById("prompt").value;
-      const responseBox = document.getElementById("response");
-
-      const token = localStorage.getItem("Mail-Token");
-
-      if (!token) {
-         window.document.location = "/login"
-        return;
-      }
-
-      if (!prompt) {
-        alert("Digite um prompt.");
-        return;
-      }
-
-      responseBox.textContent = "⌛ Aguardando resposta...";
-
-      try {
-        const response = await fetch("https://archsource.xyz/api/agent", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": token
-          },
-          body: JSON.stringify({
-            model: "gemma3:1b",
-            prompt: prompt
-          })
-        });
-
-        const data = await response.json();
-        responseBox.textContent = data.response || "❌ Erro na resposta";
-      } catch (err) {
-        responseBox.textContent = "Erro: " + err.message;
-      }
-    }
-  </script>
->>>>>>> origin/main
 </body>
 </html>
