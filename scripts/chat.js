@@ -1,7 +1,7 @@
-async function sendPrompt() {
-    const prompt = document.getElementById("prompt").value;
-    const responseBox = document.getElementById("response");
+const prompt = document.getElementById("prompt").value;
+const responseBox = document.getElementById("response");
 
+async function sendPrompt() {
     const token = localStorage.getItem("Mail-Token");
 
     if (!token) { window.document.location = "/login" return; }
