@@ -92,7 +92,7 @@
             "Authorization": token
           },
           body: JSON.stringify({
-            model: "llama3",
+            model: "gemma3:1b",
             prompt: prompt
           })
         });
