@@ -6,18 +6,58 @@
     <title>Agente S.</title>
 
     <link rel="stylesheet" href="style.css">
-    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="scripts/chat.js"></script>
 </head>
 <body>
     <div id="conteiner">
         <label for="prompt">💬 Prompt:</label>
         <textarea id="prompt" placeholder="Digite sua pergunta..."></textarea>
 
-        <button onclick="sendPrompt()">Enviar</button>
+        <button id="enviar">Enviar</button>
 
-        <div class="response" id="response">Resposta aparecerá aqui...</div>
+        <div id="response">Resposta aparecerá aqui...</div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const promptInput = document.getElementById("prompt");
+            const responseBox = document.getElementById("response");
+            const sendButton = document.getElementById("enviar");
+
+            sendButton.addEventListener("click", async () => {
+                const token = localStorage.getItem("Mail-Token");
+                const promptValue = promptInput.value.trim();
+
+                if (!token) {
+                    window.location = "/login";
+                    return;
+                }
+
+                if (!promptValue) {
+                    Swal.fire("Aviso", "Digite um prompt.", "warning");
+                    return;
+                }
+
+                responseBox.textContent = "⌛ Aguardando resposta...";
+
+                try {
+                    const response = await fetch("https://archsource.xyz/api/agent", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": token
+                        },
+                        body: JSON.stringify({ prompt: promptValue })
+                    });
+
+                    const data = await response.json();
+                    responseBox.textContent = data.response || "❌ Erro na resposta";
+                } catch (err) {
+                    Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
+                    responseBox.textContent = "❌ Erro na resposta";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
