@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Agente S.</title>
 
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 
     <style>
         * {
@@ -89,7 +90,6 @@
 
         <div id="response">Resposta aparecerá aqui...</div>
     </div>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const promptInput = document.getElementById("prompt");
@@ -123,13 +123,14 @@
                     });
 
                     const data = await response.json();
-                    responseBox.textContent = data.response || "❌ Erro na resposta";
+                    responseBox.innerHTML = marked.parse(data.response || "❌ Erro na resposta");
                 } catch (err) {
                     Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
                     responseBox.textContent = "❌ Erro na resposta";
                 }
             });
         });
-    </script>
+</script>
+
 </body>
 </html>
