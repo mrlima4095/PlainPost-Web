@@ -17,7 +17,7 @@
 
         <button onclick="sendPrompt()">Enviar</button>
 
-        <div id="response">Resposta aparecerá aqui...</div>
+        <div class="response" id="response">Resposta aparecerá aqui...</div>
     </div>
 </body>
 </html>
