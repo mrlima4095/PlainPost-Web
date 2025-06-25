@@ -21,7 +21,6 @@ async function sendPrompt() {
         "Authorization": token
         },
         body: JSON.stringify({
-        model: "gemma3:1b",
         prompt: prompt
         })
         });
