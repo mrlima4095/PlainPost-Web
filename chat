@@ -9,7 +9,7 @@
     
 </head>
 <body>
-  <div class="container">
+  <div id="container">
     <h1>🧠 Ollama Client</h1>
 
     <label for="prompt">💬 Prompt:</label>
