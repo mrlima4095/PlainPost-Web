@@ -121,22 +121,34 @@
   }
 
     async function enviarPrompt() {
-      const token = localStorage.getItem("Mail-Token");
-      const prompt = document.getElementById("prompt").value.trim();
-      if (!prompt) return;
+  const token = localStorage.getItem("Mail-Token");
+  const prompt = document.getElementById("prompt").value.trim();
+  if (!prompt) return;
 
-      await fetch("/api/agent", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": Mail-Token
-        },
-        body: JSON.stringify({ prompt })
-      });
+  await fetch("/api/agent", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": token
+    },
+    body: JSON.stringify({ prompt })
+  });
 
-      document.getElementById("prompt").value = "";
-      carregarHistorico();
+  document.getElementById("prompt").value = "";
+  carregarHistorico();
+}
+
+async function limparHistorico() {
+  const token = localStorage.getItem("Mail-Token");
+  await fetch("/api/agent/forget", {
+    method: "POST",
+    headers: {
+      "Authorization": token
     }
+  });
+  carregarHistorico();
+}
+
 
     async function limparHistorico() {
       const token = localStorage.getItem("Mail-Token");
