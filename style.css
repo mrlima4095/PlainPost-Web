@@ -23,20 +23,6 @@ body {
     width: 90%;
     text-align: center;
 }
-#acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
-#acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
-#acoes button { white-space: nowrap; }
-
-#menu {
-    display: none; 
-    margin-top: 10px;
-    background: #0199ff1e;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    width: 100%;
-}
-
 
 #conteiner h2 {
     margin-bottom: 10px;
@@ -54,6 +40,23 @@ body {
     width: 100%;
     margin-top: 10px;
 }
+
+#acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
+#acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
+#acoes button { white-space: nowrap; }
+
+#menu {
+    display: none; 
+    margin-top: 10px;
+    background: #0199ff1e;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+
+
 
 form {
     display: flex;
