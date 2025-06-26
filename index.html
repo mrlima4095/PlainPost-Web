@@ -10,27 +10,31 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="scripts/index.js"></script>
+    <script>
+        function mostrarAba() { document.getElementById("aba").style.display = "block"; }
+        function fecharAba() { document.getElementById("aba").style.display = "none"; }
+    </script>
 </head>
 <body>
-
     <div id="conteiner">
-        <div id="seila">
+        <div id="acoes">
             <button id="send" type="submit">Escrever</button>
             <button id="clear" type="submit">Limpar Mensagens</button>
             <img src="avatar.png" id="avatar" onclick="mostrarAba()">
-            <div id="aba">
-                <h2>Minha Conta</h2><br>
-                    <button id="me" type="submit">Meus Dados</button>
-                    <button id="coins" type="submit">Meu Saldo</button>
-                    <button id="drive" type="submit">BinDrop (Drive)</button>
-                    <button id="options" type="submit">Painel da Conta</button>
-                    <button id="security" type="submit">Ações de Segurança</button>
-                <button onclick="fecharAba()">Fechar Aba</button>
-            </div>
+        </div>
+
+        <div id="aba">
+            <h2>Minha Conta</h2><br>
+            <button id="me" type="submit">Meus Dados</button>
+            <button id="coins" type="submit">Meu Saldo</button>
+            <button id="drive" type="submit">BinDrop (Drive)</button>
+            <button id="options" type="submit">Painel da Conta</button>
+            <button id="security" type="submit">Ações de Segurança</button>
+            <button onclick="fecharAba()">Fechar Aba</button>
         </div>
 
         <br><br>
-        Mensagens aqui.... TAlalalala
+        Mensagens aqui... Talalalala
     </div>
 </body>
 </html>
