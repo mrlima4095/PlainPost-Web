@@ -1,3 +1,6 @@
+function mostrarAba() { document.getElementById("aba").style.display = "block"; }
+function fecharAba() { document.getElementById("aba").style.display = "none"; }
+
 window.onload = () => {
     const token = localStorage.getItem("Mail-Token");
     if (!token) { window.location.href = "login"; return; }
