@@ -1,5 +1,5 @@
-function show() { document.getElementById("menu").style.display = "block"; }
-function hide() { document.getElementById("menu").style.display = "none"; }
+function showmenu() { document.getElementById("menu").style.display = "block"; }
+function hidemenu() { document.getElementById("menu").style.display = "none"; }
 
 window.onload = () => {
     const token = localStorage.getItem("Mail-Token");
