@@ -109,7 +109,7 @@
 
                 container.scrollTop = container.scrollHeight;
 
-            } catch (e) { container.innerHTML = "<div class='msg-bot'>❌ Falha ao carregar histórico.</div>";  }
+            } catch (e) { container.innerHTML = "<div class='msg-bot'>Erro ao carregar histórico.</div>";  }
         }
 
         async function enviarPrompt() {
@@ -118,49 +118,43 @@
 
             const prompt = document.getElementById("prompt").value.trim();
             if (!prompt) { return; }
+            
+            document.getElementById("prompt").value = "";
 
             try {
                 const res = await fetch("/api/agent", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ prompt }) });
                 if (!res.ok) { Swal.fire('Erro', 'Erro ao enviar mensagem.', 'error'); }
 
+                const data = await res.json();
+                const container = document.getElementById("mensagens");
 
-    const data = await res.json();
+                const userMsg = document.createElement("div");
+                userMsg.className = "msg-user";
+                userMsg.textContent = prompt;
+                container.appendChild(userMsg);
+            
+                const botMsg = document.createElement("div");
+                botMsg.className = "msg-bot";
+                botMsg.textContent = data.response || "Nenhuma resposta recebida.";
+                container.appendChild(botMsg);
+            
+                container.scrollTop = container.scrollHeight;
+            } catch (e) { container.innerHTML = "<div class='msg-bot'>Falha na comunicação.</div>";  }}
+        }
 
-    const container = document.getElementById("mensagens");
+        async function limparHistorico() {
+            const token = localStorage.getItem("Mail-Token");
+            if (!token) { window.location.href = "login"; return; }
 
-    // Mostra a mensagem do usuário
-    const userMsg = document.createElement("div");
-    userMsg.className = "msg-user";
-    userMsg.textContent = prompt;
-    container.appendChild(userMsg);
+            try { 
+                const res = await fetch("/api/agent/forget", { method: "POST", headers: { "Authorization": token } });
 
-    // Mostra a resposta do bot
-    const botMsg = document.createElement("div");
-    botMsg.className = "msg-bot";
-    botMsg.textContent = data.response || "Nenhuma resposta recebida.";
-    container.appendChild(botMsg);
+                if (!res.ok) { Swal.fire('Erro', 'Erro ao limpar histórico.', 'error'); return; }
 
-    container.scrollTop = container.scrollHeight;
+                carregarHistorico();
 
-    document.getElementById("prompt").value = "";
-
-  } catch (e) {
-    console.error("Erro ao enviar prompt:", e);
-  }
-}
-
-    async function limparHistorico() {
-        const token = localStorage.getItem("Mail-Token");
-        if (!token) { window.location.href = "login"; return; }
-
-        try { const res = await fetch("/api/agent/forget", { method: "POST", headers: { "Authorization": token } });
-
-    if (!res.ok) { Swal.fire('Erro', 'Erro ao limpar histórico.', 'error'); return; }
-
-    carregarHistorico();
-
-  } catch (e) { Swal.fire('Erro', 'Erro ao limpar histórico.', 'error'); } 
-    }
+            } catch (e) { Swal.fire('Erro', 'Erro ao limpar histórico.', 'error'); } 
+        }
 
     </script>
 </body>
