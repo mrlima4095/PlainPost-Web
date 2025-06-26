@@ -23,6 +23,9 @@ body {
     width: 90%;
     text-align: center;
 }
+#seila {
+    align-items: justify-content;
+}
 
 #conteiner h2 {
     margin-bottom: 10px;
