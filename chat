@@ -80,85 +80,121 @@
   </div>
 
   <script>
-     async function carregarHistorico() {
-    const token = localStorage.getItem("Mail-Token");
-    const container = document.getElementById("mensagens");
-    container.innerHTML = "";
+    async function carregarHistorico() {
+  const token = localStorage.getItem("Mail-Token");
+  const container = document.getElementById("mensagens");
+  container.innerHTML = "";
 
-    if (!token) { window.location.href = "login"; }
-
-    try {
-      const res = await fetch("/api/agent/history", {
-        method: "GET",
-        headers: {
-          "Authorization": token
-        }
-      });
-
-      const data = await res.json();
-
-      if (Array.isArray(data.response)) {
-        data.response.forEach(m => {
-          const msg = document.createElement("div");
-          msg.className = m.role === "user" ? "msg-user" : "msg-bot";
-          msg.textContent = m.content;
-          container.appendChild(msg);
-        });
-      } else {
-        const msg = document.createElement("div");
-        msg.className = "msg-bot";
-        msg.textContent = data.response || "Erro desconhecido ao carregar o histórico.";
-        container.appendChild(msg);
-      }
-
-      container.scrollTop = container.scrollHeight;
-
-    } catch (e) {
-      console.error("Erro ao buscar histórico:", e);
-      container.innerHTML = "<div class='msg-bot'>❌ Falha ao carregar histórico.</div>";
-    }
+  if (!token) {
+    window.location.href = "login";
+    return;
   }
 
-    async function enviarPrompt() {
+  try {
+    const res = await fetch("/api/agent/history", {
+      method: "GET",
+      headers: {
+        "Authorization": token
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error(`Erro HTTP: ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    if (Array.isArray(data.response)) {
+      data.response.forEach(m => {
+        const msg = document.createElement("div");
+        msg.className = m.role === "user" ? "msg-user" : "msg-bot";
+        msg.textContent = m.content;
+        container.appendChild(msg);
+      });
+    } else {
+      const msg = document.createElement("div");
+      msg.className = "msg-bot";
+      msg.textContent = data.response || "Erro desconhecido ao carregar o histórico.";
+      container.appendChild(msg);
+    }
+
+    container.scrollTop = container.scrollHeight;
+
+  } catch (e) {
+    console.error("Erro ao buscar histórico:", e);
+    container.innerHTML = "<div class='msg-bot'>❌ Falha ao carregar histórico.</div>";
+  }
+}
+
+async function enviarPrompt() {
   const token = localStorage.getItem("Mail-Token");
   const prompt = document.getElementById("prompt").value.trim();
   if (!prompt) return;
 
-  await fetch("/api/agent", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": token
-    },
-    body: JSON.stringify({ prompt })
-  });
+  try {
+    const res = await fetch("/api/agent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token
+      },
+      body: JSON.stringify({ prompt })
+    });
 
-  document.getElementById("prompt").value = "";
-  carregarHistorico();
+    if (!res.ok) {
+      console.error("Erro na requisição:", res.statusText);
+      return;
+    }
+
+    const data = await res.json();
+
+    const container = document.getElementById("mensagens");
+
+    // Mostra a mensagem do usuário
+    const userMsg = document.createElement("div");
+    userMsg.className = "msg-user";
+    userMsg.textContent = prompt;
+    container.appendChild(userMsg);
+
+    // Mostra a resposta do bot
+    const botMsg = document.createElement("div");
+    botMsg.className = "msg-bot";
+    botMsg.textContent = data.response || "Nenhuma resposta recebida.";
+    container.appendChild(botMsg);
+
+    container.scrollTop = container.scrollHeight;
+
+    document.getElementById("prompt").value = "";
+
+  } catch (e) {
+    console.error("Erro ao enviar prompt:", e);
+  }
 }
 
 async function limparHistorico() {
   const token = localStorage.getItem("Mail-Token");
-  await fetch("/api/agent/forget", {
-    method: "POST",
-    headers: {
-      "Authorization": token
+  if (!token) return;
+
+  try {
+    const res = await fetch("/api/agent/forget", {
+      method: "POST",
+      headers: {
+        "Authorization": token
+      }
+    });
+
+    if (!res.ok) {
+      console.error("Erro ao limpar histórico:", res.statusText);
+      return;
     }
-  });
-  carregarHistorico();
+
+    carregarHistorico();
+
+  } catch (e) {
+    console.error("Erro ao limpar histórico:", e);
+  }
 }
 
-
-    async function limparHistorico() {
-      const token = localStorage.getItem("Mail-Token");
-      await fetch("/api/agent/forget", {
-        method: "POST",
-        headers: {
-          "Authorization": Mail-Token
-        }
-      });
-      carregarHistorico();
-    }
   </script>
 </body>
 </html>
