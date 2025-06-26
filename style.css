@@ -25,20 +25,21 @@ body {
 }
 #seila {
     display: flex;
-    align-items: center;   /* alinha verticalmente */
-    gap: 10px;              /* espaço entre os itens */
-    justify-content: center; /* opcional: centraliza no contêiner */
+    align-items: center;
+    gap: 5px; /* Reduz o espaço entre eles */
+    justify-content: flex-start; /* Alinha à esquerda */
 }
 
 #seila button {
-    flex-shrink: 0;         /* impede que os botões encolham */
+    padding: 6px 10px; /* Botões menores */
+    margin: 0;         /* Remove margem */
 }
 
 #seila img {
-    width: 20px;            /* define tamanho do avatar */
-    height: 20px;
+    width: 32px;
+    height: 32px;
     object-fit: cover;
-    cursor: pointer;
+    margin: 0;         /* Remove margem extra */
 }
 
 
