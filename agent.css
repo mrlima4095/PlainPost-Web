@@ -4,14 +4,12 @@
   padding: 1rem;
   border: 1px solid #333;
   border-radius: 8px;
-  background: #1e1e1e;
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-/* Container individual de cada mensagem */
 .msg-user, .msg-bot {
   max-width: 70%;
   padding: 0.6rem 1rem;
@@ -20,7 +18,6 @@
   white-space: pre-wrap;
 }
 
-/* Estilo da mensagem do usuário */
 .msg-user {
   align-self: flex-end;
   background: #2a3f55;
@@ -29,7 +26,6 @@
   text-align: left;
 }
 
-/* Estilo da mensagem do bot */
 .msg-bot {
   align-self: flex-start;
   background: #444029;
@@ -38,7 +34,6 @@
   text-align: left;
 }
 
-/* Melhorias visuais nos botões e inputs */
 #input-area {
   display: flex;
   gap: 0.5rem;
