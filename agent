@@ -18,6 +18,6 @@
         <button id="limpar-btn">🧹</button>
     </div>
     
-    <script src="agente.js"></script>
+    <script src="scripts/agent.js"></script>
 </body>
 </html>
