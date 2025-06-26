@@ -84,6 +84,7 @@ window.onload = () => {
             else if (status == 404) window.location.href = "login";
             else Swal.fire('Erro', 'Erro ao consultar.', 'error');
         },
+        agent: () => window.location.href = "/agent",
         drive: () => window.location.href = "/drive",
         options: () => window.location.href = "options",
         security: () => window.location.href = "security"
