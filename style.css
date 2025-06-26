@@ -23,25 +23,28 @@ body {
     width: 90%;
     text-align: center;
 }
-#seila {
+#acoes {
     display: flex;
     align-items: center;
-    gap: 5px; /* Reduz o espaço entre eles */
-    justify-content: flex-start; /* Alinha à esquerda */
+    gap: 5px;
+    justify-content: flex-start;
 }
 
-#seila button {
-    padding: 6px 10px; /* Botões menores */
-    margin: 0;         /* Remove margem */
-}
-
-#seila img {
+#acoes img {
     width: 32px;
     height: 32px;
     object-fit: cover;
-    margin: 0;         /* Remove margem extra */
+    cursor: pointer;
 }
 
+#aba {
+    display: none; 
+    margin-top: 10px;
+    background: #0199ff1e;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
 
 #conteiner h2 {
     margin-bottom: 10px;
