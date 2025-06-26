@@ -68,6 +68,9 @@
       background: #555;
     }
   </style>
+  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body onload="carregarHistorico()">
     <h1>Agente S</h1>
