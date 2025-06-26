@@ -7,6 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   enviarBtn.addEventListener("click", enviarPrompt);
   limparBtn.addEventListener("click", limparHistorico);
+
+  promptInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      enviarPrompt();
+    }
+  });
+
 });
 
 async function carregarHistorico() {
