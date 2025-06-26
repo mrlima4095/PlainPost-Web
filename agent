@@ -6,7 +6,10 @@
     <title>Agente S</title>
 
     <link rel="stylesheet" href="agent.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="scripts/agent.js"></script>
 </head>
 <body>
     <h1>Agente S</h1>
@@ -14,10 +17,8 @@
     
     <div id="input-area">
         <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
-        <button id="enviar-btn">Enviar</button>
+        <button type="submit" id="enviar-btn">Enviar</button>
         <button id="limpar-btn">🧹</button>
     </div>
-    
-    <script src="scripts/agent.js"></script>
 </body>
 </html>
