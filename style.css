@@ -25,6 +25,7 @@ body {
 }
 #acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
 #acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
+#acoes button { white-space: nowrap; }
 
 #aba {
     display: none; /* Escondida por padrão */
