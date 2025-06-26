@@ -36,13 +36,17 @@ async function carregarHistorico() {
       data.response.forEach((m) => {
         const msg = document.createElement("div");
         msg.className = m.role === "user" ? "msg-user" : "msg-bot";
-        msg.textContent = m.content;
+        if (m.role === "user") {
+          msg.textContent = m.content;
+        } else {
+          msg.innerHTML = DOMPurify.sanitize(marked.parse(m.content));
+        }
         container.appendChild(msg);
       });
     } else {
       const msg = document.createElement("div");
       msg.className = "msg-bot";
-      msg.textContent = data.response || "Erro ao carregar histórico.";
+      msg.innerHTML = DOMPurify.sanitize(marked.parse(data.response || "Erro ao carregar histórico."));
       container.appendChild(msg);
     }
 
@@ -52,7 +56,7 @@ async function carregarHistorico() {
     console.error("Erro ao carregar histórico:", e);
     const fallback = document.createElement("div");
     fallback.className = "msg-bot";
-    fallback.textContent = "Erro ao carregar histórico.";
+    fallback.innerHTML = DOMPurify.sanitize(marked.parse("Erro ao carregar histórico."));
     container.appendChild(fallback);
   }
 }
@@ -95,15 +99,18 @@ async function enviarPrompt() {
     const data = await res.json();
     const botMsg = document.createElement("div");
     botMsg.className = "msg-bot";
-    botMsg.textContent = data?.response ?? "Nenhuma resposta recebida.";
-    container.appendChild(botMsg);
 
+    const rawMarkdown = data?.response ?? "Nenhuma resposta recebida.";
+    botMsg.innerHTML = DOMPurify.sanitize(marked.parse(rawMarkdown));
+
+    container.appendChild(botMsg);
     container.scrollTop = container.scrollHeight;
+
   } catch (e) {
     console.error("Erro ao enviar prompt:", e);
     const errorMsg = document.createElement("div");
     errorMsg.className = "msg-bot";
-    errorMsg.textContent = "Falha na comunicação.";
+    errorMsg.innerHTML = DOMPurify.sanitize(marked.parse("Falha na comunicação."));
     container.appendChild(errorMsg);
   }
 }
