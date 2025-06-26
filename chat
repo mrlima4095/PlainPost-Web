@@ -81,11 +81,11 @@
 
   <script>
     async function carregarHistorico() {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("Mail-Token");
       const res = await fetch("/api/agent/history", {
         method: "GET",
         headers: {
-          "Authorization": token
+          "Authorization": Mail-Token
         }
       });
 
@@ -104,7 +104,7 @@
     }
 
     async function enviarPrompt() {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("Mail-Token");
       const prompt = document.getElementById("prompt").value.trim();
       if (!prompt) return;
 
@@ -112,7 +112,7 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": token
+          "Authorization": Mail-Token
         },
         body: JSON.stringify({ prompt })
       });
@@ -122,11 +122,11 @@
     }
 
     async function limparHistorico() {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("Mail-Token");
       await fetch("/api/agent/forget", {
         method: "POST",
         headers: {
-          "Authorization": token
+          "Authorization": Mail-Token
         }
       });
       carregarHistorico();
