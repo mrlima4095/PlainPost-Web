@@ -24,9 +24,23 @@ body {
     text-align: center;
 }
 #seila {
-    align-items: center;
     display: flex;
+    align-items: center;   /* alinha verticalmente */
+    gap: 10px;              /* espaço entre os itens */
+    justify-content: center; /* opcional: centraliza no contêiner */
 }
+
+#seila button {
+    flex-shrink: 0;         /* impede que os botões encolham */
+}
+
+#seila img {
+    width: 40px;            /* define tamanho do avatar */
+    height: 40px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
 
 #conteiner h2 {
     margin-bottom: 10px;
