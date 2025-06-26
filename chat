@@ -96,7 +96,6 @@
       });
 
       const data = await res.json();
-      console.log("Histórico recebido:", data);
 
       if (Array.isArray(data.response)) {
         data.response.forEach(m => {
