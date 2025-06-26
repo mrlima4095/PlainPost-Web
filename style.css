@@ -38,13 +38,15 @@ body {
 }
 
 #aba {
-    display: none; 
+    display: none; /* Escondida por padrão */
     margin-top: 10px;
     background: #0199ff1e;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    width: 100%; /* opcional */
 }
+
 
 #conteiner h2 {
     margin-bottom: 10px;
