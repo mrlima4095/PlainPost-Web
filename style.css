@@ -24,7 +24,8 @@ body {
     text-align: center;
 }
 #seila {
-    align-items: justify-content;
+    align-items: center;
+    display: flex;
 }
 
 #conteiner h2 {
