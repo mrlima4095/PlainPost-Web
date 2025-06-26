@@ -17,11 +17,6 @@
         <button id="back" type="button">Retornar</button>
         <button id="mural" type="button">Meu Mural</button>
         <button id="changepage" type="button">Configurar Mural</button>
-        <button id="rewardad">Assistir anúncio (ganhar 5 moedas)</button>
-        <div id="ad-container" style="display: none; margin-top: 15px;">
-            <iframe id="adframe" width="100%" height="300" frameborder="0" scrolling="no"></iframe>
-            <p id="ad-timer" style="font-weight: bold;">Espere 30 segundos...</p>
-        </div>
         <button id="changebio" type="button">Mudar Biografia</button>
     </div>
 </body>
