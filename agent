@@ -89,7 +89,6 @@
 
             try {
                 const res = await fetch("/api/agent/history", { method: "GET", headers: { "Authorization": token } });
-
                 if (!res.ok) { Swal.fire('Erro', 'Erro ao carregar historico.', 'error'); }
 
                 const data = await res.json();
@@ -104,37 +103,26 @@
                 } else {
                     const msg = document.createElement("div");
                     msg.className = "msg-bot";
-                    msg.textContent = data.response || "Suas .";
+                    msg.textContent = data.response || "Erro ao carregar historico.";
                     container.appendChild(msg);
                 }
 
-    container.scrollTop = container.scrollHeight;
+                container.scrollTop = container.scrollHeight;
 
-  } catch (e) {
-    console.error("Erro ao buscar histórico:", e);
-    container.innerHTML = "<div class='msg-bot'>❌ Falha ao carregar histórico.</div>";
-  }
-}
+            } catch (e) { container.innerHTML = "<div class='msg-bot'>❌ Falha ao carregar histórico.</div>";  }
+        }
 
-async function enviarPrompt() {
-  const token = localStorage.getItem("Mail-Token");
-  const prompt = document.getElementById("prompt").value.trim();
-  if (!prompt) return;
+        async function enviarPrompt() {
+            const token = localStorage.getItem("Mail-Token");
+            if (!token) { window.location.href = "login"; return; }
 
-  try {
-    const res = await fetch("/api/agent", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": token
-      },
-      body: JSON.stringify({ prompt })
-    });
+            const prompt = document.getElementById("prompt").value.trim();
+            if (!prompt) { return; }
 
-    if (!res.ok) {
-      console.error("Erro na requisição:", res.statusText);
-      return;
-    }
+            try {
+                const res = await fetch("/api/agent", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ prompt }) });
+                if (!res.ok) { Swal.fire('Erro', 'Erro ao enviar mensagem.', 'error'); }
+
 
     const data = await res.json();
 
