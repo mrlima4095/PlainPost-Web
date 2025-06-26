@@ -70,53 +70,43 @@
   </style>
 </head>
 <body onload="carregarHistorico()">
-  <h1>Agente S</h1>
-  <div id="mensagens"></div>
+    <h1>Agente S</h1>
+    <div id="mensagens"></div>
 
-  <div id="input-area">
-    <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
-    <button onclick="enviarPrompt()">Enviar</button>
-    <button onclick="limparHistorico()">🧹</button>
-  </div>
+    <div id="input-area">
+        <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
+        <button onclick="enviarPrompt()">Enviar</button>
+        <button onclick="limparHistorico()">🧹</button>
+    </div>
 
-  <script>
-    async function carregarHistorico() {
-  const token = localStorage.getItem("Mail-Token");
-  const container = document.getElementById("mensagens");
-  container.innerHTML = "";
+    <script>
+        async function carregarHistorico() {
+            const token = localStorage.getItem("Mail-Token");
+            if (!token) { window.location.href = "login"; return; }
 
-  if (!token) {
-    window.location.href = "login";
-    return;
-  }
+            const container = document.getElementById("mensagens");
+            container.innerHTML = "";
 
-  try {
-    const res = await fetch("/api/agent/history", {
-      method: "GET",
-      headers: {
-        "Authorization": token
-      }
-    });
+            try {
+                const res = await fetch("/api/agent/history", { method: "GET", headers: { "Authorization": token } });
 
-    if (!res.ok) {
-      throw new Error(`Erro HTTP: ${res.status}`);
-    }
+                if (!res.ok) { Swal.fire('Erro', 'Erro ao carregar historico.', 'error'); }
 
-    const data = await res.json();
+                const data = await res.json();
 
-    if (Array.isArray(data.response)) {
-      data.response.forEach(m => {
-        const msg = document.createElement("div");
-        msg.className = m.role === "user" ? "msg-user" : "msg-bot";
-        msg.textContent = m.content;
-        container.appendChild(msg);
-      });
-    } else {
-      const msg = document.createElement("div");
-      msg.className = "msg-bot";
-      msg.textContent = data.response || "Erro desconhecido ao carregar o histórico.";
-      container.appendChild(msg);
-    }
+                if (Array.isArray(data.response)) {
+                    data.response.forEach(m => {
+                        const msg = document.createElement("div");
+                        msg.className = m.role === "user" ? "msg-user" : "msg-bot";
+                        msg.textContent = m.content;
+                        container.appendChild(msg);
+                    });
+                } else {
+                    const msg = document.createElement("div");
+                    msg.className = "msg-bot";
+                    msg.textContent = data.response || "Suas .";
+                    container.appendChild(msg);
+                }
 
     container.scrollTop = container.scrollHeight;
 
@@ -171,30 +161,19 @@ async function enviarPrompt() {
   }
 }
 
-async function limparHistorico() {
-  const token = localStorage.getItem("Mail-Token");
-  if (!token) return;
+    async function limparHistorico() {
+        const token = localStorage.getItem("Mail-Token");
+        if (!token) { window.location.href = "login"; return; }
 
-  try {
-    const res = await fetch("/api/agent/forget", {
-      method: "POST",
-      headers: {
-        "Authorization": token
-      }
-    });
+        try { const res = await fetch("/api/agent/forget", { method: "POST", headers: { "Authorization": token } });
 
-    if (!res.ok) {
-      console.error("Erro ao limpar histórico:", res.statusText);
-      return;
-    }
+    if (!res.ok) { Swal.fire('Erro', 'Erro ao limpar histórico.', 'error'); return; }
 
     carregarHistorico();
 
-  } catch (e) {
-    console.error("Erro ao limpar histórico:", e);
-  }
-}
+  } catch (e) { Swal.fire('Erro', 'Erro ao limpar histórico.', 'error'); } 
+    }
 
-  </script>
+    </script>
 </body>
 </html>
