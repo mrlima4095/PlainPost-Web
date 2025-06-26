@@ -28,6 +28,44 @@ window.onload = () => {
         } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); }
     });
     
+    document.getElementById("rewardad").addEventListener("click", async () => {
+        const adContainer = document.getElementById("ad-container");
+        const adFrame = document.getElementById("adframe");
+        const adTimer = document.getElementById("ad-timer");
+
+        // URL do anúncio via AdSense (ex: link para uma página com AdSense ou seu próprio site com ads)
+        adFrame.src = "https://SEUSITE.COM/pagina-com-adsense"; // Mude aqui
+
+        adContainer.style.display = "block";
+        let tempo = 30;
+        adTimer.innerText = `Espere ${tempo} segundos...`;
+
+        const intervalo = setInterval(() => {
+            tempo--;
+            adTimer.innerText = `Espere ${tempo} segundos...`;
+            if (tempo <= 0) {
+                clearInterval(intervalo);
+                adTimer.innerText = "Tempo completo! Recebendo recompensa...";
+
+                fetch("https://archsource.xyz/api/reward", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": localStorage.getItem("Mail-Token")
+                    }
+                }).then(resp => resp.json()).then(data => {
+                    Swal.fire("Recompensa", data.response, "success");
+                    adContainer.style.display = "none";
+                    adFrame.src = "";
+                }).catch(() => {
+                    Swal.fire("Erro", "Falha ao receber moedas.", "error");
+                    adContainer.style.display = "none";
+                    adFrame.src = "";
+                });
+            }
+        }, 1000);
+    });
+    
     document.getElementById("changebio").addEventListener("click", async () => {
         const { value: content } = await Swal.fire({ title: 'Biografia:', input: 'text', inputPlaceholder: 'O que esta pensando?', showCancelButton: true });
         if (!content) return Swal.fire('Erro', 'Sua biografia não pode estar vazia!', 'error');
