@@ -6,7 +6,7 @@
     <title>Agente S</title>
 
     <link rel="stylesheet" href="agent.css" />
-    
+
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.5/dist/purify.min.js"></script>
 
@@ -14,7 +14,6 @@
     <script src="scripts/agent.js"></script>
 </head>
 <body>
-    <h1>Agente S</h1>
     <div id="mensagens"></div>
     
     <div id="input-area">
