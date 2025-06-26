@@ -1,5 +1,5 @@
-function mostrarAba() { document.getElementById("aba").style.display = "block"; }
-function fecharAba() { document.getElementById("aba").style.display = "none"; }
+function show() { document.getElementById("menu").style.display = "block"; }
+function hide() { document.getElementById("menu").style.display = "none"; }
 
 window.onload = () => {
     const token = localStorage.getItem("Mail-Token");
