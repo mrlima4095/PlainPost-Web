@@ -80,28 +80,45 @@
   </div>
 
   <script>
-    async function carregarHistorico() {
-      const token = localStorage.getItem("Mail-Token");
+     async function carregarHistorico() {
+    const token = localStorage.getItem("Mail-Token");
+    const container = document.getElementById("mensagens");
+    container.innerHTML = "";
+
+    if (!token) { window.location.href = "login"; }
+
+    try {
       const res = await fetch("/api/agent/history", {
         method: "GET",
         headers: {
-          "Authorization": Mail-Token
+          "Authorization": token
         }
       });
 
       const data = await res.json();
-      const container = document.getElementById("mensagens");
-      container.innerHTML = "";
+      console.log("Histórico recebido:", data);
 
-      data.response.forEach(m => {
+      if (Array.isArray(data.response)) {
+        data.response.forEach(m => {
+          const msg = document.createElement("div");
+          msg.className = m.role === "user" ? "msg-user" : "msg-bot";
+          msg.textContent = m.content;
+          container.appendChild(msg);
+        });
+      } else {
         const msg = document.createElement("div");
-        msg.className = m.role === "user" ? "msg-user" : "msg-bot";
-        msg.textContent = m.content;
+        msg.className = "msg-bot";
+        msg.textContent = data.response || "Erro desconhecido ao carregar o histórico.";
         container.appendChild(msg);
-      });
+      }
 
       container.scrollTop = container.scrollHeight;
+
+    } catch (e) {
+      console.error("Erro ao buscar histórico:", e);
+      container.innerHTML = "<div class='msg-bot'>❌ Falha ao carregar histórico.</div>";
     }
+  }
 
     async function enviarPrompt() {
       const token = localStorage.getItem("Mail-Token");
