@@ -11,10 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     back.addEventListener("click", goback);
 
     promptInput.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            request();
-        }
+        if (event.key === "Enter") { event.preventDefault(); request(); }
     });
 });
 
@@ -42,20 +39,8 @@ async function request() {
     container.scrollTop = container.scrollHeight;
 
     try {
-        const res = await fetch("/api/agent", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": token
-            },
-            body: JSON.stringify({ "prompt": query })
-        });
-
-        if (!res.ok) {
-            Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
-            thinking.textContent = "❌ Erro ao obter resposta.";
-            return;
-        }
+        const res = await fetch("/api/agent", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ "prompt": query }) });
+        if (!res.ok) { Swal.fire("Erro", "Erro ao enviar mensagem.", "error"); thinking.textContent = "❌ Erro ao obter resposta."; return; }
 
         const data = await res.json();
 
@@ -71,59 +56,37 @@ async function request() {
 
 async function loadHistory() {
     const token = localStorage.getItem("Mail-Token");
-    if (!token) {
-        window.location.href = "login";
-        return;
-    }
+    if (!token) { window.location.href = "login"; return; }
 
     const container = document.getElementById("mensagens");
     container.innerHTML = "";
 
     try {
-        const res = await fetch("/api/agent/history", {
-            method: "GET",
-            headers: { "Authorization": token }
-        });
-
-        if (!res.ok) {
-            Swal.fire("Erro", "Erro ao carregar histórico.", "error");
-            container.style.display = "none";
-            return;
-        }
+        const res = await fetch("/api/agent/history", { method: "GET", headers: { "Authorization": token } });
+        if (!res.ok) { Swal.fire("Erro", "Erro ao carregar histórico.", "error"); container.style.display = "none"; return; }
 
         const data = await res.json();
 
         if (Array.isArray(data.response)) {
-            if (data.response.length === 0) {
-                container.style.display = "none";
-                return;
-            }
+            if (data.response.length === 0) { container.style.display = "none"; return; }
 
             data.response.forEach((m) => {
                 const msg = document.createElement("div");
                 msg.className = m.role === "user" ? "msg-user" : "msg-bot";
 
-                if (m.role === "user") {
-                    msg.textContent = m.content;
-                } else {
-                    msg.innerHTML = DOMPurify.sanitize(marked.parse(m.content));
-                }
+                if (m.role === "user") { msg.textContent = m.content; } 
+                else { msg.innerHTML = DOMPurify.sanitize(marked.parse(m.content)); }
 
                 container.appendChild(msg);
             });
 
             container.style.display = "flex";
 
-        } else {
-            container.style.display = "none";
-        }
+        } else { container.style.display = "none"; }
 
         container.scrollTop = container.scrollHeight;
 
-    } catch (e) {
-        console.error("Erro no loadHistory:", e);
-        container.style.display = "none";
-    }
+    } catch (e) { container.style.display = "none"; }
 }
 
 
