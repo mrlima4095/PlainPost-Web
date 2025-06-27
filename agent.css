@@ -11,9 +11,8 @@
     gap: 0.75rem;
     box-sizing: border-box;
 }
-.msg-user {
+.msg-user, .msg-bot{
     align-self: flex-end;
-    background-color: #198754; /* green */
     color: white;
     padding: 0.75rem 1rem;
     border-radius: 1rem 1rem 0.25rem 1rem;
@@ -22,14 +21,5 @@
     font-size: 1rem;
     line-height: 1.4;
 }
-.msg-bot {
-    align-self: flex-start;
-    background-color: #d9a800; /* yellow */
-    color: black;
-    padding: 0.75rem 1rem;
-    border-radius: 1rem 1rem 1rem 0.25rem;
-    max-width: 75%;
-    word-wrap: break-word;
-    font-size: 1rem;
-    line-height: 1.4;
-}
+.msg-user { background-color: #198754; }
+.msg-bot { background-color: #d9a800; }
