@@ -45,7 +45,7 @@ body {
 #acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
 #acoes button { flex: 1; white-space: nowrap; }
 
-#account {
+#profile, #options, #security {
     display: none; 
     margin-top: 10px;
     background: #0199ff1e;
@@ -54,7 +54,7 @@ body {
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
     width: 100%;
 }
-#account button { width: 100%; margin-top: 8px; }
+#profile button { width: 100%; margin-top: 8px; }
 
 
 form { display: flex; flex-direction: column; gap: 15px; }
