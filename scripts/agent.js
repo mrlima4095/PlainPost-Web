@@ -29,7 +29,6 @@ async function request() {
     promptInput.value = "";
 
     const container = document.getElementById("mensagens");
-    container.style.display = "flex";
 
     const userMsg = document.createElement("div");
     userMsg.className = "msg-user";
@@ -59,6 +58,7 @@ async function request() {
         }
 
         const data = await res.json();
+
         const rawMarkdown = data?.response ?? "Nenhuma resposta recebida.";
         thinking.innerHTML = DOMPurify.sanitize(marked.parse(rawMarkdown));
 
@@ -71,7 +71,10 @@ async function request() {
 
 async function loadHistory() {
     const token = localStorage.getItem("Mail-Token");
-    if (!token) { window.location.href = "login"; return; }
+    if (!token) {
+        window.location.href = "login";
+        return;
+    }
 
     const container = document.getElementById("mensagens");
     container.innerHTML = "";
@@ -90,53 +93,52 @@ async function loadHistory() {
 
         const data = await res.json();
 
-        if (Array.isArray(data.response) && data.response.length > 0) {
+        console.log("Resposta do histórico:", data); // DEBUG
+
+        if (Array.isArray(data.response)) {
+            if (data.response.length === 0) {
+                container.style.display = "none"; // <-- OCULTA!
+                return;
+            }
+
             data.response.forEach((m) => {
                 const msg = document.createElement("div");
                 msg.className = m.role === "user" ? "msg-user" : "msg-bot";
-                msg.innerHTML = DOMPurify.sanitize(
-                    m.role === "user" ? m.content : marked.parse(m.content)
-                );
+
+                if (m.role === "user") {
+                    msg.textContent = m.content;
+                } else {
+                    msg.innerHTML = DOMPurify.sanitize(marked.parse(m.content));
+                }
+
                 container.appendChild(msg);
             });
-            container.style.display = "flex";
+
+            container.style.display = "flex"; // Mostra se tiver mensagens
+
         } else {
-            container.style.display = "none"; // Oculta se sem mensagens
+            container.style.display = "none"; // Resposta inválida = oculta
         }
 
         container.scrollTop = container.scrollHeight;
 
     } catch (e) {
-        const fallback = document.createElement("div");
-        fallback.className = "msg-bot";
-        fallback.innerHTML = DOMPurify.sanitize(marked.parse("Erro ao carregar histórico."));
-        container.appendChild(fallback);
-        container.style.display = "flex";
+        console.error("Erro no loadHistory:", e);
+        container.style.display = "none";
     }
 }
+
 
 async function clearHistory() {
     const token = localStorage.getItem("Mail-Token");
     if (!token) { window.location.href = "login"; return; }
 
     try {
-        const res = await fetch("/api/agent/forget", {
-            method: "POST",
-            headers: { "Authorization": token }
-        });
-
-        if (!res.ok) {
-            Swal.fire("Erro", "Erro ao limpar histórico.", "error");
-            return;
-        }
+        const res = await fetch("/api/agent/forget", { method: "POST", headers: { "Authorization": token } });
+        if (!res.ok) { Swal.fire("Erro", "Erro ao limpar histórico.", "error"); return; }
 
         await loadHistory();
-
-    } catch (e) {
-        Swal.fire("Erro", "Erro ao limpar histórico.", "error");
-    }
+    } catch (e) { Swal.fire("Erro", "Erro ao limpar histórico.", "error"); }
 }
 
-function goback() {
-    window.location.href = "/";
-}
+function goback() { window.location.href = "/"; }
