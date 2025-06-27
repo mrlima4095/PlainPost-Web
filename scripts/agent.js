@@ -93,11 +93,9 @@ async function loadHistory() {
 
         const data = await res.json();
 
-        console.log("Resposta do histórico:", data); // DEBUG
-
         if (Array.isArray(data.response)) {
             if (data.response.length === 0) {
-                container.style.display = "none"; // <-- OCULTA!
+                container.style.display = "none";
                 return;
             }
 
@@ -114,10 +112,10 @@ async function loadHistory() {
                 container.appendChild(msg);
             });
 
-            container.style.display = "flex"; // Mostra se tiver mensagens
+            container.style.display = "flex";
 
         } else {
-            container.style.display = "none"; // Resposta inválida = oculta
+            container.style.display = "none";
         }
 
         container.scrollTop = container.scrollHeight;
