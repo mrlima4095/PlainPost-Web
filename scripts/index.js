@@ -121,5 +121,5 @@ window.onload = () => {
         if (el) el.addEventListener("click", buttons[id]);
     });
 
-    await buttons.refresh();
+    buttons['refresh'];
 };
