@@ -16,7 +16,7 @@
 </head>
 <body>
     <div id="conteiner">
-        <h1>Agente S</h1>
+        <h2>Minha Conta</h2><br>
         <div id="mensagens"></div>
 
         <div id="input-area">
