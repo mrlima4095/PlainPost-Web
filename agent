@@ -15,19 +15,17 @@
     <script src="scripts/agent.js" defer></script>
 </head>
 <body>
-    <div id="conteiner">
-        <div id="chat-area">
-            <div id="header"><h2>Agente S.</h2></div>
+    <div id="chat-area">
+        <div id="header"><h2>Agente S.</h2></div>
 
-            <div id="mensagens"></div>
+        <div id="mensagens"></div>
 
-            <div id="input-area">
-                <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
-                <div id="botoes">
-                    <button id="send">Enviar</button>
-                    <button id="clear">Limpar</button>
-                    <button id="back">Retornar</button>
-                </div>
+        <div id="input-area">
+            <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
+            <div id="botoes">
+                <button id="send">Enviar</button>
+                <button id="clear">Limpar</button>
+                <button id="back">Retornar</button>
             </div>
         </div>
     </div>
