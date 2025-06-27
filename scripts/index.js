@@ -60,7 +60,7 @@ window.onload = () => {
             else if (status == 404) Swal.fire('Erro', 'O destinatário não foi encontrado!', 'error');
             else Swal.fire('Erro', 'Erro ao enviar mensagem.', 'error');
 
-            buttons['refresh'];
+            refreshInbox(fetchRequest);
         },
         clear: async () => {
             const confirm = await Swal.fire({ title: 'Tem certeza?', text: 'Tem certeza que deseja limpar suas mensagens?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
@@ -70,7 +70,7 @@ window.onload = () => {
             if (status == 200) Swal.fire('Sucesso', 'Suas mensagens foram apagadas!', 'success');
             else Swal.fire('Erro', 'Erro ao limpar mensagens.', 'error');
 
-            buttons['refresh'];
+            refreshInbox(fetchRequest);
         },
         transfer: async () => {
             const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do destinatário', showCancelButton: true });
@@ -121,5 +121,5 @@ window.onload = () => {
         if (el) el.addEventListener("click", buttons[id]);
     });
 
-    buttons['refresh'];
+    refreshInbox(fetchRequest);
 };
