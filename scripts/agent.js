@@ -26,8 +26,7 @@ async function request() {
     promptInput.value = "";
 
     const container = document.getElementById("mensagens");
-    container.style.display = "flex";
-
+    
     const userMsg = document.createElement("div");
     userMsg.className = "msg-user";
     userMsg.textContent = query;
@@ -37,6 +36,8 @@ async function request() {
     thinking.className = "msg-bot";
     thinking.textContent = "⏳ Pensando...";
     container.appendChild(thinking);
+
+    container.style.display = "flex";
     container.scrollTop = container.scrollHeight;
 
     try {
