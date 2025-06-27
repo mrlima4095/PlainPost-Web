@@ -29,6 +29,7 @@ async function request() {
     promptInput.value = "";
 
     const container = document.getElementById("mensagens");
+    container.style.display = "flex";
 
     const userMsg = document.createElement("div");
     userMsg.className = "msg-user";
@@ -58,7 +59,6 @@ async function request() {
         }
 
         const data = await res.json();
-
         const rawMarkdown = data?.response ?? "Nenhuma resposta recebida.";
         thinking.innerHTML = DOMPurify.sanitize(marked.parse(rawMarkdown));
 
@@ -69,7 +69,6 @@ async function request() {
     container.scrollTop = container.scrollHeight;
 }
 
-
 async function loadHistory() {
     const token = localStorage.getItem("Mail-Token");
     if (!token) { window.location.href = "login"; return; }
@@ -78,34 +77,41 @@ async function loadHistory() {
     container.innerHTML = "";
 
     try {
-        const res = await fetch("/api/agent/history", { method: "GET", headers: { "Authorization": token } });
-        if (!res.ok) { Swal.fire("Erro", "Erro ao carregar histórico.", "error"); return; }
+        const res = await fetch("/api/agent/history", {
+            method: "GET",
+            headers: { "Authorization": token }
+        });
+
+        if (!res.ok) {
+            Swal.fire("Erro", "Erro ao carregar histórico.", "error");
+            container.style.display = "none";
+            return;
+        }
 
         const data = await res.json();
 
-        if (Array.isArray(data.response)) {
-                data.response.forEach((m) => {
+        if (Array.isArray(data.response) && data.response.length > 0) {
+            data.response.forEach((m) => {
                 const msg = document.createElement("div");
                 msg.className = m.role === "user" ? "msg-user" : "msg-bot";
-                
-                if (m.role === "user") { msg.textContent = m.content; }
-                else { msg.innerHTML = DOMPurify.sanitize(marked.parse(m.content)); }
+                msg.innerHTML = DOMPurify.sanitize(
+                    m.role === "user" ? m.content : marked.parse(m.content)
+                );
                 container.appendChild(msg);
             });
+            container.style.display = "flex";
         } else {
-            const msg = document.createElement("div");
-            msg.className = "msg-bot";
-            msg.innerHTML = DOMPurify.sanitize(marked.parse(data.response || "Erro ao carregar histórico."));
-            container.appendChild(msg);
+            container.style.display = "none"; // Oculta se sem mensagens
         }
 
         container.scrollTop = container.scrollHeight;
 
     } catch (e) {
-    const fallback = document.createElement("div");
-    fallback.className = "msg-bot";
-    fallback.innerHTML = DOMPurify.sanitize(marked.parse("Erro ao carregar histórico."));
-    container.appendChild(fallback);
+        const fallback = document.createElement("div");
+        fallback.className = "msg-bot";
+        fallback.innerHTML = DOMPurify.sanitize(marked.parse("Erro ao carregar histórico."));
+        container.appendChild(fallback);
+        container.style.display = "flex";
     }
 }
 
@@ -114,11 +120,23 @@ async function clearHistory() {
     if (!token) { window.location.href = "login"; return; }
 
     try {
-        const res = await fetch("/api/agent/forget", { method: "POST", headers: { "Authorization": token } });
-        if (!res.ok) { Swal.fire("Erro", "Erro ao limpar histórico.", "error"); return; }
+        const res = await fetch("/api/agent/forget", {
+            method: "POST",
+            headers: { "Authorization": token }
+        });
+
+        if (!res.ok) {
+            Swal.fire("Erro", "Erro ao limpar histórico.", "error");
+            return;
+        }
 
         await loadHistory();
-    } catch (e) { Swal.fire("Erro", "Erro ao limpar histórico.", "error"); }
+
+    } catch (e) {
+        Swal.fire("Erro", "Erro ao limpar histórico.", "error");
+    }
 }
 
-function goback() { window.location.href = "/"; }
+function goback() {
+    window.location.href = "/";
+}
