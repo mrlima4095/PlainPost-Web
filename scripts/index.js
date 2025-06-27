@@ -118,7 +118,7 @@ window.onload = () => {
             else Swal.fire('Erro', 'Erro ao consultar.', 'error');
         },
         agent: () => window.location.href = "/agent",
-        gitea: () => window.location.href = "/git",
+        gitea: () => window.location.href = "/source",
         drive: () => window.location.href = "/drive",
         options: () => window.location.href = "options",
         security: () => window.location.href = "security"
