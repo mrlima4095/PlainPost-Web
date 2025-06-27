@@ -45,16 +45,25 @@ body {
 #acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
 #acoes button { flex: 1; white-space: nowrap; }
 
-#profile, #options, #security {
-    display: none; 
+#profile,
+#options,
+#security {
+    display: none;
     margin-top: 10px;
-    background: #0199ff1e;
+    background-color: rgba(1, 153, 255, 0.12); /* equivalente a #0199ff1e */
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
-#profile button { width: 100%; margin-top: 8px; }
+
+/* Estiliza todos os botões internos dessas divs */
+#profile button,
+#options button,
+#security button {
+    width: 100%;
+    margin-top: 8px;
+}
 
 
 form { display: flex; flex-direction: column; gap: 15px; }
