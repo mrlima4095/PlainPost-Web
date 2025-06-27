@@ -39,12 +39,7 @@ window.onload = () => {
     };
 
     const buttons = {
-        read: async () => { 
-            const { status, response } = await fetchRequest("read"); 
-            if (status == 200) Swal.fire({ icon: "info", title: "Mensagens", html: response.replaceAll("\\n", "<br>").replaceAll("\n", "<br>") });
-            else if (status == 404) window.location.href = "login";
-            else Swal.fire('Erro', 'Erro ao ler mensagens.', 'error'); 
-        },
+        fetch: async () => { updateInbox(); },
         send: async () => {
             const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do usuário', showCancelButton: true });
             if (!target) return Swal.fire('Erro', 'Destinatário não pode estar vazio!', 'error');
