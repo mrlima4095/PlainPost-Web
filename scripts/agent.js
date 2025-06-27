@@ -4,9 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const promptInput = document.getElementById("prompt");
     const send = document.getElementById("send");
     const clear = document.getElementById("clear");
+    const back = document.getElementById("back");
 
     send.addEventListener("click", request);
     clear.addEventListener("click", clearHistory);
+    back.addEventListener("click", window.location.href("/"));
 
     promptInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
