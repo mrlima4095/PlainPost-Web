@@ -45,7 +45,7 @@ body {
 #acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
 #acoes button { white-space: nowrap; }
 
-#menu {
+#account {
     display: none; 
     margin-top: 10px;
     background: #0199ff1e;
@@ -54,11 +54,10 @@ body {
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
     width: 100%;
 }
-#menu button {
+#account button {
     width: 100%;
     margin-top: 8px;
 }
-
 
 
 
