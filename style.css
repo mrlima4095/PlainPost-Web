@@ -125,10 +125,4 @@ button:hover { background-color: #2980b9; }
   text-align: left;
 }
 
-#input-area {
-  display: flex;
-  gap: 0.5rem;
-  padding: 1rem;
-  border-top: 1px solid #333;
-  background: #121212;
-}
+#input-area { display: flex; gap: 0.5rem; padding: 1rem; border-top: 1px solid #333; }
