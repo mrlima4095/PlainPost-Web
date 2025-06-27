@@ -122,4 +122,5 @@ window.onload = () => {
     });
 
     refreshInbox(fetchRequest);
+    setInterval(() => refreshInbox(fetchRequest), 60000);
 };
