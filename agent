@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agente S.</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="agent.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -16,17 +16,19 @@
 </head>
 <body>
     <div id="conteiner">
-        <h2>Agente S.</h2><br>
-        <div id="mensagens"></div>
+        <div id="chat-area">
+            <div id="header"><h2>Agente S.</h2></div>
 
+            <div id="mensagens"></div>
 
-        <div id="misc">
-            <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
-        </div>
-        <div id="acoes">
-            <button id="send">Enviar</button>
-            <button id="clear">Limpar Mensagens</button>
-            <button id="back">Retornar</button>
+            <div id="input-area">
+                <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
+                <div id="botoes">
+                    <button id="send">Enviar</button>
+                    <button id="clear">Limpar</button>
+                    <button id="back">Retornar</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>
