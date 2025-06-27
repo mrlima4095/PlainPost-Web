@@ -94,6 +94,9 @@ async function clearHistory() {
     const token = localStorage.getItem("Mail-Token");
     if (!token) { window.location.href = "login"; return; }
 
+    const confirm = await Swal.fire({ title: 'Tem certeza?', text: 'Tem certeza que deseja limpar suas mensagens?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
+    if (!confirm.isConfirmed) return;
+
     try {
         const res = await fetch("/api/agent/forget", { method: "POST", headers: { "Authorization": token } });
         if (!res.ok) { Swal.fire("Erro", "Erro ao limpar histórico.", "error"); return; }
