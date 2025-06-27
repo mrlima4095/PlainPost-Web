@@ -4,7 +4,6 @@ function hideAllMenus() {
     document.getElementById("security").style.display = "none";
 }
 
-// Alterna a visibilidade da div "profile"
 function toggleprofilemenu() {
     const isVisible = document.getElementById("profile").style.display === "block";
     hideAllMenus();
