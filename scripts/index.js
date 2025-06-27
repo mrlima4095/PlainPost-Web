@@ -15,7 +15,7 @@ async function refreshInbox(fetchRequest, fromButton = false) {
 
     if (status !== 200 || !response) {
         inbox.innerHTML = "<p>Erro ao carregar mensagens.</p>";
-    } else if (response.trim() === "No Messages") {
+    } else if (response.trim() === "No messages") {
         inbox.innerHTML = "<p>Sem mensagens.</p>";
     } else {
         const mensagens = response.split("\n").filter(l => l.trim() !== "");
