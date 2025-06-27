@@ -129,7 +129,7 @@ window.onload = () => {
             else Swal.fire('Erro', 'Erro ao consultar.', 'error');
         },
         agent: () => window.location.href = "/agent",
-        gitea: () => window.location.replace = "https://gitea.archsource.xyz",
+        gitea: () => window.location.href = "https://gitea.archsource.xyz",
         drive: () => window.location.href = "/drive",
         
         mural: async () => { 
