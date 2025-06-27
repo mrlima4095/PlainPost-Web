@@ -1,3 +1,22 @@
+body {
+    background-color: #202124;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+}
+
+h2 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
 #mensagens {
     max-width: 768px;
     width: 100%;
@@ -11,7 +30,8 @@
     gap: 0.75rem;
     box-sizing: border-box;
 }
-.msg-user, .msg-bot{
+
+.msg-user, .msg-bot {
     align-self: flex-end;
     color: white;
     padding: 0.75rem 1rem;
@@ -21,5 +41,65 @@
     font-size: 1rem;
     line-height: 1.4;
 }
-.msg-user { background-color: #198754; }
-.msg-bot { background-color: #d9a800; }
+
+.msg-user {
+    background-color: #198754;
+}
+
+.msg-bot {
+    background-color: #d9a800;
+    align-self: flex-start;
+}
+
+#user-area {
+    max-width: 768px;
+    width: 100%;
+    background-color: #303134;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-sizing: border-box;
+}
+
+#prompt {
+    background-color: #202124;
+    color: #e8eaed;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+#prompt::placeholder {
+    color: #9aa0a6;
+}
+
+#prompt:focus {
+    outline: 2px solid #8ab4f8;
+}
+
+#botoes {
+    display: flex;
+    gap: 1rem;
+}
+
+#botoes button {
+    flex: 1;
+    background-color: #3c4043;
+    color: #e8eaed;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#botoes button:hover {
+    background-color: #4a4a4a;
+}
