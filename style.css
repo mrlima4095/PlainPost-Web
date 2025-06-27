@@ -43,7 +43,7 @@ body {
 
 #acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
 #acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
-#acoes button { white-space: nowrap; }
+#acoes button { flex: 1; white-space: nowrap; }
 
 #account {
     display: none; 
