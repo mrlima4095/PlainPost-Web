@@ -1,42 +1,41 @@
 var account_menu_is_shown = false;
 
 function toggleaccountmenu() { if (account_menu_is_shown == false) { document.getElementById("account").style.display = "block"; } else { document.getElementById("account").style.display = "none"; } account_menu_is_shown = !account_menu_is_shown; }
+const fetchRequest = async (action, extraData = {}) => {
+    try {
+        const resposta = await fetch("https://archsource.xyz/api/mail", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Authorization": token },
+            body: JSON.stringify({ action, ...extraData })
+        });
+        const dados = await resposta.json();
+        return { status: resposta.status, response: dados.response };
+    } catch { return { status: 0 }; }
+};
+const updateInbox = async () => {
+    const { status, response } = await fetchRequest("read");
+    const inbox = document.getElementById("inbox");
+
+    inbox.innerHTML = "";
+
+    if (status !== 200 || !response) {
+        inbox.innerHTML = "<p>Erro ao carregar mensagens.</p>";
+        return;
+    }
+
+    const mensagens = response.split("\n").filter(l => l.trim() !== "");
+
+    for (const linha of mensagens) {
+        const msgDiv = document.createElement("div");
+        msgDiv.className = "mensagem";
+        msgDiv.innerText = linha;
+        inbox.appendChild(msgDiv);
+    }
+};
 
 window.onload = () => {
     const token = localStorage.getItem("Mail-Token");
     if (!token) { window.location.href = "login"; return; }
-
-    const fetchRequest = async (action, extraData = {}) => {
-        try {
-            const resposta = await fetch("https://archsource.xyz/api/mail", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": token },
-                body: JSON.stringify({ action, ...extraData })
-            });
-            const dados = await resposta.json();
-            return { status: resposta.status, response: dados.response };
-        } catch { return { status: 0 }; }
-    };
-    const updateInbox = async () => {
-        const { status, response } = await fetchRequest("read");
-        const inbox = document.getElementById("inbox");
-
-        inbox.innerHTML = "";
-
-        if (status !== 200 || !response) {
-            inbox.innerHTML = "<p>Erro ao carregar mensagens.</p>";
-            return;
-        }
-
-        const mensagens = response.split("\n").filter(l => l.trim() !== "");
-
-        for (const linha of mensagens) {
-            const msgDiv = document.createElement("div");
-            msgDiv.className = "mensagem";
-            msgDiv.innerText = linha;
-            inbox.appendChild(msgDiv);
-        }
-    };
 
     const buttons = {
         fetch: async () => { updateInbox(); },
