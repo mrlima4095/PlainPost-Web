@@ -1,6 +1,7 @@
 var account_menu_is_shown = false;
 
 function toggleaccountmenu() { if (account_menu_is_shown == false) { document.getElementById("account").style.display = "block"; } else { document.getElementById("account").style.display = "none"; } account_menu_is_shown = !account_menu_is_shown; }
+
 async function refreshInbox(fetchRequest, fromButton = false) {
     const refreshButton = document.getElementById("refresh");
     if (fromButton && refreshButton) {
