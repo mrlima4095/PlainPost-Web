@@ -32,6 +32,11 @@ h2 {
     gap: 0.75rem;
     box-sizing: border-box;
 }
+#mensagens * {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
 
 .msg-user, .msg-bot {
     align-self: flex-end;
