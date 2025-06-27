@@ -121,4 +121,4 @@ async function clearHistory() {
     } catch (e) { Swal.fire("Erro", "Erro ao limpar histórico.", "error"); }
 }
 
-function goback() { window.location.href("/"); }
+function goback() { window.location.href = "/"; }
