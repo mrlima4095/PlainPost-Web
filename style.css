@@ -100,3 +100,25 @@ button:hover {
     max-width: 400px;
     cursor: pointer;
 }
+
+#inbox {
+    margin-top: 20px;
+    text-align: left;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.mensagem {
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    background-color: #e9f1fb;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.mensagem:hover,
+.mensagem:active {
+    background-color: #d0e8ff;
+}
