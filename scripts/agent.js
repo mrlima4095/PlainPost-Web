@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     send.addEventListener("click", request);
     clear.addEventListener("click", clearHistory);
-    back.addEventListener("click", window.location.href("/"));
+    back.addEventListener("click", goback);
 
     promptInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
@@ -120,3 +120,5 @@ async function clearHistory() {
         await loadHistory();
     } catch (e) { Swal.fire("Erro", "Erro ao limpar histórico.", "error"); }
 }
+
+function goback() { window.location.href("/"); }
