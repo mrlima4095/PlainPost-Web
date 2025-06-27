@@ -38,7 +38,27 @@ window.onload = () => {
     if (!token) { window.location.href = "login"; return; }
 
     const buttons = {
-        fetch: async () => { updateInbox(); },
+        refresh: async () => {
+            const { status, response } = await fetchRequest("read");
+            const inbox = document.getElementById("inbox");
+
+            inbox.innerHTML = ""; // Limpa mensagens anteriores
+
+            if (status !== 200 || !response) {
+                inbox.innerHTML = "<p>Erro ao carregar mensagens.</p>";
+                return;
+            }
+
+            // Quebra a resposta em linhas
+            const mensagens = response.split("\n").filter(l => l.trim() !== "");
+
+            for (const linha of mensagens) {
+                const msgDiv = document.createElement("div");
+                msgDiv.className = "mensagem";
+                msgDiv.innerText = linha;
+                inbox.appendChild(msgDiv);
+            }
+        },
         send: async () => {
             const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do usuário', showCancelButton: true });
             if (!target) return Swal.fire('Erro', 'Destinatário não pode estar vazio!', 'error');
