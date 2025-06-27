@@ -1,5 +1,6 @@
-function showmenu() { document.getElementById("account").style.display = "block"; }
-function hidemenu() { document.getElementById("account").style.display = "none"; }
+var account_menu_is_shown = false;
+
+function toggleaccountmenu() { if (account_menu_is_shown == false) { document.getElementById("account").style.display = "block"; } else { document.getElementById("account").style.display = "none"; } }
 
 window.onload = () => {
     const token = localStorage.getItem("Mail-Token");
