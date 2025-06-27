@@ -25,14 +25,13 @@ window.onload = () => {
             const { status, response } = await fetchRequest("read");
             const inbox = document.getElementById("inbox");
 
-            inbox.innerHTML = ""; // Limpa mensagens anteriores
+            inbox.innerHTML = "";
 
             if (status !== 200 || !response) {
                 inbox.innerHTML = "<p>Erro ao carregar mensagens.</p>";
                 return;
             }
 
-            // Quebra a resposta em linhas
             const mensagens = response.split("\n").filter(l => l.trim() !== "");
 
             for (const linha of mensagens) {
@@ -56,6 +55,8 @@ window.onload = () => {
             if (status == 200) Swal.fire('Sucesso', 'Sua mensagem foi enviada!', 'success');
             else if (status == 404) Swal.fire('Erro', 'O destinatário não foi encontrado!', 'error');
             else Swal.fire('Erro', 'Erro ao enviar mensagem.', 'error');
+
+            buttons['refresh'];
         },
         clear: async () => {
             const confirm = await Swal.fire({ title: 'Tem certeza?', text: 'Tem certeza que deseja limpar suas mensagens?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
@@ -64,6 +65,8 @@ window.onload = () => {
             const { status } = await fetchRequest("clear");
             if (status == 200) Swal.fire('Sucesso', 'Suas mensagens foram apagadas!', 'success');
             else Swal.fire('Erro', 'Erro ao limpar mensagens.', 'error');
+
+            buttons['refresh'];
         },
         transfer: async () => {
             const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do destinatário', showCancelButton: true });
@@ -113,4 +116,6 @@ window.onload = () => {
         const el = document.getElementById(id);
         if (el) el.addEventListener("click", buttons[id]);
     });
+
+    buttons['refresh'];
 };
