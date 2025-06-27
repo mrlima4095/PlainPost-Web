@@ -121,6 +121,32 @@ window.onload = () => {
         agent: () => window.location.href = "/agent",
         gitea: () => window.location.replace = "https://gitea.archsource.xyz",
         drive: () => window.location.href = "/drive",
+        
+        mural: async () => { 
+            try {
+                const resposta = await fetch("https://archsource.xyz/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "status" }), });
+                const dados = await resposta.json();
+    
+                if (resposta.status == 200) window.location.href = "/mural/" + dados.response;
+                else if (resposta.status == 401) window.location.href = "/login";
+                else { Swal.fire('Erro', 'Ocorreu um erro interno.', 'error'); }
+            } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); }
+        });
+        changepage: async () => {
+            const { value: file_id } = await Swal.fire({ title: 'ID do arquivo:', input: 'text', inputPlaceholder: 'Link do arquivo do BinDrop', showCancelButton: true });
+            if (!file_id) return Swal.fire('Erro', 'O ID não pode estar vazio!', 'error');
+            
+            try {
+                const resposta = await fetch("https://archsource.xyz/api/mural", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ file_id }), });
+    
+                if (resposta.status == 200) Swal.fire('Sucesso', 'A pagina do seu mural foi alterada!', 'success');
+                else if (resposta.status == 404) Swal.fire('Erro', 'O arquivo não foi encontrado, ou você não é o dono dele!', 'error');
+                else if (resposta.status == 406) Swal.fire('Erro', 'O arquivo foi negado! Isto pode ocorrer caso o arquivo seja binario ou esta pagina possua JavaScript.', 'error');
+                else if (resposta.status == 410) Swal.fire('Erro', 'O arquivo não esta disponivel!', 'error');
+                else { Swal.fire('Erro', 'Erro ao alterar a pagina.', 'error'); }
+            } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); }
+        });
+        
         options: () => window.location.href = "options",
         security: () => window.location.href = "security"
     };
