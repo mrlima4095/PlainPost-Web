@@ -12,45 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-async function loadHistory() {
-    const token = localStorage.getItem("Mail-Token");
-    if (!token) { window.location.href = "login"; return; }
-
-    const container = document.getElementById("mensagens");
-    container.innerHTML = "";
-
-    try {
-        const res = await fetch("/api/agent/history", { method: "GET", headers: { "Authorization": token } });
-        if (!res.ok) { Swal.fire("Erro", "Erro ao carregar histórico.", "error"); return; }
-
-        const data = await res.json();
-
-        if (Array.isArray(data.response)) {
-                data.response.forEach((m) => {
-                const msg = document.createElement("div");
-                msg.className = m.role === "user" ? "msg-user" : "msg-bot";
-                
-                if (m.role === "user") { msg.textContent = m.content; }
-                else { msg.innerHTML = DOMPurify.sanitize(marked.parse(m.content)); }
-                container.appendChild(msg);
-            });
-        } else {
-            const msg = document.createElement("div");
-            msg.className = "msg-bot";
-            msg.innerHTML = DOMPurify.sanitize(marked.parse(data.response || "Erro ao carregar histórico."));
-            container.appendChild(msg);
-        }
-
-        container.scrollTop = container.scrollHeight;
-
-    } catch (e) {
-    const fallback = document.createElement("div");
-    fallback.className = "msg-bot";
-    fallback.innerHTML = DOMPurify.sanitize(marked.parse("Erro ao carregar histórico."));
-    container.appendChild(fallback);
-    }
-}
-
 async function request() {
     const token = localStorage.getItem("Mail-Token");
     if (!token) { window.location.href = "login"; return; }
@@ -87,6 +48,45 @@ async function request() {
         errorMsg.className = "msg-bot";
         errorMsg.innerHTML = DOMPurify.sanitize(marked.parse("Falha na comunicação."));
         container.appendChild(errorMsg);
+    }
+}
+
+async function loadHistory() {
+    const token = localStorage.getItem("Mail-Token");
+    if (!token) { window.location.href = "login"; return; }
+
+    const container = document.getElementById("mensagens");
+    container.innerHTML = "";
+
+    try {
+        const res = await fetch("/api/agent/history", { method: "GET", headers: { "Authorization": token } });
+        if (!res.ok) { Swal.fire("Erro", "Erro ao carregar histórico.", "error"); return; }
+
+        const data = await res.json();
+
+        if (Array.isArray(data.response)) {
+                data.response.forEach((m) => {
+                const msg = document.createElement("div");
+                msg.className = m.role === "user" ? "msg-user" : "msg-bot";
+                
+                if (m.role === "user") { msg.textContent = m.content; }
+                else { msg.innerHTML = DOMPurify.sanitize(marked.parse(m.content)); }
+                container.appendChild(msg);
+            });
+        } else {
+            const msg = document.createElement("div");
+            msg.className = "msg-bot";
+            msg.innerHTML = DOMPurify.sanitize(marked.parse(data.response || "Erro ao carregar histórico."));
+            container.appendChild(msg);
+        }
+
+        container.scrollTop = container.scrollHeight;
+
+    } catch (e) {
+    const fallback = document.createElement("div");
+    fallback.className = "msg-bot";
+    fallback.innerHTML = DOMPurify.sanitize(marked.parse("Erro ao carregar histórico."));
+    container.appendChild(fallback);
     }
 }
 
