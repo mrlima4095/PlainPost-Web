@@ -6,27 +6,135 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.0/dist/purify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <script src="scripts/agent.js" defer></script>
+
+    <style>
+        /* Layout principal */
+        body {
+            background-color: #202124;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+        }
+
+        h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        #mensagens {
+            max-width: 768px;
+            width: 100%;
+            height: 400px;
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: #303134;
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-sizing: border-box;
+        }
+
+        .msg-user, .msg-bot {
+            align-self: flex-end;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem 1rem 0.25rem 1rem;
+            max-width: 75%;
+            word-wrap: break-word;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .msg-user {
+            background-color: #198754;
+        }
+
+        .msg-bot {
+            background-color: #d9a800;
+            align-self: flex-start;
+        }
+
+        #user-area {
+            max-width: 768px;
+            width: 100%;
+            background-color: #303134;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-sizing: border-box;
+        }
+
+        #prompt {
+            background-color: #202124;
+            color: #e8eaed;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        #prompt::placeholder {
+            color: #9aa0a6;
+        }
+
+        #prompt:focus {
+            outline: 2px solid #8ab4f8;
+        }
+
+        #botoes {
+            display: flex;
+            gap: 1rem;
+        }
+
+        #botoes button {
+            flex: 1;
+            background-color: #3c4043;
+            color: #e8eaed;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        #botoes button:hover {
+            background-color: #4a4a4a;
+        }
+    </style>
 </head>
-<body class="bg-[#202124] min-h-screen flex flex-col items-center justify-center p-4">
+<body>
     
-    <h2 class="text-white text-2xl mb-6 font-semibold">Agente S.</h2>
+    <h2>Agente S.</h2>
     
-    <div id="mensagens" class="w-full max-w-3xl mb-6"></div>
+    <div id="mensagens"></div>
     
-    <div id="user-area" class="w-full max-w-3xl bg-[#303134] rounded-2xl px-6 py-4 flex flex-col space-y-2">
-        <input id="prompt" type="text" placeholder="Digite sua mensagem..." class="bg-[#202124] text-[#e8eaed] placeholder-[#9aa0a6] rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8ab4f8] w-full text-base"/>
-        <div id="botoes" class="flex space-x-4">
-            <button id="back" class="flex-1 bg-[#3c4043] hover:bg-[#4a4a4a] text-[#e8eaed] rounded-md py-2 text-center font-medium transition">Retornar</button>
-            <button id="clear" class="flex-1 bg-[#3c4043] hover:bg-[#4a4a4a] text-[#e8eaed] rounded-md py-2 text-center font-medium transition">Limpar</button>
-            <button id="send" class="flex-1 bg-[#3c4043] hover:bg-[#4a4a4a] text-[#e8eaed] rounded-md py-2 text-center font-medium transition">Enviar</button>
+    <div id="user-area">
+        <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
+        <div id="botoes">
+            <button id="back">Retornar</button>
+            <button id="clear">Limpar</button>
+            <button id="send">Enviar</button>
         </div>
     </div>
-    
+
 </body>
 </html>
