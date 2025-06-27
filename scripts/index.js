@@ -1,7 +1,37 @@
-var account_menu_is_shown = false;
+function hideAllMenus() {
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("options").style.display = "none";
+    document.getElementById("security").style.display = "none";
+}
 
-function toggleaccountmenu() { if (account_menu_is_shown == false) { document.getElementById("account").style.display = "block"; } else { document.getElementById("account").style.display = "none"; } account_menu_is_shown = !account_menu_is_shown; }
+// Alterna a visibilidade da div "profile"
+function toggleprofilemenu() {
+    const isVisible = document.getElementById("profile").style.display === "block";
+    hideAllMenus();
+    if (!isVisible) {
+        document.getElementById("profile").style.display = "block";
+    }
+}
 
+// Mostrar a div "options" e ocultar as outras
+document.getElementById("options").addEventListener("click", () => {
+    hideAllMenus();
+    document.getElementById("options").style.display = "block";
+});
+
+// Mostrar a div "security" e ocultar as outras
+document.getElementById("security").addEventListener("click", () => {
+    hideAllMenus();
+    document.getElementById("security").style.display = "block";
+});
+
+// Botões "Retornar" também escondem tudo e voltam para "profile"
+document.querySelectorAll("#back").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        hideAllMenus();
+        document.getElementById("profile").style.display = "block";
+    });
+});
 async function refreshInbox(fetchRequest, fromButton = false) {
     const refreshButton = document.getElementById("refresh");
     if (fromButton && refreshButton) {
@@ -79,7 +109,7 @@ window.onload = () => {
             else Swal.fire('Erro', 'Erro ao limpar mensagens.', 'error');
 
             refreshInbox(fetchRequest);
-        },
+        }, 
         transfer: async () => {
             const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do destinatário', showCancelButton: true });
             if (!target) return Swal.fire('Erro', 'Destinatário não pode estar vazio!', 'error');
