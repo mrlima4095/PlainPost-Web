@@ -131,7 +131,7 @@ window.onload = () => {
                 else if (resposta.status == 401) window.location.href = "/login";
                 else { Swal.fire('Erro', 'Ocorreu um erro interno.', 'error'); }
             } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); }
-        });
+        }),
         changepage: async () => {
             const { value: file_id } = await Swal.fire({ title: 'ID do arquivo:', input: 'text', inputPlaceholder: 'Link do arquivo do BinDrop', showCancelButton: true });
             if (!file_id) return Swal.fire('Erro', 'O ID não pode estar vazio!', 'error');
@@ -144,6 +144,18 @@ window.onload = () => {
                 else if (resposta.status == 406) Swal.fire('Erro', 'O arquivo foi negado! Isto pode ocorrer caso o arquivo seja binario ou esta pagina possua JavaScript.', 'error');
                 else if (resposta.status == 410) Swal.fire('Erro', 'O arquivo não esta disponivel!', 'error');
                 else { Swal.fire('Erro', 'Erro ao alterar a pagina.', 'error'); }
+            } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); }
+        }),
+        changebio: async () => {
+            const { value: content } = await Swal.fire({ title: 'Biografia:', input: 'text', inputPlaceholder: 'O que esta pensando?', showCancelButton: true });
+            if (!content) return Swal.fire('Erro', 'Sua biografia não pode estar vazia!', 'error');
+            
+            try {
+                const resposta = await fetch("https://archsource.xyz/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "changebio", bio: content }), });
+    
+                if (resposta.status == 200) Swal.fire('Sucesso', 'Sua biografia foi alterada!', 'success');
+                else if (resposta.status == 401) Swal.fire('Erro', 'O destinatário não foi encontrado!', 'error');
+                else { Swal.fire('Erro', 'Erro ao alterar sua biografia.', 'error'); }
             } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); }
         });
         
