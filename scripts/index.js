@@ -1,6 +1,6 @@
 var account_menu_is_shown = false;
 
-function toggleaccountmenu() { if (account_menu_is_shown == false) { document.getElementById("account").style.display = "block"; } else { document.getElementById("account").style.display = "none"; } }
+function toggleaccountmenu() { if (account_menu_is_shown == false) { document.getElementById("account").style.display = "block"; account_menu_is_shown == true; } else { document.getElementById("account").style.display = "none"; } }
 
 window.onload = () => {
     const token = localStorage.getItem("Mail-Token");
