@@ -7,15 +7,9 @@ html, body {
   font-family: sans-serif;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-}
+body { display: flex; flex-direction: column; }
 
-h1 {
-  margin: 1rem;
-  text-align: center;
-}
+h1 { margin: 1rem; text-align: center; }
 
 #mensagens {
   flex: 1;
@@ -30,7 +24,6 @@ h1 {
   gap: 0.5rem;
 }
 
-/* Mensagens estilo bolha */
 .msg-user, .msg-bot {
   max-width: 70%;
   padding: 0.6rem 1rem;
