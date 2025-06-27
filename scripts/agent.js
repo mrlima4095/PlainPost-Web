@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     loadHistory();
 
     const promptInput = document.getElementById("prompt");
-    const send = document.getElementById("enviar-btn");
-    const clear = document.getElementById("limpar-btn");
+    const send = document.getElementById("send");
+    const clear = document.getElementById("clear");
 
     send.addEventListener("click", request);
     clear.addEventListener("click", clearHistory);
@@ -29,27 +29,40 @@ async function request() {
     userMsg.textContent = query;
     container.appendChild(userMsg);
 
+    const thinking = document.createElement("div");
+    thinking.className = "msg-bot";
+    thinking.textContent = "⏳ Pensando...";
+    container.appendChild(thinking);
+    container.scrollTop = container.scrollHeight;
+
     try {
-        const res = await fetch("/api/agent", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ query }) });
-        if (!res.ok) { Swal.fire("Erro", "Erro ao enviar mensagem.", "error"); return; }
+        const res = await fetch("/api/agent", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token
+            },
+            body: JSON.stringify({ query })
+        });
+
+        if (!res.ok) {
+            Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
+            thinking.textContent = "❌ Erro ao obter resposta.";
+            return;
+        }
 
         const data = await res.json();
-        const botMsg = document.createElement("div");
-        botMsg.className = "msg-bot";
 
         const rawMarkdown = data?.response ?? "Nenhuma resposta recebida.";
-        botMsg.innerHTML = DOMPurify.sanitize(marked.parse(rawMarkdown));
+        thinking.innerHTML = DOMPurify.sanitize(marked.parse(rawMarkdown));
 
-        container.appendChild(botMsg);
-        container.scrollTop = container.scrollHeight;
-
-    } catch (e) { 
-        const errorMsg = document.createElement("div");
-        errorMsg.className = "msg-bot";
-        errorMsg.innerHTML = DOMPurify.sanitize(marked.parse("Falha na comunicação."));
-        container.appendChild(errorMsg);
+    } catch (e) {
+        thinking.innerHTML = DOMPurify.sanitize(marked.parse("❌ Falha na comunicação."));
     }
+
+    container.scrollTop = container.scrollHeight;
 }
+
 
 async function loadHistory() {
     const token = localStorage.getItem("Mail-Token");
