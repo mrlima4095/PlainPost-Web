@@ -8,8 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     send.addEventListener("click", request);
     clear.addEventListener("click", clearHistory);
 
-    promptInput.addEventListener("keydown", (event) => { if (event.key === "Enter") { event.preventDefault(); enviarPrompt(); } });
-
+    promptInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            request();
+        }
+    });
 });
 
 async function request() {
