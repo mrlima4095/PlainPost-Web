@@ -13,24 +13,6 @@ function toggleprofilemenu() {
     }
 }
 
-// Mostrar a div "options" e ocultar as outras
-document.getElementById("options").addEventListener("click", () => {
-    hideAllMenus();
-    document.getElementById("options").style.display = "block";
-});
-
-// Mostrar a div "security" e ocultar as outras
-document.getElementById("security").addEventListener("click", () => {
-    
-});
-
-// Botões "Retornar" também escondem tudo e voltam para "profile"
-document.querySelectorAll("#back").forEach((btn) => {
-    btn.addEventListener("click", () => {
-        hideAllMenus();
-        document.getElementById("profile").style.display = "block";
-    });
-});
 async function refreshInbox(fetchRequest, fromButton = false) {
     const refreshButton = document.getElementById("refresh");
     if (fromButton && refreshButton) {
@@ -223,8 +205,8 @@ window.onload = () => {
             } catch { Swal.fire("Erro", "Erro na conexão.", "error"); }
         },
         
-        options: () => window.location.href = "options",
-        security: () => window.location.href = "security",
+        options: () => { hideAllMenus(); document.getElementById("options").style.display = "block"; },
+        security: () => { hideAllMenus(); document.getElementById("security").style.display = "block"; },
         back: () => { hideAllMenus(); toggleprofilemenu(); },
     };
 
@@ -232,6 +214,23 @@ window.onload = () => {
         const el = document.getElementById(id);
         if (el) el.addEventListener("click", buttons[id]);
     });
+    // Mostrar a div "options" e ocultar as outras
+document.getElementById("options").addEventListener("click", () => {
+    
+});
+
+// Mostrar a div "security" e ocultar as outras
+document.getElementById("security").addEventListener("click", () => {
+    
+});
+
+// Botões "Retornar" também escondem tudo e voltam para "profile"
+document.querySelectorAll("#back").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        hideAllMenus();
+        document.getElementById("profile").style.display = "block";
+    });
+});
 
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
