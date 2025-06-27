@@ -21,8 +21,7 @@ document.getElementById("options").addEventListener("click", () => {
 
 // Mostrar a div "security" e ocultar as outras
 document.getElementById("security").addEventListener("click", () => {
-    hideAllMenus();
-    document.getElementById("security").style.display = "block";
+    
 });
 
 // Botões "Retornar" também escondem tudo e voltam para "profile"
@@ -225,7 +224,8 @@ window.onload = () => {
         },
         
         options: () => window.location.href = "options",
-        security: () => window.location.href = "security"
+        security: () => window.location.href = "security",
+        back: () => { hideAllMenus(); toggleprofilemenu(); },
     };
 
     Object.keys(buttons).forEach(id => {
