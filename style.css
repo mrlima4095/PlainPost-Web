@@ -24,30 +24,16 @@ body {
     text-align: center;
 }
 
-#conteiner h2 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-#conteiner p {
-    margin-bottom: 20px;
-    font-size: 0.9em;
-    color: #666;
-}
-
-#conteiner > button {
-    display: block;
-    width: 100%;
-    margin-top: 10px;
-}
+#conteiner h2 { margin-bottom: 10px; color: #333; }
+#conteiner p { margin-bottom: 20px; font-size: 0.9em; color: #666; }
+#conteiner > button { display: block; width: 100%; margin-top: 10px; }
+#conteiner h2 + button { margin-top: 10px; }
 
 #acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
 #acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
 #acoes button { flex: 1; white-space: nowrap; }
 
-#profile,
-#options,
-#security {
+#profile, #options, #security {
     display: none;
     margin-top: 10px;
     background-color: rgba(1, 153, 255, 0.12);
@@ -56,25 +42,14 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
-
-#profile button,
-#options button,
-#security button {
-    width: 100%;
-    margin-top: 8px;
-}
+#profile button, #options button, #security button { width: 100%; margin-top: 8px; }
 
 
 form { display: flex; flex-direction: column; gap: 15px; }
 
-input[type="user"],
-input[type="password"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+input[type="user"], input[type="password"] { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
 
-button {
+button { 
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -83,14 +58,8 @@ button {
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
+button:hover { background-color: #2980b9; }
 
-button:hover {
-    background-color: #2980b9;
-}
-
-#conteiner h2 + button {
-    margin-top: 10px;
-}
 
 #avatar {
     display: block;
