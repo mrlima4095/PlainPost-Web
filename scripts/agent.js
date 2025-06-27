@@ -26,6 +26,7 @@ async function request() {
     promptInput.value = "";
 
     const container = document.getElementById("mensagens");
+    container.style.display = "flex";
 
     const userMsg = document.createElement("div");
     userMsg.className = "msg-user";
