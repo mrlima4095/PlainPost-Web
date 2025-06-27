@@ -57,11 +57,7 @@ body {
 #account button { width: 100%; margin-top: 8px; }
 
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
+form { display: flex; flex-direction: column; gap: 15px; }
 
 input[type="user"],
 input[type="password"] {
