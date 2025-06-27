@@ -70,6 +70,8 @@ async function loadHistory() {
         if (Array.isArray(data.response)) {
             if (data.response.length === 0) { container.style.display = "none"; return; }
 
+            container.style.display = "flex";
+
             data.response.forEach((m) => {
                 const msg = document.createElement("div");
                 msg.className = m.role === "user" ? "msg-user" : "msg-bot";
@@ -79,8 +81,6 @@ async function loadHistory() {
 
                 container.appendChild(msg);
             });
-
-            container.style.display = "flex";
 
         } else { container.style.display = "none"; }
 
