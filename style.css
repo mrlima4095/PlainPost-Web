@@ -50,7 +50,7 @@ body {
 #security {
     display: none;
     margin-top: 10px;
-    background-color: rgba(1, 153, 255, 0.12); /* equivalente a #0199ff1e */
+    background-color: rgba(1, 153, 255, 0.12);
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
