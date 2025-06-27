@@ -24,11 +24,8 @@
             <label for="senha">Senha:</label><br />
             <input type="password" id="senha" name="senha" required /><br /><br />
 
-
-            <div id="acoes">
-                <button type="button">Entrar</button>
-                <button type="button">Registrar-se</button>
-            </div>
+            <button type="button">Entrar</button>
+            <button type="button">Registrar-se</button>
             <br><a href="privacy">Política de Privacidade</a>
         </form>
     </div>
