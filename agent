@@ -17,7 +17,7 @@
     
     <h2>Agente S.</h2>
     
-    <div id="mensagens"></div>
+    <div id="mensagens"></div><br>
     
     <div id="user-area">
         <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
