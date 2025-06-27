@@ -205,8 +205,8 @@ window.onload = () => {
             } catch { Swal.fire("Erro", "Erro na conexão.", "error"); }
         },
         
-        options: () => { hideAllMenus(); document.getElementById("options").style.display = "block"; },
-        security: () => { hideAllMenus(); document.getElementById("security").style.display = "block"; },
+        optionsbutton: () => { hideAllMenus(); document.getElementById("options").style.display = "block"; },
+        securitybutton: () => { hideAllMenus(); document.getElementById("security").style.display = "block"; },
         back: () => { hideAllMenus(); toggleprofilemenu(); },
     };
 
