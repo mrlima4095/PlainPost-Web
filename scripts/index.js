@@ -32,6 +32,12 @@ window.onload = () => {
                 return;
             }
 
+            // Se única linha for "No Messages", traduzir
+            if (response.trim() === "No Messages") {
+                inbox.innerHTML = "<p>Sem mensagens.</p>";
+                return;
+            }
+
             const mensagens = response.split("\n").filter(l => l.trim() !== "");
 
             for (const linha of mensagens) {
