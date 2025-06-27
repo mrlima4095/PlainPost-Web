@@ -1,7 +1,13 @@
 var account_menu_is_shown = false;
 
 function toggleaccountmenu() { if (account_menu_is_shown == false) { document.getElementById("account").style.display = "block"; } else { document.getElementById("account").style.display = "none"; } account_menu_is_shown = !account_menu_is_shown; }
-async function refreshInbox(fetchRequest) {
+async function refreshInbox(fetchRequest, fromButton = false) {
+    const refreshButton = document.getElementById("refresh");
+    if (fromButton && refreshButton) {
+        refreshButton.disabled = true;
+        refreshButton.innerText = "Atualizando...";
+    }
+
     const { status, response } = await fetchRequest("read");
     const inbox = document.getElementById("inbox");
 
@@ -9,23 +15,24 @@ async function refreshInbox(fetchRequest) {
 
     if (status !== 200 || !response) {
         inbox.innerHTML = "<p>Erro ao carregar mensagens.</p>";
-        return;
-    }
-
-    if (response.trim() === "No Messages") {
+    } else if (response.trim() === "No Messages") {
         inbox.innerHTML = "<p>Sem mensagens.</p>";
-        return;
+    } else {
+        const mensagens = response.split("\n").filter(l => l.trim() !== "");
+        for (const linha of mensagens) {
+            const msgDiv = document.createElement("div");
+            msgDiv.className = "mensagem";
+            msgDiv.innerText = linha;
+            inbox.appendChild(msgDiv);
+        }
     }
 
-    const mensagens = response.split("\n").filter(l => l.trim() !== "");
-
-    for (const linha of mensagens) {
-        const msgDiv = document.createElement("div");
-        msgDiv.className = "mensagem";
-        msgDiv.innerText = linha;
-        inbox.appendChild(msgDiv);
+    if (fromButton && refreshButton) {
+        refreshButton.disabled = false;
+        refreshButton.innerText = "Atualizar";
     }
 }
+
 
 window.onload = () => {
     const token = localStorage.getItem("Mail-Token");
@@ -44,7 +51,7 @@ window.onload = () => {
     };
 
     const buttons = {
-        refresh: () => refreshInbox(fetchRequest),
+        refresh: () => refreshInbox(fetchRequest, true),
         send: async () => {
             const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do usuário', showCancelButton: true });
             if (!target) return Swal.fire('Erro', 'Destinatário não pode estar vazio!', 'error');
