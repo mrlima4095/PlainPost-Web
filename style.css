@@ -6,12 +6,12 @@
 }
 
 body {
-  background-color: #f0f2f5;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column; 
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
 }
 
 #conteiner {
@@ -93,11 +93,10 @@ button:hover {
 }
 
 #avatar {
-  display: block;
-  width: 95px;
-  margin-top: 10px;
-  margin-left: 45%;
-  max-width: 400px;
-  cursor: pointer;
-  
+    display: block;
+    width: 95px;
+    margin-top: 10px;
+    margin-left: 45%;
+    max-width: 400px;
+    cursor: pointer;
 }
