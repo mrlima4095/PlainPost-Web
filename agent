@@ -20,7 +20,9 @@
         <div id="mensagens"></div>
 
 
-        <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
+        <div id="misc">
+            <input id="prompt" type="text" placeholder="Digite sua mensagem..." />
+        </div>
         <div id="acoes">
             <button id="send">Enviar</button>
             <button id="clear">Limpar Mensagens</button>
