@@ -48,24 +48,10 @@ button {
 button:hover { background-color: #2980b9; }
 
 
-#avatar {
-    display: block;
-    width: 95px;
-    margin-top: 10px;
-    margin-left: 45%;
-    max-width: 400px;
-    cursor: pointer;
-}
+#avatar { display: block; width: 95px; margin-top: 10px; margin-left: 45%; max-width: 400px; cursor: pointer; }
+#inbox { margin-top: 20px; text-align: left; max-height: 300px; overflow-y: auto; padding-right: 5px; }
 
-#inbox {
-    margin-top: 20px;
-    text-align: left;
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 5px;
-}
-
-.mensagem {
+.mensagem { 
     padding: 8px 10px;
     margin-bottom: 8px;
     background-color: #e9f1fb;
@@ -76,8 +62,4 @@ button:hover { background-color: #2980b9; }
     word-break: break-word;
     white-space: pre-wrap;
 }
-
-.mensagem:hover,
-.mensagem:active {
-    background-color: #d0e8ff;
-}
+.mensagem:hover, .mensagem:active { background-color: #d0e8ff; }
