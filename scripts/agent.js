@@ -21,12 +21,12 @@ async function request() {
 
     const promptInput = document.getElementById("prompt");
     const query = promptInput.value.trim();
-    if (!query) return;
+    if (!query) { loadHistory(); return; }
 
     promptInput.value = "";
 
     const container = document.getElementById("mensagens");
-    
+
     const userMsg = document.createElement("div");
     userMsg.className = "msg-user";
     userMsg.textContent = query;
