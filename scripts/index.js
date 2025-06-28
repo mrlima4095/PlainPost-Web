@@ -44,7 +44,6 @@ async function refreshInbox(fetchRequest, fromButton = false) {
     }
 }
 
-
 window.onload = () => {
     const token = localStorage.getItem("Mail-Token");
     if (!token) { window.location.href = "login"; return; }
@@ -58,7 +57,9 @@ window.onload = () => {
             });
             const dados = await resposta.json();
             return { status: resposta.status, response: dados.response };
-        } catch { return { status: 0 }; }
+        } catch {
+            return { status: 0 };
+        }
     };
 
     const buttons = {
@@ -89,7 +90,7 @@ window.onload = () => {
             else Swal.fire('Erro', 'Erro ao limpar mensagens.', 'error');
 
             refreshInbox(fetchRequest);
-        }, 
+        },
         transfer: async () => {
             const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do destinatário', showCancelButton: true });
             if (!target) return Swal.fire('Erro', 'Destinatário não pode estar vazio!', 'error');
@@ -131,79 +132,54 @@ window.onload = () => {
         agent: () => window.location.href = "/agent",
         gitea: () => window.location.href = "https://gitea.archsource.xyz",
         drive: () => window.location.href = "/drive",
-        
-        mural: async () => { 
-            try {
-                const resposta = await fetch("https://archsource.xyz/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "status" }), });
-                const dados = await resposta.json();
-    
-                if (resposta.status == 200) window.location.href = "/mural/" + dados.response;
-                else if (resposta.status == 401) window.location.href = "/login";
-                else { Swal.fire('Erro', 'Ocorreu um erro interno.', 'error'); }
-            } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); }
+        mural: async () => {
+            const { status, response } = await fetchRequest("status");
+            if (status == 200) window.location.href = "/mural/" + response;
+            else if (status == 401) window.location.href = "/login";
+            else Swal.fire('Erro', 'Ocorreu um erro interno.', 'error');
         },
         changepage: async () => {
             const { value: file_id } = await Swal.fire({ title: 'ID do arquivo:', input: 'text', inputPlaceholder: 'Link do arquivo do BinDrop', showCancelButton: true });
             if (!file_id) return Swal.fire('Erro', 'O ID não pode estar vazio!', 'error');
-            
-            try {
-                const resposta = await fetch("https://archsource.xyz/api/mural", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ file_id }), });
-    
-                if (resposta.status == 200) Swal.fire('Sucesso', 'A pagina do seu mural foi alterada!', 'success');
-                else if (resposta.status == 404) Swal.fire('Erro', 'O arquivo não foi encontrado, ou você não é o dono dele!', 'error');
-                else if (resposta.status == 406) Swal.fire('Erro', 'O arquivo foi negado! Isto pode ocorrer caso o arquivo seja binario ou esta pagina possua JavaScript.', 'error');
-                else if (resposta.status == 410) Swal.fire('Erro', 'O arquivo não esta disponivel!', 'error');
-                else { Swal.fire('Erro', 'Erro ao alterar a pagina.', 'error'); }
-            } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); }
+
+            const { status } = await fetchRequest("changepage", { file_id });
+            if (status == 200) Swal.fire('Sucesso', 'A pagina do seu mural foi alterada!', 'success');
+            else if (status == 404) Swal.fire('Erro', 'O arquivo não foi encontrado, ou você não é o dono dele!', 'error');
+            else if (status == 406) Swal.fire('Erro', 'O arquivo foi negado! Isto pode ocorrer caso o arquivo seja binario ou esta pagina possua JavaScript.', 'error');
+            else if (status == 410) Swal.fire('Erro', 'O arquivo não está disponível!', 'error');
+            else Swal.fire('Erro', 'Erro ao alterar a pagina.', 'error');
         },
         changebio: async () => {
-            const { value: content } = await Swal.fire({ title: 'Biografia:', input: 'text', inputPlaceholder: 'O que esta pensando?', showCancelButton: true });
+            const { value: content } = await Swal.fire({ title: 'Biografia:', input: 'text', inputPlaceholder: 'O que está pensando?', showCancelButton: true });
             if (!content) return Swal.fire('Erro', 'Sua biografia não pode estar vazia!', 'error');
-            
-            try {
-                const resposta = await fetch("https://archsource.xyz/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "changebio", bio: content }), });
-    
-                if (resposta.status == 200) Swal.fire('Sucesso', 'Sua biografia foi alterada!', 'success');
-                else if (resposta.status == 401) Swal.fire('Erro', 'O destinatário não foi encontrado!', 'error');
-                else { Swal.fire('Erro', 'Erro ao alterar sua biografia.', 'error'); }
-            } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); }
+
+            const { status } = await fetchRequest("changebio", { bio: content });
+            if (status == 200) Swal.fire('Sucesso', 'Sua biografia foi alterada!', 'success');
+            else Swal.fire('Erro', 'Erro ao alterar sua biografia.', 'error');
         },
-        
-        changepass: async () => { 
-            const token = localStorage.getItem("Mail-Token");
-            if (!token) { window.location.href = "login"; return; }
-    
+        changepass: async () => {
             const { value: newpass } = await Swal.fire({ title: "Trocar Senha", input: "password", inputPlaceholder: "Nova senha", showCancelButton: true });
             if (!newpass) return;
-    
-            try {
-                const resposta = await fetch("https://archsource.xyz/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "changepass", newpass }) });
-    
-                if (resposta.status === 200) { Swal.fire("Sucesso", "Senha alterada com sucesso!", "success"); } 
-                else { Swal.fire("Erro", "Erro ao trocar senha.", "error"); }
-            } catch { Swal.fire("Erro", "Erro na conexão.", "error"); }
+
+            const { status } = await fetchRequest("changepass", { newpass });
+            if (status === 200) Swal.fire("Sucesso", "Senha alterada com sucesso!", "success");
+            else Swal.fire("Erro", "Erro ao trocar senha.", "error");
         },
-        
-        signout: async () => { localStorage.removeItem("Mail-Token"); window.location.href = "/login"; },
-        signoff: async () => { 
-            const token = localStorage.getItem("Mail-Token");
-            if (!token) { window.location.href = "login"; return; }
-    
+        signout: () => {
+            localStorage.removeItem("Mail-Token");
+            window.location.href = "/login";
+        },
+        signoff: async () => {
             const result = await Swal.fire({ title: "Tem certeza?", text: "Tem certeza que deseja apagar sua conta?", icon: "warning", showCancelButton: true, confirmButtonText: "Sim, apagar", cancelButtonText: "Cancelar" });
             if (!result.isConfirmed) return;
-    
-            try {
-                const resposta = await fetch("https://archsource.xyz/api/mail", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ action: "signoff" }) });
-    
-                if (resposta.status === 200) { 
-                    localStorage.removeItem("Mail-Token");
-                    await Swal.fire("Conta apagada!", "Sua conta foi removida com sucesso.", "success");
-                    window.location.href = "login";
-                } 
-                else { Swal.fire("Erro", "Erro ao apagar conta.", "error"); }
-            } catch { Swal.fire("Erro", "Erro na conexão.", "error"); }
+
+            const { status } = await fetchRequest("signoff");
+            if (status === 200) {
+                localStorage.removeItem("Mail-Token");
+                await Swal.fire("Conta apagada!", "Sua conta foi removida com sucesso.", "success");
+                window.location.href = "login";
+            } else Swal.fire("Erro", "Erro ao apagar conta.", "error");
         },
-        
         optionsbutton: () => { hideAllMenus(); document.getElementById("options").style.display = "block"; },
         securitybutton: () => { hideAllMenus(); document.getElementById("security").style.display = "block"; },
         back: () => { hideAllMenus(); toggleprofilemenu(); },
@@ -213,23 +189,13 @@ window.onload = () => {
         const el = document.getElementById(id);
         if (el) el.addEventListener("click", buttons[id]);
     });
-    // Mostrar a div "options" e ocultar as outras
-document.getElementById("options").addEventListener("click", () => {
-    
-});
 
-// Mostrar a div "security" e ocultar as outras
-document.getElementById("security").addEventListener("click", () => {
-    
-});
-
-// Botões "Retornar" também escondem tudo e voltam para "profile"
-document.querySelectorAll("#back").forEach((btn) => {
-    btn.addEventListener("click", () => {
-        hideAllMenus();
-        document.getElementById("profile").style.display = "block";
+    document.querySelectorAll("#back").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            hideAllMenus();
+            document.getElementById("profile").style.display = "block";
+        });
     });
-});
 
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
