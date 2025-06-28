@@ -59,16 +59,6 @@ h2 {
     align-self: flex-start;
 }
 
-/* Garante que msg-user e msg-bot fiquem dentro do container */
-.msg-user,
-.msg-bot {
-    max-width: 100%;
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    white-space: pre-wrap;
-    box-sizing: border-box;
-}
-
 /* Garante que o conteúdo dentro de mensagens (como p, ul, li, code etc) não estoure */
 .msg-user *,
 .msg-bot * {
@@ -79,9 +69,7 @@ h2 {
     box-sizing: border-box;
 }
 
-/* Corrige <pre> e <code> para não quebrarem layout horizontal */
-.msg-bot pre,
-.msg-bot code {
+.msg-bot pre, .msg-bot code {
     white-space: pre-wrap;
     word-break: break-word;
     overflow-x: auto;
@@ -116,7 +104,6 @@ h2 {
     font-size: 1rem;
     box-sizing: border-box;
 }
-
 #prompt::placeholder { color: #9aa0a6; }
 #prompt:focus { outline: 2px solid #8ab4f8; }
 
