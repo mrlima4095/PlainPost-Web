@@ -22,6 +22,10 @@ body {
     width: 100%;
     max-width: 800px;
 }
+#acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
+#acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
+#acoes button { flex: 1; white-space: nowrap; }
+
 
 h1, h2 {
     text-align: center;
