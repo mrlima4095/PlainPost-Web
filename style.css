@@ -16,9 +16,16 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 #conteiner > button { display: block; width: 100%; margin-top: 10px; }
 #conteiner h2 + button { margin-top: 10px; }
 
-#acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
-#acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
-#acoes button { flex: 1; white-space: nowrap; }
+.acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
+.acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
+.acoes button { flex: 1; white-space: nowrap; }
+
+@media (max-width: 480px) {
+    .acoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
 
 #profile, #options, #security {
     display: none;
