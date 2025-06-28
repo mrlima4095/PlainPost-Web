@@ -143,6 +143,4 @@ h2 {
     transition: background-color 0.2s ease-in-out;
 }
 
-#botoes button:hover {
-    background-color: #4a4a4a;
-}
+#botoes button:hover { background-color: #4a4a4a; }
