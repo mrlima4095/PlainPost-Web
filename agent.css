@@ -56,6 +56,41 @@ h2 {
     align-self: flex-start;
 }
 
+/* Garante que msg-user e msg-bot fiquem dentro do container */
+.msg-user,
+.msg-bot {
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+}
+
+/* Garante que o conteúdo dentro de mensagens (como p, ul, li, code etc) não estoure */
+.msg-user *,
+.msg-bot * {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+}
+
+/* Corrige <pre> e <code> para não quebrarem layout horizontal */
+.msg-bot pre,
+.msg-bot code {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+    display: block;
+    max-width: 100%;
+    padding: 0.5rem;
+    background-color: #1e1e1e;
+    border-radius: 0.5rem;
+    color: #e8eaed;
+    font-family: monospace;
+}
+
 #user-area {
     max-width: 768px;
     width: 100%;
