@@ -20,10 +20,6 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 #acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
 #acoes button { flex: 1; white-space: nowrap; }
 
-@media (max-width: 480px) {
-    #acoes { flex-direction: column; align-items: stretch; }
-}
-
 #profile, #options, #security {
     display: none;
     margin-top: 10px;
