@@ -125,11 +125,7 @@ h2 {
     outline: 2px solid #8ab4f8;
 }
 
-#botoes {
-    display: flex;
-    gap: 1rem;
-}
-
+#botoes { display: flex; gap: 1rem; }
 #botoes button {
     flex: 1;
     background-color: #3c4043;
@@ -142,5 +138,4 @@ h2 {
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 }
-
 #botoes button:hover { background-color: #4a4a4a; }
