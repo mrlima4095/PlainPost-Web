@@ -197,63 +197,83 @@ window.onload = () => {
         });
     });
 
-    document.getElementById("inbox").addEventListener("click", function (e) {
-        const el = e.target;
-        if (!el || !el.textContent.includes("[")) return;
+    document.getElementById("inbox").addEventListener("click", async function (e) {
+    const el = e.target;
+    if (!el || !el.textContent.includes("[")) return;
 
-        const texto = el.textContent.trim();
-        const match = texto.match(/^\[(\d{2}:\d{2}) (\d{2}\/\d{2}\/\d{4}) - ([^\]]+)\] (.+)$/);
+    const texto = el.textContent.trim();
+    const match = texto.match(/^\[(\d{2}:\d{2}) (\d{2}\/\d{2}\/\d{4}) - ([^\]]+)\] (.+)$/);
 
-        if (!match) return;
+    if (!match) return;
 
-        const [, hora, data, autor, conteudo] = match;
+    const [, hora, data, autor, conteudo] = match;
 
-        Swal.fire({
-            title: "Mensagem",
-            html: `<pre style="text-align:center; white-space:pre-wrap;">Hora: ${hora}<br>Data: ${data}<br>Remetente: ${autor}<br><br>${conteudo}</pre>`,
-            showConfirmButton: false,
-            didRender: () => {
-                const container = Swal.getHtmlContainer();
+    Swal.fire({
+        title: "Mensagem",
+        html: `
+            <div style="text-align:center; white-space:pre-wrap;">
+                Hora: ${hora}<br>
+                Data: ${data}<br>
+                Remetente: ${autor}<br><br>
+                ${conteudo}
+            </div>`,
+        showConfirmButton: false,
+        showCancelButton: true,
+        cancelButtonText: "Fechar",
+        didRender: () => {
+            const container = Swal.getHtmlContainer();
 
-                const copiarBtn = document.createElement("button");
-                copiarBtn.textContent = "Copiar";
-                copiarBtn.style.marginRight = "10px";
-                copiarBtn.onclick = () => {
-                    navigator.clipboard.writeText(conteudo);
-                    Swal.fire("Copiado!", "", "success");
-                };
+            const copiarBtn = document.createElement("button");
+            copiarBtn.textContent = "Copiar";
+            copiarBtn.style.marginRight = "10px";
+            copiarBtn.onclick = () => {
+                navigator.clipboard.writeText(conteudo);
+                Swal.fire("Copiado!", "", "success");
+            };
 
-                const responderBtn = document.createElement("button");
-                responderBtn.textContent = "Responder";
-                responderBtn.onclick = () => {
-                    Swal.fire({
-                        title: `Responder para ${autor}`,
-                        input: "text",
-                        inputLabel: "Digite sua resposta",
-                        inputPlaceholder: "Escreva aqui...",
-                        showCancelButton: true,
-                        confirmButtonText: "Enviar",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const { status } = fetchRequest("send", { to: autor, content: result.value });
-                            if (status == 200) Swal.fire('Sucesso', 'Sua mensagem foi enviada!', 'success');
-                            else if (status == 404) Swal.fire('Erro', 'O destinatário não foi encontrado!', 'error');
-                            else Swal.fire('Erro', 'Erro ao enviar mensagem.', 'error');
+            const responderBtn = document.createElement("button");
+            responderBtn.textContent = "Responder";
+            responderBtn.onclick = () => {
+                Swal.fire({
+                    title: `Responder para ${autor}`,
+                    input: "text",
+                    inputLabel: "Digite sua resposta",
+                    inputPlaceholder: "Escreva aqui...",
+                    showCancelButton: true,
+                    confirmButtonText: "Enviar",
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        try {
+                            const res = await fetchRequest("send", {
+                                to: autor,
+                                content: result.value
+                            });
+                            if (res.status === 200) {
+                                Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
+                            } else if (res.status === 404) {
+                                Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
+                            } else {
+                                Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
+                            }
+                        } catch (err) {
+                            Swal.fire("Erro", "Erro na requisição.", "error");
                         }
-                    });
-                };
+                    }
+                });
+            };
 
-                const botoes = document.createElement("div");
-                botoes.style.display = "flex";
-                botoes.style.justifyContent = "center";
-                botoes.style.marginTop = "20px";
-                botoes.appendChild(copiarBtn);
-                botoes.appendChild(responderBtn);
+            const botoes = document.createElement("div");
+            botoes.style.display = "flex";
+            botoes.style.justifyContent = "center";
+            botoes.style.marginTop = "20px";
+            botoes.appendChild(copiarBtn);
+            botoes.appendChild(responderBtn);
 
-                container.appendChild(botoes);
-            },
-        });
+            container.appendChild(botoes);
+        },
     });
+});
+
 
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
