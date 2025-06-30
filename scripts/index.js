@@ -221,11 +221,12 @@ window.onload = () => {
 
     document.getElementById("inbox").addEventListener("click", async function (e) {
         const el = e.target;
-        if (!el || !el.textContent.includes("[")) return;
+        if (!el || !el.classList.contains("mensagem")) return;
 
         const texto = el.textContent.trim();
-        const match = texto.match(/^\[(\d{2}:\d{2}) (\d{2}\/\d{2}\/\d{4}) - ([^\]]+)\] (.+)$/);
+        const messageId = el.dataset.messageId;
 
+        const match = texto.match(/^\[(\d{2}:\d{2}) (\d{2}\/\d{2}\/\d{4}) - ([^\]]+)\] (.+)$/);
         if (!match) return;
 
         const [, hora, data, autor, conteudo] = match;
@@ -236,7 +237,7 @@ window.onload = () => {
             showConfirmButton: true,
             confirmButtonText: "Copiar",
             showDenyButton: true,
-            denyButtonText: "Responder",
+            denyButtonText: "Apagar",
             showCancelButton: true,
             cancelButtonText: "Fechar",
         }).then(async (result) => {
@@ -244,32 +245,18 @@ window.onload = () => {
                 navigator.clipboard.writeText(conteudo);
                 Swal.fire("Copiado!", "", "success");
             } else if (result.isDenied) {
-                const resposta = await Swal.fire({
-                    title: `Responder para ${autor}`,
-                    input: "text",
-                    inputLabel: "Digite sua resposta",
-                    inputPlaceholder: "Escreva aqui...",
+                const confirm = await Swal.fire({
+                    title: "Tem certeza?",
+                    text: "Essa ação apagará a mensagem.",
+                    icon: "warning",
                     showCancelButton: true,
-                    confirmButtonText: "Enviar",
+                    confirmButtonText: "Sim, apagar",
+                    cancelButtonText: "Cancelar"
                 });
-
-                if (resposta.isConfirmed) {
-                    try {
-                        const res = await fetchRequest("send", {
-                            to: autor,
-                            content: resposta.value
-                        });
-                        if (res.status === 200) {
-                            Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
-                        } else if (res.status === 404) {
-                            Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
-                        } else {
-                            Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
-                        }
-                    } catch (err) {
-                        Swal.fire("Erro", "Erro na requisição.", "error");
-                    }
-                    refreshInbox(fetchRequest);
+                if (confirm.isConfirmed) {
+                    await fetchRequest("delete", { id: messageId });
+                    el.remove();
+                    Swal.fire("Apagado!", "", "success");
                 }
             }
         });
