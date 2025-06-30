@@ -2,7 +2,6 @@ function hideAllMenus() {
     document.getElementById("profile").style.display = "none";
     document.getElementById("options").style.display = "none";
     document.getElementById("security").style.display = "none";
-    document.getElementById("block-panel").style.display = "none";
 }
 
 function toggleprofilemenu() {
@@ -320,7 +319,6 @@ window.onload = () => {
 
     document.getElementById("back-options").addEventListener("click", () => { hideAllMenus(); toggleprofilemenu(); });
     document.getElementById("back-security").addEventListener("click", () => { hideAllMenus(); toggleprofilemenu(); });
-    document.getElementById("back-block").addEventListener("click", () => { hideAllMenus(); toggleprofilemenu(); });
 
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
