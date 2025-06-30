@@ -21,19 +21,18 @@ async function refreshInbox(fetchRequest, fromButton = false) {
 
     const { status, response } = await fetchRequest("read");
     const inbox = document.getElementById("inbox");
-
     inbox.innerHTML = "";
 
     if (status !== 200 || !response) {
         inbox.innerHTML = "<p>Erro ao carregar mensagens. </p>";
-    } else if (response.trim() === "No messages") {
+    } else if (response === "No messages") {
         inbox.innerHTML = "<p>Sem mensagens.</p>";
     } else {
-        const mensagens = response.split("\n").filter(l => l.trim() !== "");
-        for (const linha of mensagens) {
+        for (const msg of response) {
             const msgDiv = document.createElement("div");
             msgDiv.className = "mensagem";
-            msgDiv.innerText = linha;
+            msgDiv.innerText = msg.content;
+            msgDiv.dataset.messageId = msg.id;
             inbox.appendChild(msgDiv);
         }
     }
