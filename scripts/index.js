@@ -233,10 +233,10 @@ window.onload = () => {
         Swal.fire({
     title: "Mensagem",
     html: `<div style="text-align:center; white-space:pre-wrap;">
-            Hora: ${hora}<br>
-            Data: ${data}<br>
-            Remetente: ${autor}<br><br>
-            ${conteudo}
+            Hora: 12:00<br>
+            Data: 2025-06-30<br>
+            Remetente: AutorX<br><br>
+            Conteúdo da mensagem aqui.
           </div>`,
     showConfirmButton: true,
     confirmButtonText: "Responder",
@@ -246,9 +246,8 @@ window.onload = () => {
     cancelButtonText: "Fechar",
 }).then(async (result) => {
     if (result.isConfirmed) {
-        // Botão Responder foi clicado
         const resposta = await Swal.fire({
-            title: `Responder para ${autor}`,
+            title: `Responder para AutorX`,
             input: "text",
             inputLabel: "Digite sua resposta",
             inputPlaceholder: "Escreva aqui...",
@@ -259,25 +258,16 @@ window.onload = () => {
 
         if (resposta.isConfirmed && resposta.value.trim() !== "") {
             try {
-                const res = await fetchRequest("send", {
-                    to: autor,
-                    content: resposta.value.trim()
-                });
-
-                if (res.status === 200) {
-                    Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
-                } else if (res.status === 404) {
-                    Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
-                } else {
-                    Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
-                }
+                // Simula envio
+                console.log("Enviando resposta para AutorX:", resposta.value.trim());
+                // Aqui você pode chamar seu fetchRequest
+                Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
             } catch (err) {
                 Swal.fire("Erro", "Erro na requisição.", "error");
             }
-            refreshInbox(fetchRequest);
+            // refreshInbox(fetchRequest); // Comente para testar sem função externa
         }
     } else if (result.isDenied) {
-        // Botão Apagar foi clicado
         const confirm = await Swal.fire({
             title: "Tem certeza?",
             text: "Essa ação apagará a mensagem.",
@@ -288,12 +278,13 @@ window.onload = () => {
         });
 
         if (confirm.isConfirmed) {
-            await fetchRequest("delete", { id: messageId });
-            el.remove();
+            // Simula exclusão
+            console.log("Mensagem apagada");
+            // await fetchRequest("delete", { id: messageId });
+            // el.remove();
             Swal.fire("Apagado!", "", "success");
         }
     }
-    // Se cancelar, nada acontece (Fechar)
 });
 
 
