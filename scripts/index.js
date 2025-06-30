@@ -203,13 +203,7 @@ window.onload = () => {
 
     Swal.fire({
         title: "Mensagem",
-        html: `
-            <div style="text-align:center; white-space:pre-wrap;">
-                Hora: ${hora}<br>
-                Data: ${data}<br>
-                Remetente: ${autor}<br><br>
-                ${conteudo}
-            </div>`,
+        html: `<div style="text-align:center; white-space:pre-wrap;">Hora: ${hora}<br>Data: ${data}<br>Remetente: ${autor}<br><br>${conteudo}</div>`,
         showConfirmButton: true,
         confirmButtonText: "Copiar",
         showDenyButton: true,
