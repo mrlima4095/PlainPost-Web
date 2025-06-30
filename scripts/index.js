@@ -238,48 +238,24 @@ window.onload = () => {
             cancelButtonText: "Fechar",
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const resposta = await Swal.fire({
-                    title: `Responder para ${autor}`,
-                    input: "text",
-                    inputLabel: "Digite sua resposta",
-                    inputPlaceholder: "Escreva aqui...",
-                    showCancelButton: true,
-                    confirmButtonText: "Enviar",
-                    cancelButtonText: "Cancelar",
-                });
+                const resposta = await Swal.fire({ title: `Responder para ${autor}`, input: "text", inputLabel: "Digite sua resposta", inputPlaceholder: "Escreva aqui...", showCancelButton: true, confirmButtonText: "Enviar", cancelButtonText: "Cancelar", });
 
                 if (resposta.isConfirmed && resposta.value.trim() !== "") {
                     try {
-                        const res = await fetchRequest("send", {
-                            to: autor,
-                            content: resposta.value.trim()
-                        });
+                        const res = await fetchRequest("send", { to: autor, content: resposta.value.trim() });
 
-                        if (res.status === 200) {
-                            Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
-                        } else if (res.status === 404) {
-                            Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
-                        } else {
-                            Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
-                        }
-                    } catch (err) {
-                        Swal.fire("Erro", "Erro na requisição.", "error");
-                    }
+                        if (res.status === 200) { Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success"); } 
+                        else if (res.status === 404) { Swal.fire("Erro", "O destinatário não foi encontrado!", "error"); } 
+                        else { Swal.fire("Erro", "Erro ao enviar mensagem.", "error"); }
+                    } catch (err) { Swal.fire("Erro", "Erro na requisição.", "error"); }
                     refreshInbox(fetchRequest);
                 }
             } else if (result.isDenied) {
-                const confirm = await Swal.fire({
-                    title: "Tem certeza?",
-                    text: "Essa ação apagará a mensagem.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Sim, apagar",
-                    cancelButtonText: "Cancelar"
-                });
+                const confirm = await Swal.fire({ title: "Tem certeza?", text: "Essa ação apagará a mensagem.", icon: "warning", showCancelButton: true, confirmButtonText: "Sim, apagar", cancelButtonText: "Cancelar" });
                 if (confirm.isConfirmed) {
                     await fetchRequest("delete", { id: messageId });
                     el.remove();
-                    Swal.fire("Apagado!", "", "success");
+                    Swal.fire("Apagado!", "Mensagem apagada com sucesso.", "success");
                 }
             }
         });
