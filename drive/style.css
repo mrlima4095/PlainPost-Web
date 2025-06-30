@@ -27,7 +27,7 @@ body {
 #acoes button { flex: 1; white-space: nowrap; }
 
 #tabelaContainer {
-    max-height: 200px; /* altura máxima visível */
+    max-height: 400px; /* altura máxima visível */
     overflow-y: auto;  /* ativa scroll vertical quando necessário */
     overflow-x: auto;  /* caso a tabela cresça em largura */
     border: 1px solid #ccc;
