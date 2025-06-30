@@ -212,7 +212,6 @@ window.onload = () => {
         },
         optionsbutton: () => { hideAllMenus(); document.getElementById("options").style.display = "block"; },
         securitybutton: () => { hideAllMenus(); document.getElementById("security").style.display = "block"; },
-        back: () => { hideAllMenus(); toggleprofilemenu(); },
     };
 
     Object.keys(buttons).forEach(id => {
@@ -275,6 +274,7 @@ window.onload = () => {
             }
         });
     });
+    document.getElementById("back").addEventListener({ hideAllMenus(); toggleprofilemenu(); });
 
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
