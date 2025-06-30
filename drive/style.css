@@ -28,8 +28,8 @@ body {
 
 #tabelaContainer {
     max-height: 400px; /* altura máxima visível */
-    overflow-y: auto;  /* ativa scroll vertical quando necessário */
-    overflow-x: auto;  /* caso a tabela cresça em largura */
+    overflow-y: auto;  /* scroll vertical */
+    overflow-x: auto;  /* scroll horizontal, se precisar */
     border: 1px solid #ccc;
     border-radius: 5px;
 }
