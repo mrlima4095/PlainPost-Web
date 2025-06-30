@@ -21,18 +21,19 @@ async function refreshInbox(fetchRequest, fromButton = false) {
 
     const { status, response } = await fetchRequest("read");
     const inbox = document.getElementById("inbox");
+
     inbox.innerHTML = "";
 
     if (status !== 200 || !response) {
         inbox.innerHTML = "<p>Erro ao carregar mensagens. </p>";
-    } else if (response === "No messages") {
+    } else if (response.trim() === "No messages") {
         inbox.innerHTML = "<p>Sem mensagens.</p>";
     } else {
-        for (const msg of response) {
+        const mensagens = response.split("\n").filter(l => l.trim() !== "");
+        for (const linha of mensagens) {
             const msgDiv = document.createElement("div");
             msgDiv.className = "mensagem";
-            msgDiv.innerText = msg.content;
-            msgDiv.dataset.messageId = msg.id;
+            msgDiv.innerText = linha;
             inbox.appendChild(msgDiv);
         }
     }
@@ -240,24 +241,15 @@ window.onload = () => {
             ${conteudo}
         </div>
     `,
-    showConfirmButton: false,
-    showCancelButton: false,
+    showConfirmButton: true, // PRECISA estar ativado para criar os .swal2-actions
+    confirmButtonText: "Copiar",
     didOpen: () => {
-        const swalContainer = Swal.getHtmlContainer();
-        const btnContainer = document.createElement("div");
-        btnContainer.style.marginTop = "20px";
-        btnContainer.style.display = "flex";
-        btnContainer.style.justifyContent = "space-around";
+        const actions = Swal.getPopup().querySelector(".swal2-actions");
 
-        const btnCopiar = Swal.getPopup().querySelector(".swal2-actions").appendChild(document.createElement("button"));
-        btnCopiar.textContent = "Copiar";
-        btnCopiar.className = "swal2-confirm swal2-styled";
-        btnCopiar.addEventListener("click", async () => {
-            await navigator.clipboard.writeText(conteudo);
-            Swal.fire("Copiado!", "", "success");
-        });
+        // Botão Copiar já está criado pelo confirmButtonText
 
-        const btnApagar = Swal.getPopup().querySelector(".swal2-actions").appendChild(document.createElement("button"));
+        // Botão Apagar
+        const btnApagar = document.createElement("button");
         btnApagar.textContent = "Apagar";
         btnApagar.className = "swal2-deny swal2-styled";
         btnApagar.addEventListener("click", async () => {
@@ -275,8 +267,10 @@ window.onload = () => {
                 Swal.fire("Apagado!", "", "success");
             }
         });
+        actions.appendChild(btnApagar);
 
-        const btnResponder = Swal.getPopup().querySelector(".swal2-actions").appendChild(document.createElement("button"));
+        // Botão Responder
+        const btnResponder = document.createElement("button");
         btnResponder.textContent = "Responder";
         btnResponder.className = "swal2-confirm swal2-styled";
         btnResponder.style.backgroundColor = "#3085d6";
@@ -308,15 +302,23 @@ window.onload = () => {
                 refreshInbox(fetchRequest);
             }
         });
+        actions.appendChild(btnResponder);
 
-        const btnFechar = Swal.getPopup().querySelector(".swal2-actions").appendChild(document.createElement("button"));
+        // Botão Fechar
+        const btnFechar = document.createElement("button");
         btnFechar.textContent = "Fechar";
         btnFechar.className = "swal2-cancel swal2-styled";
         btnFechar.addEventListener("click", () => {
             Swal.close();
         });
+        actions.appendChild(btnFechar);
+    },
+    preConfirm: async () => {
+        await navigator.clipboard.writeText(conteudo);
+        Swal.fire("Copiado!", "", "success");
     }
 });
+
 
     });
     
