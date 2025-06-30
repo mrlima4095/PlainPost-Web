@@ -175,7 +175,7 @@ window.onload = () => {
                 try {
                     const res = await fetchRequest("send", {
                         to: "admin",
-                        content: `Deseja comprar ${quantidade} moedas`;
+                        content: `Deseja comprar ${quantidade} moedas`
                     });
                     if (res.status === 200) {
                         Swal.fire("Solicitado!", "Aguarde o contato da administração.", "success");
