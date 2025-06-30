@@ -211,7 +211,7 @@ window.onload = () => {
             } else Swal.fire("Erro", "Erro ao apagar conta.", "error");
         },
         optionsbutton: () => { hideAllMenus(); document.getElementById("options").style.display = "block"; },
-        securitybutton: () => { hideAllMenus(); document.getElementById("security").style.display = "block"; },
+        securitybutton: () => { hideAllMenus(); document.getElementById("security").style.display = "block"; }
     };
 
     Object.keys(buttons).forEach(id => {
