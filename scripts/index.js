@@ -210,7 +210,7 @@ window.onload = () => {
 
         Swal.fire({
             title: "Mensagem",
-            html: `<pre style="text-align:left; white-space:pre-wrap;">Hora: ${hora}<br>Data: ${data}<br>Remetente: ${autor}<br>${conteudo}</pre>`,
+            html: `<pre style="text-align:center; white-space:pre-wrap;">Hora: ${hora}<br>Data: ${data}<br>Remetente: ${autor}<br><br>${conteudo}</pre>`,
             showConfirmButton: false,
             didRender: () => {
                 const container = Swal.getHtmlContainer();
