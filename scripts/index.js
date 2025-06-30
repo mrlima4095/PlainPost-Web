@@ -235,8 +235,7 @@ window.onload = () => {
                         confirmButtonText: "Enviar",
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            const content = result.value;
-                            const { status } = fetchRequest("send", { to: autor, content });
+                            const { status } = fetchRequest("send", { to: autor, content: result.value });
                             if (status == 200) Swal.fire('Sucesso', 'Sua mensagem foi enviada!', 'success');
                             else if (status == 404) Swal.fire('Erro', 'O destinatário não foi encontrado!', 'error');
                             else Swal.fire('Erro', 'Erro ao enviar mensagem.', 'error');
