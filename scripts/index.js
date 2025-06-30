@@ -216,24 +216,20 @@ window.onload = () => {
                 Data: ${data}<br>
                 Remetente: ${autor}<br><br>
                 ${conteudo}
+                <br><br>
+                <button id="copiarBtn" style="margin-right:10px;">Copiar</button>
+                <button id="responderBtn">Responder</button>
             </div>`,
         showConfirmButton: false,
         showCancelButton: true,
         cancelButtonText: "Fechar",
-        didRender: () => {
-            const container = Swal.getHtmlContainer();
-
-            const copiarBtn = document.createElement("button");
-            copiarBtn.textContent = "Copiar";
-            copiarBtn.style.marginRight = "10px";
-            copiarBtn.onclick = () => {
+        didOpen: () => {
+            document.getElementById("copiarBtn").onclick = () => {
                 navigator.clipboard.writeText(conteudo);
                 Swal.fire("Copiado!", "", "success");
             };
 
-            const responderBtn = document.createElement("button");
-            responderBtn.textContent = "Responder";
-            responderBtn.onclick = () => {
+            document.getElementById("responderBtn").onclick = () => {
                 Swal.fire({
                     title: `Responder para ${autor}`,
                     input: "text",
@@ -261,15 +257,6 @@ window.onload = () => {
                     }
                 });
             };
-
-            const botoes = document.createElement("div");
-            botoes.style.display = "flex";
-            botoes.style.justifyContent = "center";
-            botoes.style.marginTop = "20px";
-            botoes.appendChild(copiarBtn);
-            botoes.appendChild(responderBtn);
-
-            container.appendChild(botoes);
         },
     });
 });
