@@ -131,6 +131,62 @@ window.onload = () => {
         agent: () => window.location.href = "/agent",
         gitea: () => window.location.href = "https://gitea.archsource.xyz",
         drive: () => window.location.href = "/drive",
+        block: async () => {
+            const { value: user } = await Swal.fire({
+                title: 'Bloquear usuário',
+                input: 'text',
+                inputPlaceholder: 'Nome de usuário',
+                showCancelButton: true
+            });
+            if (!user) return;
+
+            const { status, response } = await fetchRequest("block", { user_to_block: user });
+            if (status === 200) Swal.fire("Sucesso", response, "success");
+            else if (status === 409) Swal.fire("Atenção", "Usuário já está bloqueado.", "info");
+            else Swal.fire("Erro", "Erro ao bloquear usuário.", "error");
+        },
+        unblock: async () => {
+            const { value: user } = await Swal.fire({
+                title: 'Desbloquear usuário',
+                input: 'text',
+                inputPlaceholder: 'Nome de usuário',
+                showCancelButton: true
+            });
+            if (!user) return;
+
+            const { status, response } = await fetchRequest("unblock", { user_to_unblock: user });
+            if (status === 200) Swal.fire("Sucesso", response, "success");
+            else if (status === 404) Swal.fire("Erro", "Usuário não está bloqueado.", "error");
+            else Swal.fire("Erro", "Erro ao desbloquear usuário.", "error");
+        },
+        read_blocked: async () => {
+            const { status, response } = await fetchRequest("read_blocked");
+            const inbox = document.getElementById("inbox");
+            inbox.innerHTML = "";
+
+            if (status !== 200 || !response) {
+                inbox.innerHTML = "<p>Erro ao carregar mensagens de bloqueados.</p>";
+            } else if (response === "No messages from blocked users.") {
+                inbox.innerHTML = "<p>Sem mensagens de usuários bloqueados.</p>";
+            } else {
+                for (const msg of response) {
+                    const msgDiv = document.createElement("div");
+                    msgDiv.className = "mensagem";
+                    msgDiv.innerText = msg.content;
+                    msgDiv.dataset.messageId = msg.id;
+                    inbox.appendChild(msgDiv);
+                }
+            }
+        },
+        view_blocks: async () => {
+            const { status, response } = await fetchRequest("blocked_users");
+            if (status === 200 && Array.isArray(response)) {
+                const lista = response.length > 0 ? response.join("<br>") : "Nenhum usuário bloqueado.";
+                Swal.fire("Usuários bloqueados", lista, "info");
+            } else {
+                Swal.fire("Erro", "Erro ao buscar usuários bloqueados.", "error");
+            }
+        },
         mural: async () => {
             const { status, response } = await fetchRequest("status");
             if (status == 200) window.location.href = "/mural/" + response;
