@@ -289,7 +289,7 @@ window.onload = () => {
             }
             // Se cancelar, nada acontece (Fechar)
         });
-    }
+    });
 
     document.getElementById("back-options").addEventListener("click", () => {
         hideAllMenus();
