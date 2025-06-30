@@ -55,7 +55,7 @@ async function request() {
             body: JSON.stringify({ prompt: query })
         });
 
-        if (res.status == 403) {
+        if (res.status === 403) {
             Swal.fire("Erro", "Saldo insuficiente para continuar.", "error");
             thinking.textContent = "❌ Saldo insuficiente.";
             return;
