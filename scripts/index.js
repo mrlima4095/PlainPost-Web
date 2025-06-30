@@ -94,7 +94,7 @@ window.onload = () => {
             const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do destinatário', showCancelButton: true });
             if (!target) return Swal.fire('Erro', 'Destinatário não pode estar vazio!', 'error');
 
-            const { value: amount } = await Swal.fire({ title: 'Quantidade:', input: 'number', inputPlaceholder: 'Quantas moedas?', showCancelButton: true });
+            const { value: amount } = await Swal.fire({ title: 'Quantidade:', input: 'number', inputPlaceholder: 'Quantas moedas?', inputAttributes: { min: 1 }, showCancelButton: true });
             if (!amount) return Swal.fire('Erro', 'Você precisa informar a quantidade!', 'error');
 
             const confirm = await Swal.fire({ title: 'Confirmar transferência', text: `Tem certeza que deseja enviar ${amount} moedas para ${target}?`, icon: 'question', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
@@ -160,10 +160,7 @@ window.onload = () => {
             const { value: quantidade } = await Swal.fire({
                 title: 'Obter Moedas',
                 input: 'number',
-                inputLabel: 'Digite a quantia de moedas que deseja obter:',
-                inputAttributes: {
-                    min: 1
-                },
+                inputPlaceholder: 'Quantas moedas?', inputAttributes: { min: 1 },
                 confirmButtonText: 'Enviar Solicitação',
                 showCancelButton: true,
                 cancelButtonText: 'Cancelar'
@@ -271,7 +268,6 @@ window.onload = () => {
                     refreshInbox(fetchRequest);
                 }
             } else if (result.isDenied) {
-                // Botão Apagar foi clicado
                 const confirm = await Swal.fire({
                     title: "Tem certeza?",
                     text: "Essa ação apagará a mensagem.",
