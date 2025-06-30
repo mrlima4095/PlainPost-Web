@@ -274,8 +274,10 @@ window.onload = () => {
             }
         });
     });
-    document.getElementById("back").addEventListener({ hideAllMenus(); toggleprofilemenu(); });
-
+    document.getElementById("back").addEventListener("click", () => {
+        hideAllMenus();
+        toggleprofilemenu();
+    });
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
 };
