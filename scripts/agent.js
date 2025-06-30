@@ -55,17 +55,17 @@ async function request() {
             body: JSON.stringify({ prompt: query })
         });
 
-        if (res.status === 403) {
+        if (res.status == 403) {
             Swal.fire("Erro", "Saldo insuficiente para continuar.", "error");
             thinking.textContent = "❌ Saldo insuficiente.";
             return;
         }
 
-        /*if (!res.ok) {
+        if (!res.ok) {
             Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
             thinking.textContent = "❌ Erro ao obter resposta.";
             return;
-        }*/
+        }
 
         const data = await res.json();
         const rawMarkdown = data?.response ?? "Nenhuma resposta recebida.";
