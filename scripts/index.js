@@ -321,8 +321,11 @@ window.onload = () => {
         hideAllMenus();
         toggleprofilemenu();
     });
-
     document.getElementById("back-security").addEventListener("click", () => {
+        hideAllMenus();
+        toggleprofilemenu();
+    });
+    document.getElementById("back-block").addEventListener("click", () => {
         hideAllMenus();
         toggleprofilemenu();
     });
