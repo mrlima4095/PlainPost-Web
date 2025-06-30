@@ -2,6 +2,7 @@ function hideAllMenus() {
     document.getElementById("profile").style.display = "none";
     document.getElementById("options").style.display = "none";
     document.getElementById("security").style.display = "none";
+    document.getElementById("block-panel").style.display = "none";
 }
 
 function toggleprofilemenu() {
