@@ -241,15 +241,25 @@ window.onload = () => {
             cancelButtonText: "Fechar",
         }).then(async (result) => {
             if (result.isConfirmed) {
+                // Botão Responder foi clicado
                 const resposta = await Swal.fire({
                     title: `Responder para ${autor}`,
                     input: "text",
                     inputLabel: "Digite sua resposta",
                     inputPlaceholder: "Escreva aqui...",
+                    showCancelButton: true,
                     confirmButtonText: "Enviar",
+                    cancelButtonText: "Cancelar",
                 });
 
-                if (res.status === 200) {
+                if (resposta.isConfirmed && resposta.value.trim() !== "") {
+                    try {
+                        const res = await fetchRequest("send", {
+                            to: autor,
+                            content: resposta.value.trim()
+                        });
+
+                        if (res.status === 200) {
                             Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
                         } else if (res.status === 404) {
                             Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
@@ -261,12 +271,8 @@ window.onload = () => {
                     }
                     refreshInbox(fetchRequest);
                 }
-                if (resposta.isConfirmed) {
-                    try {
-                        const res = await fetchRequest("send", {
-                            to: autor,
-                            content: resposta.value
             } else if (result.isDenied) {
+                // Botão Apagar foi clicado
                 const confirm = await Swal.fire({
                     title: "Tem certeza?",
                     text: "Essa ação apagará a mensagem.",
@@ -281,8 +287,9 @@ window.onload = () => {
                     Swal.fire("Apagado!", "", "success");
                 }
             }
+            // Se cancelar, nada acontece (Fechar)
         });
-    });
+
 
     document.getElementById("back-options").addEventListener("click", () => {
         hideAllMenus();
