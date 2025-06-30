@@ -240,6 +240,7 @@ window.onload = () => {
                 } catch (err) {
                     Swal.fire("Erro", "Erro na requisição.", "error");
                 }
+                refreshInbox(fetchRequest);
             }
         }
     });
