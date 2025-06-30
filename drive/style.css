@@ -26,6 +26,14 @@ body {
 #acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
 #acoes button { flex: 1; white-space: nowrap; }
 
+#tabelaContainer {
+    max-height: 400px; /* altura máxima visível */
+    overflow-y: auto;  /* ativa scroll vertical quando necessário */
+    overflow-x: auto;  /* caso a tabela cresça em largura */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 
 h1, h2 {
     text-align: center;
