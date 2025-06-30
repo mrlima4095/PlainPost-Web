@@ -231,63 +231,65 @@ window.onload = () => {
         const [, hora, data, autor, conteudo] = match;
 
         Swal.fire({
-    title: "Mensagem",
-    html: `<div style="text-align:center; white-space:pre-wrap;">
-            Hora: 12:00<br>
-            Data: 2025-06-30<br>
-            Remetente: AutorX<br><br>
-            Conteúdo da mensagem aqui.
-          </div>`,
-    showConfirmButton: true,
-    confirmButtonText: "Responder",
-    showDenyButton: true,
-    denyButtonText: "Apagar",
-    showCancelButton: true,
-    cancelButtonText: "Fechar",
-}).then(async (result) => {
-    if (result.isConfirmed) {
-        const resposta = await Swal.fire({
-            title: `Responder para AutorX`,
-            input: "text",
-            inputLabel: "Digite sua resposta",
-            inputPlaceholder: "Escreva aqui...",
+            title: "Mensagem",
+            html: `<div style="text-align:center; white-space:pre-wrap;">Hora: ${hora}<br>Data: ${data}<br>Remetente: ${autor}<br><br>${conteudo}</div>`,
+            showConfirmButton: true,
+            confirmButtonText: "Responder",
+            showDenyButton: true,
+            denyButtonText: "Apagar",
             showCancelButton: true,
-            confirmButtonText: "Enviar",
-            cancelButtonText: "Cancelar",
-        });
+            cancelButtonText: "Fechar",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                // Botão Responder foi clicado
+                const resposta = await Swal.fire({
+                    title: `Responder para ${autor}`,
+                    input: "text",
+                    inputLabel: "Digite sua resposta",
+                    inputPlaceholder: "Escreva aqui...",
+                    showCancelButton: true,
+                    confirmButtonText: "Enviar",
+                    cancelButtonText: "Cancelar",
+                });
 
-        if (resposta.isConfirmed && resposta.value.trim() !== "") {
-            try {
-                // Simula envio
-                console.log("Enviando resposta para AutorX:", resposta.value.trim());
-                // Aqui você pode chamar seu fetchRequest
-                Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
-            } catch (err) {
-                Swal.fire("Erro", "Erro na requisição.", "error");
+                if (resposta.isConfirmed && resposta.value.trim() !== "") {
+                    try {
+                        const res = await fetchRequest("send", {
+                            to: autor,
+                            content: resposta.value.trim()
+                        });
+
+                        if (res.status === 200) {
+                            Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
+                        } else if (res.status === 404) {
+                            Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
+                        } else {
+                            Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
+                        }
+                    } catch (err) {
+                        Swal.fire("Erro", "Erro na requisição.", "error");
+                    }
+                    refreshInbox(fetchRequest);
+                }
+            } else if (result.isDenied) {
+                // Botão Apagar foi clicado
+                const confirm = await Swal.fire({
+                    title: "Tem certeza?",
+                    text: "Essa ação apagará a mensagem.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Sim, apagar",
+                    cancelButtonText: "Cancelar"
+                });
+                if (confirm.isConfirmed) {
+                    await fetchRequest("delete", { id: messageId });
+                    el.remove();
+                    Swal.fire("Apagado!", "", "success");
+                }
             }
-            // refreshInbox(fetchRequest); // Comente para testar sem função externa
-        }
-    } else if (result.isDenied) {
-        const confirm = await Swal.fire({
-            title: "Tem certeza?",
-            text: "Essa ação apagará a mensagem.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Sim, apagar",
-            cancelButtonText: "Cancelar"
+            // Se cancelar, nada acontece (Fechar)
         });
-
-        if (confirm.isConfirmed) {
-            // Simula exclusão
-            console.log("Mensagem apagada");
-            // await fetchRequest("delete", { id: messageId });
-            // el.remove();
-            Swal.fire("Apagado!", "", "success");
-        }
     }
-});
-
-
 
     document.getElementById("back-options").addEventListener("click", () => {
         hideAllMenus();
