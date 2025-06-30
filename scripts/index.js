@@ -241,7 +241,6 @@ window.onload = () => {
             cancelButtonText: "Fechar",
         }).then(async (result) => {
             if (result.isConfirmed) {
-                // Botão Responder foi clicado
                 const resposta = await Swal.fire({
                     title: `Responder para ${autor}`,
                     input: "text",
@@ -287,7 +286,6 @@ window.onload = () => {
                     Swal.fire("Apagado!", "", "success");
                 }
             }
-            // Se cancelar, nada acontece (Fechar)
         });
     });
 
