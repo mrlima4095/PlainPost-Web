@@ -114,7 +114,7 @@ tr:nth-child(even) {
     max-width: 150px;
 }
 
-#tabelaContainer {
+#arquivoTabela {
     max-height: 400px;
     overflow-y: auto;
     border: 1px solid #ccc;
