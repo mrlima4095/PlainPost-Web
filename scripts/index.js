@@ -190,13 +190,6 @@ window.onload = () => {
         if (el) el.addEventListener("click", buttons[id]);
     });
 
-    document.querySelectorAll("#back").forEach((btn) => {
-        btn.addEventListener("click", () => {
-            hideAllMenus();
-            document.getElementById("profile").style.display = "block";
-        });
-    });
-
     document.getElementById("inbox").addEventListener("click", async function (e) {
     const el = e.target;
     if (!el || !el.textContent.includes("[")) return;
@@ -216,48 +209,45 @@ window.onload = () => {
                 Data: ${data}<br>
                 Remetente: ${autor}<br><br>
                 ${conteudo}
-                <br><br>
-                <button id="copiarBtn" style="margin-right:10px;">Copiar</button>
-                <button id="responderBtn">Responder</button>
             </div>`,
-        showConfirmButton: false,
+        showConfirmButton: true,
+        confirmButtonText: "Copiar",
+        showDenyButton: true,
+        denyButtonText: "Responder",
         showCancelButton: true,
         cancelButtonText: "Fechar",
-        didOpen: () => {
-            document.getElementById("copiarBtn").onclick = () => {
-                navigator.clipboard.writeText(conteudo);
-                Swal.fire("Copiado!", "", "success");
-            };
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            navigator.clipboard.writeText(conteudo);
+            Swal.fire("Copiado!", "", "success");
+        } else if (result.isDenied) {
+            const resposta = await Swal.fire({
+                title: `Responder para ${autor}`,
+                input: "text",
+                inputLabel: "Digite sua resposta",
+                inputPlaceholder: "Escreva aqui...",
+                showCancelButton: true,
+                confirmButtonText: "Enviar",
+            });
 
-            document.getElementById("responderBtn").onclick = () => {
-                Swal.fire({
-                    title: `Responder para ${autor}`,
-                    input: "text",
-                    inputLabel: "Digite sua resposta",
-                    inputPlaceholder: "Escreva aqui...",
-                    showCancelButton: true,
-                    confirmButtonText: "Enviar",
-                }).then(async (result) => {
-                    if (result.isConfirmed) {
-                        try {
-                            const res = await fetchRequest("send", {
-                                to: autor,
-                                content: result.value
-                            });
-                            if (res.status === 200) {
-                                Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
-                            } else if (res.status === 404) {
-                                Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
-                            } else {
-                                Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
-                            }
-                        } catch (err) {
-                            Swal.fire("Erro", "Erro na requisição.", "error");
-                        }
+            if (resposta.isConfirmed) {
+                try {
+                    const res = await fetchRequest("send", {
+                        to: autor,
+                        content: resposta.value
+                    });
+                    if (res.status === 200) {
+                        Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
+                    } else if (res.status === 404) {
+                        Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
+                    } else {
+                        Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
                     }
-                });
-            };
-        },
+                } catch (err) {
+                    Swal.fire("Erro", "Erro na requisição.", "error");
+                }
+            }
+        }
     });
 });
 
