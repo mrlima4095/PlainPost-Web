@@ -14,14 +14,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.key === "Enter") { event.preventDefault(); request(); }
     });
 });
-
 async function request() {
     const token = localStorage.getItem("Mail-Token");
-    if (!token) { window.location.href = "login"; return; }
+    if (!token) {
+        window.location.href = "login";
+        return;
+    }
 
     const promptInput = document.getElementById("prompt");
     const query = promptInput.value.trim();
-    if (!query) { loadHistory(); return; }
+    if (!query) {
+        loadHistory();
+        return;
+    }
 
     promptInput.value = "";
 
@@ -41,11 +46,28 @@ async function request() {
     container.scrollTop = container.scrollHeight;
 
     try {
-        const res = await fetch("/api/agent", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": token }, body: JSON.stringify({ "prompt": query }) });
-        if (!res.ok) { Swal.fire("Erro", "Erro ao enviar mensagem.", "error"); thinking.textContent = "❌ Erro ao obter resposta."; return; }
+        const res = await fetch("/api/agent", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token
+            },
+            body: JSON.stringify({ prompt: query })
+        });
+
+        if (res.status === 403) {
+            Swal.fire("Erro", "Saldo insuficiente para continuar.", "error");
+            thinking.textContent = "❌ Saldo insuficiente.";
+            return;
+        }
+
+        if (!res.ok) {
+            Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
+            thinking.textContent = "❌ Erro ao obter resposta.";
+            return;
+        }
 
         const data = await res.json();
-
         const rawMarkdown = data?.response ?? "Nenhuma resposta recebida.";
         thinking.innerHTML = DOMPurify.sanitize(marked.parse(rawMarkdown));
 
