@@ -103,6 +103,8 @@ tr:nth-child(even) {
 #arquivoTabela {
     table-layout: fixed;
     word-wrap: break-word;
+    border-collapse: collapse;
+    width: 100%;
 }
 #arquivoTabela td, #arquivoTabela th {
     word-break: break-word;
@@ -111,6 +113,50 @@ tr:nth-child(even) {
 #arquivoTabela td:first-child {
     max-width: 150px;
 }
+
+#tabelaContainer {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#arquivoTabela thead, #arquivoTabela tbody {
+    display: block;
+}
+
+#arquivoTabela thead tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    background-color: #f8f8f8;
+}
+
+#arquivoTabela tbody {
+    height: 350px; 
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+    width: 100%;
+}
+
+#arquivoTabela tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#arquivoTabela th, #arquivoTabela td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    word-break: break-word;
+}
+
+#arquivoTabela td:first-child, #arquivoTabela th:first-child {
+    max-width: 150px;
+}
+
 
 @media (max-width: 600px) {
     #conteiner {
