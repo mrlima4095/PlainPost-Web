@@ -274,10 +274,17 @@ window.onload = () => {
             }
         });
     });
-    document.getElementById("back").addEventListener("click", () => {
+    
+    document.getElementById("back-options").addEventListener("click", () => {
         hideAllMenus();
         toggleprofilemenu();
     });
+
+    document.getElementById("back-security").addEventListener("click", () => {
+        hideAllMenus();
+        toggleprofilemenu();
+    });
+
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
 };
