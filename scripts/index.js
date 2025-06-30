@@ -157,6 +157,36 @@ window.onload = () => {
             if (status == 200) Swal.fire('Sucesso', 'Sua biografia foi alterada!', 'success');
             else Swal.fire('Erro', 'Erro ao alterar sua biografia.', 'error');
         },
+        buycoins: async () => {
+            const { value: quantidade } = await Swal.fire({
+                title: 'Obter Moedas',
+                input: 'number',
+                inputLabel: 'Digite a quantia de moedas que deseja obter:',
+                inputAttributes: {
+                    min: 1
+                },
+                confirmButtonText: 'Enviar Solicitação',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar'
+            });
+
+            if (quantidade && quantidade > 0) {
+
+                try {
+                    const res = await fetchRequest("send", {
+                        to: "admin",
+                        content: `Deseja comprar ${quantidade} moedas`;
+                    });
+                    if (res.status === 200) {
+                        Swal.fire("Solicitado!", "Aguarde o contato da administração.", "success");
+                    } else {
+                        Swal.fire("Erro", "Não foi possível enviar sua solicitação.", "error");
+                    }
+                } catch (error) {
+                    Swal.fire("Erro", "Erro de rede ao enviar solicitação.", "error");
+                }
+            }
+        },
         changepass: async () => {
             const { value: newpass } = await Swal.fire({ title: "Trocar Senha", input: "password", inputPlaceholder: "Nova senha", showCancelButton: true });
             if (!newpass) return;
@@ -191,61 +221,60 @@ window.onload = () => {
     });
 
     document.getElementById("inbox").addEventListener("click", async function (e) {
-    const el = e.target;
-    if (!el || !el.textContent.includes("[")) return;
+        const el = e.target;
+        if (!el || !el.textContent.includes("[")) return;
 
-    const texto = el.textContent.trim();
-    const match = texto.match(/^\[(\d{2}:\d{2}) (\d{2}\/\d{2}\/\d{4}) - ([^\]]+)\] (.+)$/);
+        const texto = el.textContent.trim();
+        const match = texto.match(/^\[(\d{2}:\d{2}) (\d{2}\/\d{2}\/\d{4}) - ([^\]]+)\] (.+)$/);
 
-    if (!match) return;
+        if (!match) return;
 
-    const [, hora, data, autor, conteudo] = match;
+        const [, hora, data, autor, conteudo] = match;
 
-    Swal.fire({
-        title: "Mensagem",
-        html: `<div style="text-align:center; white-space:pre-wrap;">Hora: ${hora}<br>Data: ${data}<br>Remetente: ${autor}<br><br>${conteudo}</div>`,
-        showConfirmButton: true,
-        confirmButtonText: "Copiar",
-        showDenyButton: true,
-        denyButtonText: "Responder",
-        showCancelButton: true,
-        cancelButtonText: "Fechar",
-    }).then(async (result) => {
-        if (result.isConfirmed) {
-            navigator.clipboard.writeText(conteudo);
-            Swal.fire("Copiado!", "", "success");
-        } else if (result.isDenied) {
-            const resposta = await Swal.fire({
-                title: `Responder para ${autor}`,
-                input: "text",
-                inputLabel: "Digite sua resposta",
-                inputPlaceholder: "Escreva aqui...",
-                showCancelButton: true,
-                confirmButtonText: "Enviar",
-            });
+        Swal.fire({
+            title: "Mensagem",
+            html: `<div style="text-align:center; white-space:pre-wrap;">Hora: ${hora}<br>Data: ${data}<br>Remetente: ${autor}<br><br>${conteudo}</div>`,
+            showConfirmButton: true,
+            confirmButtonText: "Copiar",
+            showDenyButton: true,
+            denyButtonText: "Responder",
+            showCancelButton: true,
+            cancelButtonText: "Fechar",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                navigator.clipboard.writeText(conteudo);
+                Swal.fire("Copiado!", "", "success");
+            } else if (result.isDenied) {
+                const resposta = await Swal.fire({
+                    title: `Responder para ${autor}`,
+                    input: "text",
+                    inputLabel: "Digite sua resposta",
+                    inputPlaceholder: "Escreva aqui...",
+                    showCancelButton: true,
+                    confirmButtonText: "Enviar",
+                });
 
-            if (resposta.isConfirmed) {
-                try {
-                    const res = await fetchRequest("send", {
-                        to: autor,
-                        content: resposta.value
-                    });
-                    if (res.status === 200) {
-                        Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
-                    } else if (res.status === 404) {
-                        Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
-                    } else {
-                        Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
+                if (resposta.isConfirmed) {
+                    try {
+                        const res = await fetchRequest("send", {
+                            to: autor,
+                            content: resposta.value
+                        });
+                        if (res.status === 200) {
+                            Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
+                        } else if (res.status === 404) {
+                            Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
+                        } else {
+                            Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
+                        }
+                    } catch (err) {
+                        Swal.fire("Erro", "Erro na requisição.", "error");
                     }
-                } catch (err) {
-                    Swal.fire("Erro", "Erro na requisição.", "error");
+                    refreshInbox(fetchRequest);
                 }
-                refreshInbox(fetchRequest);
             }
-        }
+        });
     });
-});
-
 
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
