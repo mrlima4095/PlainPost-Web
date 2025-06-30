@@ -27,7 +27,7 @@ body {
 #acoes button { flex: 1; white-space: nowrap; }
 
 #tabelaContainer {
-    max-height: 200px;
+    max-height: 150px;
     overflow-y: auto;
     overflow-x: auto; 
     border: 1px solid #ccc;
