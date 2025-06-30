@@ -231,34 +231,93 @@ window.onload = () => {
         const [, hora, data, autor, conteudo] = match;
 
         Swal.fire({
-            title: "Mensagem",
-            html: `<div style="text-align:center; white-space:pre-wrap;">Hora: ${hora}<br>Data: ${data}<br>Remetente: ${autor}<br><br>${conteudo}</div>`,
-            showConfirmButton: true,
-            confirmButtonText: "Copiar",
-            showDenyButton: true,
-            denyButtonText: "Apagar",
-            showCancelButton: true,
-            cancelButtonText: "Fechar",
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                navigator.clipboard.writeText(conteudo);
-                Swal.fire("Copiado!", "", "success");
-            } else if (result.isDenied) {
-                const confirm = await Swal.fire({
-                    title: "Tem certeza?",
-                    text: "Essa ação apagará a mensagem.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Sim, apagar",
-                    cancelButtonText: "Cancelar"
-                });
-                if (confirm.isConfirmed) {
-                    await fetchRequest("delete", { id: messageId });
-                    el.remove();
-                    Swal.fire("Apagado!", "", "success");
-                }
+    title: "Mensagem",
+    html: `
+        <div style="text-align:center; white-space:pre-wrap;">
+            Hora: ${hora}<br>
+            Data: ${data}<br>
+            Remetente: ${autor}<br><br>
+            ${conteudo}
+        </div>
+    `,
+    showConfirmButton: false,
+    showCancelButton: false,
+    didOpen: () => {
+        const swalContainer = Swal.getHtmlContainer();
+        const btnContainer = document.createElement("div");
+        btnContainer.style.marginTop = "20px";
+        btnContainer.style.display = "flex";
+        btnContainer.style.justifyContent = "space-around";
+
+        const btnCopiar = Swal.getPopup().querySelector(".swal2-actions").appendChild(document.createElement("button"));
+        btnCopiar.textContent = "Copiar";
+        btnCopiar.className = "swal2-confirm swal2-styled";
+        btnCopiar.addEventListener("click", async () => {
+            await navigator.clipboard.writeText(conteudo);
+            Swal.fire("Copiado!", "", "success");
+        });
+
+        const btnApagar = Swal.getPopup().querySelector(".swal2-actions").appendChild(document.createElement("button"));
+        btnApagar.textContent = "Apagar";
+        btnApagar.className = "swal2-deny swal2-styled";
+        btnApagar.addEventListener("click", async () => {
+            const confirm = await Swal.fire({
+                title: "Tem certeza?",
+                text: "Essa ação apagará a mensagem.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sim, apagar",
+                cancelButtonText: "Cancelar"
+            });
+            if (confirm.isConfirmed) {
+                await fetchRequest("delete", { id: messageId });
+                el.remove();
+                Swal.fire("Apagado!", "", "success");
             }
         });
+
+        const btnResponder = Swal.getPopup().querySelector(".swal2-actions").appendChild(document.createElement("button"));
+        btnResponder.textContent = "Responder";
+        btnResponder.className = "swal2-confirm swal2-styled";
+        btnResponder.style.backgroundColor = "#3085d6";
+        btnResponder.addEventListener("click", async () => {
+            const resposta = await Swal.fire({
+                title: `Responder para ${autor}`,
+                input: "text",
+                inputLabel: "Digite sua resposta",
+                inputPlaceholder: "Escreva aqui...",
+                showCancelButton: true,
+                confirmButtonText: "Enviar"
+            });
+            if (resposta.isConfirmed) {
+                try {
+                    const res = await fetchRequest("send", {
+                        to: autor,
+                        content: resposta.value
+                    });
+                    if (res.status === 200) {
+                        Swal.fire("Sucesso", "Sua mensagem foi enviada!", "success");
+                    } else if (res.status === 404) {
+                        Swal.fire("Erro", "O destinatário não foi encontrado!", "error");
+                    } else {
+                        Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
+                    }
+                } catch (err) {
+                    Swal.fire("Erro", "Erro na requisição.", "error");
+                }
+                refreshInbox(fetchRequest);
+            }
+        });
+
+        const btnFechar = Swal.getPopup().querySelector(".swal2-actions").appendChild(document.createElement("button"));
+        btnFechar.textContent = "Fechar";
+        btnFechar.className = "swal2-cancel swal2-styled";
+        btnFechar.addEventListener("click", () => {
+            Swal.close();
+        });
+    }
+});
+
     });
     
     document.getElementById("back-options").addEventListener("click", () => {
