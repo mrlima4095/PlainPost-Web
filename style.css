@@ -20,7 +20,7 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 #acoes img { width: 32px; height: 32px; object-fit: cover; cursor: pointer; }
 #acoes button { flex: 1; white-space: nowrap; }
 
-#profile, #options, #security, #block-panel {
+#profile, #options, #security {
     display: none;
     margin-top: 10px;
     background-color: rgba(1, 153, 255, 0.12);
