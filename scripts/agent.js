@@ -61,11 +61,11 @@ async function request() {
             return;
         }
 
-        if (!res.ok) {
+        /*if (!res.ok) {
             Swal.fire("Erro", "Erro ao enviar mensagem.", "error");
             thinking.textContent = "❌ Erro ao obter resposta.";
             return;
-        }
+        }*/
 
         const data = await res.json();
         const rawMarkdown = data?.response ?? "Nenhuma resposta recebida.";
