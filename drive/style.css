@@ -27,9 +27,9 @@ body {
 #acoes button { flex: 1; white-space: nowrap; }
 
 #tabelaContainer {
-    max-height: 400px; /* altura máxima visível */
-    overflow-y: auto;  /* scroll vertical */
-    overflow-x: auto;  /* scroll horizontal, se precisar */
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: auto; 
     border: 1px solid #ccc;
     border-radius: 5px;
 }
