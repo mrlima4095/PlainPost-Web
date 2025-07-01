@@ -22,7 +22,7 @@
             <input type="user" id="email" name="email" required /><br /><br />
 
             <label for="senha">Senha:</label><br />
-            <input type="password" id="senha" name="senha" required />
+            <input type="password" id="senha" name="senha" required /><br /><br />
 
             <div id="acoes">
                 <button type="button">Entrar</button>
