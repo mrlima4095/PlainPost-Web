@@ -12,11 +12,6 @@ function toggleprofilemenu() {
     }
 }
 
-function toggleDarkMode() {
-    document.body.classList.toggle("dark");
-    localStorage.setItem("dark-mode", document.body.classList.contains("dark") ? "on" : "off");
-}
-
 async function refreshInbox(fetchRequest, fromButton = false) {
     const refreshButton = document.getElementById("refresh");
     if (fromButton && refreshButton) {
@@ -51,8 +46,6 @@ async function refreshInbox(fetchRequest, fromButton = false) {
 window.onload = () => {
     const token = localStorage.getItem("Mail-Token");
     if (!token) { window.location.href = "login"; return; }
-
-    if (localStorage.getItem("dark-mode") === "on") { document.body.classList.add("dark"); }
 
     const fetchRequest = async (action, extraData = {}) => {
         try {
