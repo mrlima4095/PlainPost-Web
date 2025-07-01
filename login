@@ -23,7 +23,7 @@
 
             <div class="password-conteiner">
                 <input type="password" id="senha" name="senha" required />
-                <button type="button" id="toggleSenha" class="toggle-senha" aria-label="Mostrar senha">&#128065;</button>
+                <button type="button" id="togglePassword" class="toggle-password" aria-label="Mostrar senha">&#128065;</button>
             </div>
 
             <div id="acoes">
