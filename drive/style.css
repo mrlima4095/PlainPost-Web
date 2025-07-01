@@ -155,8 +155,4 @@ tr:nth-child(even) {
 }
 
 
-@media (max-width: 600px) {
-    #conteiner {
-        overflow-x: auto;
-    }
-}
+@media (max-width: 600px) { #conteiner { overflow-x: auto; } }
