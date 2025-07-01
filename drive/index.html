@@ -75,27 +75,20 @@
         //function mostrarPropriedades(arquivo) { Swal.fire({ title: 'Propriedades do Arquivo', html: `<b>Nome:</b> ${arquivo.filename}<br> <b>Tamanho:</b> ${(arquivo.size / 1024 / 1024).toFixed(2)} MB<br> <b>Enviado em:</b> ${formatarData(arquivo.upload_time)}<br> <b>Expira em:</b> ${arquivo.expire_time ? formatarData(arquivo.expire_time) : 'Permanente'} `, icon: 'info' }); }
 
         function mostrarPropriedades(arquivo) {
-    let html = `
-        <b>Nome:</b> ${arquivo.filename}<br>
-        <b>Tamanho:</b> ${(arquivo.size / 1024 / 1024).toFixed(2)} MB<br>
-        <b>Enviado em:</b> ${formatarData(arquivo.upload_time)}<br>
-        <b>Expira em:</b> ${arquivo.expire_time ? formatarData(arquivo.expire_time) : 'Permanente'}
-    `;
+            let html = `<b>Nome:</b> ${arquivo.filename}<br><b>Tamanho:</b> ${(arquivo.size / 1024 / 1024).toFixed(2)} MB<br><b>Enviado em:</b> ${formatarData(arquivo.upload_time)}<br><b>Expira em:</b> ${arquivo.expire_time ? formatarData(arquivo.expire_time) : 'Permanente'}`;
 
-    const temExpiracao = Boolean(arquivo.expire_time);
+            const temExpiracao = Boolean(arquivo.expire_time);
 
-    if (temExpiracao) {
-        html += `<br><br><button onclick="extenderValidade('${arquivo.file_id}')" class="swal2-confirm swal2-styled">Extender validade (1 moeda)</button>`;
-    }
-
-    Swal.fire({
-        title: 'Propriedades do Arquivo',
-        html: html,
-        icon: 'info',
-        showConfirmButton: !temExpiracao,
-        confirmButtonText: 'Fechar'
-    });
-}
+            if (temExpiracao) { html += `<br><br><button onclick="extenderValidade('${arquivo.file_id}')" class="swal2-confirm swal2-styled">Extender validade (1 moeda)</button>`; }
+            
+            Swal.fire({
+                title: 'Propriedades do Arquivo',
+                html: html,
+                icon: 'info',
+                showConfirmButton: !temExpiracao,
+                confirmButtonText: 'Fechar'
+            });
+        }
 
 
         async function extenderValidade(fileId) {
