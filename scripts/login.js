@@ -19,4 +19,16 @@ window.onload = () => {
 
     botoes[0].addEventListener("click", function (event) { event.preventDefault(); autenticar("login"); });
     botoes[1].addEventListener("click", function (event) { event.preventDefault(); autenticar("signup"); });
+
+    const senhaInput = document.getElementById("senha");
+    const toggleBtn = document.getElementById("toggleSenha");
+
+    if (toggleBtn && senhaInput) {
+        toggleBtn.addEventListener("click", () => {
+            const isPassword = senhaInput.type === "password";
+            senhaInput.type = isPassword ? "text" : "password";
+            toggleBtn.innerHTML = isPassword ? "🙈" : "👁️";
+        });
+    }
+    
 };
