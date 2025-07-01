@@ -116,7 +116,9 @@
                 if (resposta.status === 200) {
                     Swal.fire("Sucesso", "Validade estendida até: " + formatarData(data.new_expire_time), "success");
                     listar(); 
-                } else {
+                } 
+                else if (resposta.status === 401) { Swal.fire("Erro", "Saldo insuficiente.", "error"); }
+                else {
                     Swal.fire("Erro", data.response || "Erro ao estender validade.", "error");
                 }
             } catch (e) {
