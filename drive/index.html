@@ -74,60 +74,50 @@
         function compartilhar(fileId) { const link = `${apiBase}/download/${fileId}`; navigator.clipboard.writeText(link).then(() => { Swal.fire("Link copiado!", "O link de download foi copiado para a área de transferência.", "success"); }).catch(() => { Swal.fire("Erro", "Não foi possível copiar o link.", "error"); }); }
         //function mostrarPropriedades(arquivo) { Swal.fire({ title: 'Propriedades do Arquivo', html: `<b>Nome:</b> ${arquivo.filename}<br> <b>Tamanho:</b> ${(arquivo.size / 1024 / 1024).toFixed(2)} MB<br> <b>Enviado em:</b> ${formatarData(arquivo.upload_time)}<br> <b>Expira em:</b> ${arquivo.expire_time ? formatarData(arquivo.expire_time) : 'Permanente'} `, icon: 'info' }); }
 
-    function mostrarPropriedades(arquivo) {
-        let html = `
-            <b>Nome:</b> ${arquivo.filename}<br>
-            <b>Tamanho:</b> ${(arquivo.size / 1024 / 1024).toFixed(2)} MB<br>
-            <b>Enviado em:</b> ${formatarData(arquivo.upload_time)}<br>
-            <b>Expira em:</b> ${arquivo.expire_time ? formatarData(arquivo.expire_time) : 'Permanente'}
-        `;
+        function mostrarPropriedades(arquivo) {
+            let html = `<b>Nome:</b> ${arquivo.filename}<br><b>Tamanho:</b> ${(arquivo.size / 1024 / 1024).toFixed(2)} MB<br><b>Enviado em:</b> ${formatarData(arquivo.upload_time)}<br><b>Expira em:</b> ${arquivo.expire_time ? formatarData(arquivo.expire_time) : 'Permanente'}`;
+            
+            if (arquivo.expire_time) { html += `<br><br><button onclick="extenderValidade('${arquivo.file_id}')" class="swal2-confirm swal2-styled">Extender validade (1 moeda)</button>`; }
 
-        if (arquivo.expire_time) {
-            html += `<br><br><button onclick="extenderValidade('${arquivo.file_id}')" class="swal2-confirm swal2-styled">Extender validade (1 moeda)</button>`;
-        }
+            Swal.fire({
+                title: 'Propriedades do Arquivo',
+                html: html,
+                showConfirmButton: false
+            });
+        }
 
-        Swal.fire({
-            title: 'Propriedades do Arquivo',
-            html: html,
-            showConfirmButton: false
-        });
-    }
+        async function extenderValidade(fileId) {
+            const confirmacao = await Swal.fire({
+                title: "Extender validade?",
+                text: "Deseja gastar 1 moeda para adicionar 2 horas à validade do arquivo?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Sim, estender",
+                cancelButtonText: "Cancelar"
+            });
 
-    async function extenderValidade(fileId) {
-        const confirmacao = await Swal.fire({
-            title: "Extender validade?",
-            text: "Deseja gastar 1 moeda para adicionar 2 horas à validade do arquivo?",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Sim, estender",
-            cancelButtonText: "Cancelar"
-        });
+            if (!confirmacao.isConfirmed) return;
 
-        if (!confirmacao.isConfirmed) return;
+            const token = localStorage.getItem("Mail-Token");
+            try {
+                const resposta = await fetch("https://archsource.xyz/api/drive/extend_expires", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": token },
+                    body: JSON.stringify({ file_id: fileId })
+                });
 
-        const token = localStorage.getItem("Mail-Token");
-        try {
-            const resposta = await fetch("https://archsource.xyz/api/drive/extend_expires", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": token
-                },
-                body: JSON.stringify({ file_id: fileId })
-            });
+                const data = await resposta.json();
 
-            const data = await resposta.json();
-
-            if (resposta.status === 200) {
-                Swal.fire("Sucesso", "Validade estendida até: " + formatarData(data.new_expire_time), "success");
-                listar(); // atualiza a lista
-            } else {
-                Swal.fire("Erro", data.response || "Erro ao estender validade.", "error");
-            }
-        } catch (e) {
-            Swal.fire("Erro", "Erro na conexão com o servidor.", "error");
-        }
-    }
+                if (resposta.status === 200) {
+                    Swal.fire("Sucesso", "Validade estendida até: " + formatarData(data.new_expire_time), "success");
+                    listar(); 
+                } else {
+                    Swal.fire("Erro", data.response || "Erro ao estender validade.", "error");
+                }
+            } catch (e) {
+                Swal.fire("Erro", "Erro na conexão com o servidor.", "error");
+            }
+        }
 
         function baixar(fileId) { window.open(`${apiBase}/download/${fileId}`, '_blank'); }
 
