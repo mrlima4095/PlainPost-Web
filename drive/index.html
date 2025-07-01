@@ -87,7 +87,7 @@
         html += `
             <br><br>
             <div style="display: flex; gap: 10px; justify-content: center;">
-                <button onclick="extenderValidade('${arquivo.file_id}')" class="swal2-confirm swal2-styled">Extender validade (1 moeda)</button>
+                <button onclick="extenderValidade('${arquivo.file_id}')" class="swal2-confirm swal2-styled">Extender +2h</button>
                 <button onclick="Swal.close()" class="swal2-cancel swal2-styled">Fechar</button>
             </div>
         `;
@@ -96,11 +96,11 @@
     Swal.fire({
         title: 'Propriedades do Arquivo',
         html: html,
-        icon: 'info',
-        showConfirmButton: !arquivo.expire_time, // se for permanente, exibe botão padrão "Fechar"
-        confirmButtonText: 'Fechar',
-        showCloseButton: false // não mostra o X, já temos o botão "Fechar"
-    });
+        icon: 'info',
+        showConfirmButton: !arquivo.expire_time, // se for permanente, exibe botão padrão "Fechar"
+        confirmButtonText: 'Fechar',
+        showCloseButton: false // não mostra o X, já temos o botão "Fechar"
+    });
 }
 
 
