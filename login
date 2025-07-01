@@ -20,7 +20,8 @@
         <form>
             <label for="email">ID:</label><br />
             <input type="user" id="email" name="email" required /><br /><br />
-            <label for="email">ID:</label><br />
+
+            <label for="senha">Senha:</label><br />
             <input type="password" id="senha" name="senha" required />
 
             <div id="acoes">
