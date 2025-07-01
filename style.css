@@ -31,6 +31,28 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 }
 #profile button, #options button, #security button { width: 100%; margin-top: 8px; }
 
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input[type="password"],
+.password-container input[type="text"] {
+    width: 100%;
+    padding-right: 2.5rem;
+    box-sizing: border-box;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #666;
+}
 
 form { display: flex; flex-direction: column; gap: 15px; }
 
