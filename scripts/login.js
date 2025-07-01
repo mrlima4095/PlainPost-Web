@@ -21,7 +21,7 @@ window.onload = () => {
     botoes[1].addEventListener("click", function (event) { event.preventDefault(); autenticar("signup"); });
 
     const senhaInput = document.getElementById("senha");
-    const toggleBtn = document.getElementById("toggleSenha");
+    const toggleBtn = document.getElementById("togglePassword");
 
     if (toggleBtn && senhaInput) {
         toggleBtn.addEventListener("click", () => {
