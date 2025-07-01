@@ -167,7 +167,7 @@ window.onload = () => {
 
             if (status !== 200 || !response) {
                 inbox.innerHTML = "<p>Erro ao carregar mensagens de bloqueados.</p>";
-            } else if (response === "No messages from blocked users.") {
+            } else if (response === "No messages.") {
                 inbox.innerHTML = "<p>Sem mensagens de usuários bloqueados.</p>";
             } else {
                 for (const msg of response) {
