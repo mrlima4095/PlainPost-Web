@@ -21,8 +21,10 @@
             <label for="email">ID:</label><br />
             <input type="user" id="email" name="email" required /><br /><br />
 
-            <label for="senha">Senha:</label><br />
-            <input type="password" id="senha" name="senha" required /><br /><br />
+            <div class="password-conteiner">
+                <input type="password" id="senha" name="senha" required />
+                <button type="button" id="toggleSenha" class="toggle-senha" aria-label="Mostrar senha">&#128065;</button>
+            </div>
 
             <div id="acoes">
                 <button type="button">Entrar</button>
