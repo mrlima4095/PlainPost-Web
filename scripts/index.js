@@ -167,9 +167,7 @@ window.onload = () => {
 
             if (status !== 200 || !response) {
                 inbox.innerHTML = "<p>Erro ao carregar mensagens de bloqueados.</p>";
-            } else if (response === "No messages.") {
-                inbox.innerHTML = "<p>Sem mensagens de usuários bloqueados.</p>";
-            } else {
+            } else if (Array.isArray(response)){
                 for (const msg of response) {
                     const msgDiv = document.createElement("div");
                     msgDiv.className = "mensagem";
@@ -177,6 +175,8 @@ window.onload = () => {
                     msgDiv.dataset.messageId = msg.id;
                     inbox.appendChild(msgDiv);
                 }
+            } else {
+                inbox.innerHTML = "<p>Sem mensagens de usuários bloqueados.</p>";
             }
         },
         view_blocks: async () => {
