@@ -13,7 +13,14 @@
 </head>
 <body>
     <div id="container">
-        <button id="transfer" type="button">Transferir Moedas</button>
+        <h2>Moedas</h2><br>
+        <p>Confira, envie e obtenha moedas aqui!</p>
+        <button id="coins" type="button">Meu Saldo</button>
+        <div id="acoes">
+            <button id="transfer" type="button">Transferir Moedas</button>
+            <button id="buycoins" type="button">Obter Moedas</button>
+        </div><br>
+            
         <h2>Configurações</h2><br>
 
         <h3>Caixa de Spam</h3><br>
@@ -29,7 +36,6 @@
             <button id="changepage" type="button">Configurar Mural</button>
         </div><br>
         <button id="changebio" type="button">Mudar Biografia</button>
-        <button id="buycoins" type="button">Obter Moedas</button>
 
 
         <div id="security">
