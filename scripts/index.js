@@ -1,3 +1,5 @@
+var menu_open = false;
+
 function hideAllMenus() {
     document.getElementById("profile").style.display = "none";
     document.getElementById("options").style.display = "none";
@@ -6,16 +8,14 @@ function hideAllMenus() {
 }
 
 function toggleprofilemenu() {
-    const isVisible = document.getElementById("profile").style.display === "block";
     hideAllMenus();
-    if (!isVisible) {
-        document.getElementById("profile").style.display = "block";
-    }
+    if (|menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; }
 }
 
 function togglemenu(menu) {
     hideAllMenus();
     document.getElementById(menu).style.display = 'block';
+    menu_open = true;
 }
 
 async function refreshInbox(fetchRequest, fromButton = false) {
