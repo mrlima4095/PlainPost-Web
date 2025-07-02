@@ -42,26 +42,7 @@
             <button id="clear" type="submit" title="Apagar mensagens">🧹</button>
             <button id="read_blocked" type="submit" title="Caixa de Spam">🕳️</button>
             <button id="refresh" type="submit" title="Atualizar">🔄</button>
-            <button id="toggle-theme" type="button" title="Alternar tema">🌞</button>
         </div>
     </div>
-
-    <script>
-        const prefersDark = localStorage.getItem("theme") === "dark";
-        if (prefersDark) document.documentElement.classList.add("dark-mode");
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const themeBtn = document.getElementById("toggle-theme");
-
-            const applyTheme = () => {
-                const dark = document.documentElement.classList.toggle("dark-mode");
-                themeBtn.textContent = dark ? "🌙" : "🌞";
-                localStorage.setItem("theme", dark ? "dark" : "light");
-            };
-
-            themeBtn.textContent = prefersDark ? "🌙" : "🌞";
-            themeBtn.addEventListener("click", applyTheme);
-        });
-    </script>
 </body>
 </html>
