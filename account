@@ -14,6 +14,7 @@
 <body>
     <div id="container">
         <button id="back" type="submit">Retornar</button>
+        <button id="changebio" type="button">Mudar Biografia</button>
 
         <h2>Moedas</h2><br>
         <button id="coins" type="button">Meu Saldo</button>
@@ -38,7 +39,6 @@
         <button id="view_blocks">Bloqueados</button>
             
         
-        <button id="changebio" type="button">Mudar Biografia</button>
 
         <h2>Ações de Segurança</h2><br>
         <div id="acoes">
