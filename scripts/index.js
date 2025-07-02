@@ -275,8 +275,11 @@ window.onload = () => {
                 window.location.href = "login";
             } else Swal.fire("Erro", "Erro ao apagar conta.", "error");
         },
-        optionsbutton: () => { hideAllMenus(); document.getElementById("options").style.display = "block"; },
-        securitybutton: () => { hideAllMenus(); document.getElementById("security").style.display = "block"; }
+        agent: () => window.location.href = "/agent",
+        drive: () => window.location.href = "/drive",
+        account: () => window.location.href = "/account",
+        gitea: () => window.location.href = "https://gitea.archsource.xyz",
+        security: () => { hideAllMenus(); document.getElementById("securityx").style.display = "block"; }
     };
 
     Object.keys(buttons).forEach(id => {
@@ -330,9 +333,6 @@ window.onload = () => {
         });
     });
 
-    document.getElementById('agent').onclick = () => window.location.href = "/agent";
-    document.getElementById('gitea').onclick = () => window.location.href = "https://gitea.archsource.xyz";
-    document.getElementById('drive').onclick = () => window.location.href = "/drive";
 
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
