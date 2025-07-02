@@ -10,18 +10,18 @@ function toggle_profile_menu() { hideAllMenus(); if (!menu_open) { document.getE
 function abrirServicos() {
     Swal.fire({
         title: 'Serviços',
-        text: 'Escolha um dos serviços abaixo:',
-        icon: 'info',
-        showConfirmButton: false,
-        showCancelButton: true,
-        cancelButtonText: 'Fechar',
-        footer: `
-            <div style="display: flex; gap: 10px; justify-content: center;">
+        html: `
+            <p>Escolha um dos serviços abaixo:</p>
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
                 <button id="agentBtn" class="swal2-styled">🕵️ Agente S.</button>
                 <button id="giteaBtn" class="swal2-styled">💻 ArchSource</button>
                 <button id="driveBtn" class="swal2-styled">☁️ BinDrop</button>
             </div>
         `,
+        icon: 'info',
+        showConfirmButton: false,
+        showCancelButton: true,
+        cancelButtonText: 'Fechar',
         didOpen: () => {
             document.getElementById('agentBtn').onclick = () => window.location.href = "/agent";
             document.getElementById('giteaBtn').onclick = () => window.location.href = "https://gitea.archsource.xyz";
@@ -29,6 +29,7 @@ function abrirServicos() {
         }
     });
 }
+
 
 
 async function refreshInbox(fetchRequest) {
