@@ -46,9 +46,9 @@ function abrirServicos() {
     showCancelButton: true,
     cancelButtonText: 'Fechar',
     didOpen: () => {
-        document.getElementById('agentBtn').onclick = () => window.location.href = "/agent";
-        document.getElementById('giteaBtn').onclick = () => window.location.href = "https://gitea.archsource.xyz";
-        document.getElementById('driveBtn').onclick = () => window.location.href = "/drive";
+        document.getElementById('agent').onclick = () => window.location.href = "/agent";
+        document.getElementById('gitea').onclick = () => window.location.href = "https://gitea.archsource.xyz";
+        document.getElementById('drive').onclick = () => window.location.href = "/drive";
     }
 });
 }
@@ -163,9 +163,6 @@ window.onload = () => {
             else if (status == 404) window.location.href = "login";
             else Swal.fire('Erro', 'Erro ao consultar.', 'error');
         },
-        agent: () => window.location.href = "/agent",
-        drive: () => window.location.href = "/drive",
-        gitea: () => window.location.href = "https://gitea.archsource.xyz",
         block: async () => {
             const { value: user } = await Swal.fire({
                 title: 'Bloquear usuário',
