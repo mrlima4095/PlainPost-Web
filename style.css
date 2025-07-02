@@ -54,6 +54,7 @@ button:hover { background-color: #2980b9; }
 #avatar { display: block; width: 95px; margin-top: 10px; margin-left: 45%; max-width: 400px; cursor: pointer; }
 #inbox { margin-top: 20px; text-align: left; max-height: 80vh; overflow-y: auto; padding-right: 5px; }
 #menu { background-color: #3498db;}
+
 .mensagem { 
     padding: 8px 10px;
     margin-bottom: 8px;
@@ -66,23 +67,8 @@ button:hover { background-color: #2980b9; }
     white-space: pre-wrap;
 }
 .mensagem:hover, .mensagem:active { background-color: #d0e8ff; }
-.acoes-flutuante {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 8px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    z-index: 10;
-    display: flex;
-    gap: 5px;
-}
-.acoes-flutuante button {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    font-size: 1.2rem;
-}
+
+.acoes-flutuante { position: absolute; bottom: 15px; right: 15px; background-color: rgba(255, 255, 255, 0.95); padding: 8px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 10; display: flex; gap: 5px; }
+.acoes-flutuante button { width: 40px; height: 40px; padding: 0; font-size: 1.2rem; } 
 
 @media (max-width: 600px) { #conteiner { overflow-x: auto; } }
