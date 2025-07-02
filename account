@@ -41,7 +41,6 @@
         <button id="changebio" type="button">Mudar Biografia</button>
 
         <h2>Ações de Segurança</h2><br>
-        <button id="back-security" type="button">Retornar</button> 
         <div id="acoes">
             <button id="signout" type="button">Encerrar sessão</button>
             <button id="signoff" type="button">Apagar Conta</button>
