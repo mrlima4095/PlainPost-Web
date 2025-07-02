@@ -16,22 +16,22 @@
         <button id="back" type="submit">Retornar</button>
         <button id="changebio" type="submit">Mudar Biografia</button>
 
-        <h2>Moedas</h2><br>
+        <h2>Moedas</h2>
+
         <button id="coins" type="submit">Meu Saldo</button>
+
         <div id="acoes">
             <button id="transfer" type="submit">Transferir Moedas</button>
             <button id="buycoins" type="submit">Obter Moedas</button>
-        </div><br>
-            
-        <h2>Configurações</h2><br>
-        
-        <h3>Mural</h3><br>
+        </div>
+
+        <h3>Mural</h3>
+
         <div id="acoes">
             <button id="mural" type="submit">Meu Mural</button>
             <button id="changepage" type="submit">Configurar Mural</button>
-        </div><br>
+        </div>
 
-        <h3>Caixa de Spam</h3><br>
         <div id="acoes">
             <button id="block" type="submit">Bloquear usuario</button>
             <button id="unblock" type="submit">Desbloquear</button>
