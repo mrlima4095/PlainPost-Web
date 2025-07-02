@@ -17,7 +17,7 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 #conteiner > button { display: block; width: 100%; margin-top: 10px; }
 #conteiner h2 + button { margin-top: 10px; }
 
-#acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
+#acoes { display: flex; align-items: center; gap: 5px; }
 #acoes img { width: 60px; height: 60px; object-fit: cover; cursor: pointer; }
 #acoes button { flex: 1; white-space: nowrap; }
 
@@ -57,15 +57,7 @@ form { display: flex; flex-direction: column; gap: 15px; }
 input[type="user"], input[type="password"], input[type="search"] { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
 input[type="search"] { width: 100%; max-width: none; }
 
-button { 
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #3498db;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
+button { padding: 10px; border: none; border-radius: 5px; background-color: #3498db; color: white; cursor: pointer; transition: background-color 0.2s ease; }
 button:hover { background-color: #2980b9; }
 
 
