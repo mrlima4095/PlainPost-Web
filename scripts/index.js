@@ -122,10 +122,27 @@ window.onload = () => {
         },
         coins: async () => {
             const { status, response } = await fetchRequest("coins");
-            if (status == 200) Swal.fire('Suas moedas', response, 'info');
-            else if (status == 404) window.location.href = "login";
-            else Swal.fire('Erro', 'Erro ao consultar.', 'error');
+            if (status == 200) {
+                const result = await Swal.fire({
+                    title: 'Suas moedas',
+                    html: `<strong>${response}</strong> moedas disponíveis.`,
+                    icon: 'info',
+                    showDenyButton: true,
+                    denyButtonText: 'Enviar Moedas',
+                    showCancelButton: true,
+                    cancelButtonText: 'Obter Moedas',
+                    confirmButtonText: 'Fechar'
+                });
+
+                if (result.isDenied) return buttons.transfer();
+                else if (result.dismiss === Swal.DismissReason.cancel) return buttons.buycoins();
+            } else if (status == 404) {
+                window.location.href = "login";
+            } else {
+                Swal.fire('Erro', 'Erro ao consultar.', 'error');
+            }
         },
+
         block: async () => {
             const { value: user } = await Swal.fire({
                 title: 'Bloquear usuário',
