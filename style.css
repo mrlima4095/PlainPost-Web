@@ -82,3 +82,44 @@ button:hover { background-color: #2980b9; }
 .acoes-flutuante button { width: 40px; height: 40px; padding: 0; font-size: 1.2rem; } 
 
 @media (max-width: 600px) { #conteiner { overflow-x: auto; } }
+
+button[data-tooltip] {
+    position: relative;
+    cursor: pointer;
+}
+
+button[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%; /* Ajuste para cima do botão */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 10;
+}
+
+button[data-tooltip]::before {
+    content: "";
+    position: absolute;
+    bottom: 115%; /* ajuste a posição */
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #333;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 10;
+}
+
+button[data-tooltip]:hover::after,
+button[data-tooltip]:hover::before {
+    opacity: 1;
+}
