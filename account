@@ -23,15 +23,13 @@
         </div>
         <button id="view_blocks">Bloqueados</button>
             
-            <h2>Painel da Conta</h2><br>
-            <div id="acoes">
-                <button id="mural" type="button">Meu Mural</button>
-                <button id="changepage" type="button">Configurar Mural</button>
-            </div><br>
-            >
-            </div><br>
-            <button id="changebio" type="button">Mudar Biografia</button>
-            <button id="buycoins" type="button">Obter Moedas</button>
+        <h2>Painel da Conta</h2><br>
+        <div id="acoes">
+            <button id="mural" type="button">Meu Mural</button>
+            <button id="changepage" type="button">Configurar Mural</button>
+        </div><br>
+        <button id="changebio" type="button">Mudar Biografia</button>
+        <button id="buycoins" type="button">Obter Moedas</button>
 
 
         <div id="security">
