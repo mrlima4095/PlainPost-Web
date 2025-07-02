@@ -7,7 +7,8 @@ function hideAllMenus() {
 }
 
 function toggle_profile_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; } else { menu_open = false; } }
-Swal.fire({
+function abrirServicos() {
+    Swal.fire({
     title: 'Serviços',
     html: `
         <p>Escolha um dos serviços abaixo:</p>
@@ -56,7 +57,7 @@ Swal.fire({
         document.getElementById('driveBtn').onclick = () => window.location.href = "/drive";
     }
 });
-
+}
 
 async function refreshInbox(fetchRequest) {
     const { status, response } = await fetchRequest("read");
