@@ -16,34 +16,30 @@
 </head>
 <body>
     <div id="container">
-        <header id="acoes">
-            <a href="/">PlainPost</a>
-            <input type="search" id="search_msgs" name="search" placeholder="Procurar..." /><br /><br />
-            <button onclick="toggle_services_menu()" type="submit">☰</button>
-            <button onclick="toggle_profile_menu()" type="submit">👤</button>
-        </header>
-        <div id="profile">
-            <h2>Minha Conta</h2><br>
-            <button id="me" type="button">👤 Meus Dados</button>
-            <button id="coins" type="button">💰 Meu Saldo</button>
-            <button id="mural" type="button">📋 Meu Mural</button>
-            <button id="account" type="button">🛠️ Painel da Conta</button>
-            <button id="security" type="button">🔒 Segurança</button>
-        </div>
-        <div id="services">
-            <h2>Serviços</h2><br>
-            <button id="agent" type="button">🕵️ Agente S.</button>
-            <button id="drive" type="button">☁️ BinDrop</button>
-            <button id="gitea" type="button">💻 ArchSource</button>
+        <button id="back" type="submit">Retornar</button>
+        <button id="changebio" type="submit">Mudar Biografia</button>
+
+        <h2>Moedas</h2>
+        <button id="coins" type="submit">Meu Saldo</button>
+
+        <div id="acoes">
+            <button id="transfer" type="submit">Transferir Moedas</button>
+            <button id="buycoins" type="submit">Obter Moedas</button>
         </div>
 
-        <div id="inbox"></div>
-        <div id="acoes" class="acoes-flutuante">
-            <button id="send" type="submit">✏️</button>
-            <button id="clear" type="submit">🧹</button>
-            <button id="read_blocked" type="submit">🕳️</button>
-            <button id="refresh" type="submit">🔄</button>
+        <h3>Mural</h3>
+
+        <div id="acoes">
+            <button id="mural" type="submit">Meu Mural</button>
+            <button id="changepage" type="submit">Configurar Mural</button>
         </div>
+
+        <div id="acoes">
+            <button id="block" type="submit">Bloquear Usuário</button>
+            <button id="unblock" type="submit">Desbloquear</button>
+        </div>
+
+        <button id="view_blocks" type="submit">Bloqueados</button>
     </div>
 </body>
 </html>
