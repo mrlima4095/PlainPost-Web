@@ -105,9 +105,22 @@ window.onload = () => {
         },
         me: async () => {
             const { status, response } = await fetchRequest("me");
-            if (status == 200) Swal.fire('Seus dados', response.replaceAll("\\n", "<br>").replaceAll("\n", "<br>"), 'info');
-            else if (status == 404) window.location.href = "login";
-            else Swal.fire('Erro', 'Erro ao consultar.', 'error');
+            if (status == 200) {
+                const { isConfirmed } = await Swal.fire({
+                    title: 'Seus dados',
+                    html: response.replaceAll("\\n", "<br>").replaceAll("\n", "<br>"),
+                    icon: 'info',
+                    showCancelButton: true,
+                    cancelButtonText: 'Fechar',
+                    confirmButtonText: 'Mudar Biografia'
+                });
+
+                if (isConfirmed) buttons.changebio();
+            } else if (status == 404) {
+                window.location.href = "login";
+            } else {
+                Swal.fire('Erro', 'Erro ao consultar.', 'error');
+            }
         },
         coins: async () => {
             const { status, response } = await fetchRequest("coins");

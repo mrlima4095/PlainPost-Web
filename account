@@ -9,19 +9,8 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <style>
         .acoes { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-        .acoes button { flex: 1 1 45%; min-width: 130px; white-space: nowrap;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #3498db;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .acoes button:hover {
-            background-color: #2980b9;
-        }
+        .acoes button { flex: 1 1 45%; min-width: 130px; white-space: nowrap; padding: 10px;border: none; border-radius: 5px; background-color: #3498db; color: white; cursor: pointer; transition: background-color 0.2s ease; }
+        .acoes button:hover { background-color: #2980b9; }
 
     </style>
 
