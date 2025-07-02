@@ -304,6 +304,16 @@ window.onload = () => {
         });
     });
 
+    document.getElementById("search_msgs").addEventListener("input", function () {
+        const termo = this.value.toLowerCase();
+        const mensagens = document.querySelectorAll("#inbox .mensagem");
+
+        mensagens.forEach(msg => {
+            const texto = msg.innerText.toLowerCase();
+            msg.style.display = texto.includes(termo) ? "" : "none";
+        });
+    });
+
 
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
