@@ -14,11 +14,6 @@
 <body>
     <div id="container">
         <button id="back" type="submit">Retornar</button>
-        <div id="acao">
-            <button id="signout" type="submit">Encerrar sessão</button>
-            <button id="signoff" type="submit">Apagar Conta</button>
-        </div>
-        <button id="changepass" type="submit">Trocar Senha</button>
     </div>
 </body>
 </html>
