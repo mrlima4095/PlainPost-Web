@@ -1,34 +1,35 @@
-var menu_open = false;
+let profileMenuOpen = false;
+let servicesMenuOpen = false;
 
 function hideAllMenus() {
     document.getElementById("profile").style.display = "none";
-    document.getElementById("options").style.display = "none";
-    document.getElementById("security").style.display = "none";
+    document.getElementById("services").style.display = "none";
+    profileMenuOpen = false;
+    servicesMenuOpen = false;
 }
 
-function toggle_profile_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; } else { menu_open = false; } }
-function abrirServicos() {
-    Swal.fire({
-        title: 'Serviços',
-        html: `
-            <p>Escolha um dos serviços abaixo:</p><br>
-            <div class="swal-button-container">
-                <button id="agent" class="swal-button">🕵️ Agente S.</button>
-                <button id="drive" class="swal-btn">☁️ BinDrop</button>
-                <button id="gitea" class="swal-btn">💻 ArchSource</button>
-            </div>
-        `,
-        icon: 'info',
-        showConfirmButton: false,
-        showCancelButton: true,
-        cancelButtonText: 'Fechar',
-        didOpen: () => {
-            document.getElementById('agent').onclick = () => window.location.href = "/agent";
-            document.getElementById('gitea').onclick = () => window.location.href = "https://gitea.archsource.xyz";
-            document.getElementById('drive').onclick = () => window.location.href = "/drive";
-        }
-    });
+function toggle_profile_menu() {
+    if (profileMenuOpen) {
+        document.getElementById("profile").style.display = "none";
+        profileMenuOpen = false;
+    } else {
+        hideAllMenus();
+        document.getElementById("profile").style.display = "flex";
+        profileMenuOpen = true;
+    }
 }
+
+function toggle_services_menu() {
+    if (servicesMenuOpen) {
+        document.getElementById("services").style.display = "none";
+        servicesMenuOpen = false;
+    } else {
+        hideAllMenus();
+        document.getElementById("services").style.display = "flex";
+        servicesMenuOpen = true;
+    }
+}
+
 
 
 async function refreshInbox(fetchRequest) {
