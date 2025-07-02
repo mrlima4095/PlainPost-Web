@@ -116,11 +116,9 @@ window.onload = () => {
                 });
 
                 if (isConfirmed) buttons.changebio();
-            } else if (status == 404) {
-                window.location.href = "login";
-            } else {
-                Swal.fire('Erro', 'Erro ao consultar.', 'error');
-            }
+            } 
+            else if (status == 404) { window.location.href = "login"; } 
+            else { Swal.fire('Erro', 'Erro ao consultar.', 'error'); }
         },
         coins: async () => {
             const { status, response } = await fetchRequest("coins");
