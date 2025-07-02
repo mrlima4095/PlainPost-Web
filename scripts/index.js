@@ -9,49 +9,27 @@ function hideAllMenus() {
 function toggle_profile_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; } else { menu_open = false; } }
 function abrirServicos() {
     Swal.fire({
-    title: 'Serviços',
-    html: `
-        <p>Acesse abaixo outros de nossos serviços:</p><br>
-        <div id="acoes">
-            <button id="agent" type="submit" class="swal2-styled" style="
-                flex: 1 1 30%;
-                min-width: 80px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                font-size: 0.9rem;
-            ">🕵️ Agente S.</button>
-
-            <button id="gitea" type="submit" class="swal2-styled" style="
-                flex: 1 1 30%;
-                min-width: 80px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                font-size: 0.9rem;
-            ">💻 ArchSource</button>
-        </div>
-
-        <button id="drive" type="submit" class="swal2-styled" style="
-            flex: 1 1 30%;
-            min-width: 80px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 0.9rem;
-        ">☁️ BinDrop</button>
-    `,
-    icon: 'info',
-    showConfirmButton: false,
-    showCancelButton: true,
-    cancelButtonText: 'Fechar',
-    didOpen: () => {
-        document.getElementById('agent').onclick = () => window.location.href = "/agent";
-        document.getElementById('gitea').onclick = () => window.location.href = "https://gitea.archsource.xyz";
-        document.getElementById('drive').onclick = () => window.location.href = "/drive";
-    }
-});
+        title: 'Serviços',
+        html: `
+            <p>Escolha um dos serviços abaixo:</p>
+            <div class="swal-btn-container">
+                <button id="agent" class="swal-btn">🕵️ Agente S.</button>
+                <button id="gitea" class="swal-btn">💻 ArchSource</button>
+                <button id="drive" class="swal-btn">☁️ BinDrop</button>
+            </div>
+        `,
+        icon: 'info',
+        showConfirmButton: false,
+        showCancelButton: true,
+        cancelButtonText: 'Fechar',
+        didOpen: () => {
+            document.getElementById('agent').onclick = () => window.location.href = "/agent";
+            document.getElementById('gitea').onclick = () => window.location.href = "https://gitea.archsource.xyz";
+            document.getElementById('drive').onclick = () => window.location.href = "/drive";
+        }
+    });
 }
+
 
 async function refreshInbox(fetchRequest) {
     const { status, response } = await fetchRequest("read");
