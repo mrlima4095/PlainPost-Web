@@ -67,7 +67,7 @@ button[data-tooltip]:hover::after, button[data-tooltip]:hover::before { opacity:
 
 #avatar { display: block; width: 95px; margin-top: 10px; margin-left: 45%; max-width: 400px; cursor: pointer; }
 #inbox { margin-top: 20px; text-align: left; max-height: 80vh; overflow-y: auto; padding-right: 5px; }
-#menu { background-color: #3498db;}
+#menu { background-color: #3498db; }
 
 .mensagem { padding: 8px 10px; margin-bottom: 8px; background-color: #e9f1fb; border-radius: 6px; transition: background-color 0.2s ease; cursor: pointer; overflow-wrap: anywhere; word-break: break-word; white-space: pre-wrap; }
 .mensagem:hover, .mensagem:active { background-color: #d0e8ff; }
