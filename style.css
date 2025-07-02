@@ -26,29 +26,28 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 #profile, #services {
     display: none;
     position: absolute;
-    top: 60px; /* aumentei para descer mais */
+    top: 60px;
     right: 10px;
     background-color: rgba(1, 153, 255, 0.12);
-    padding: 15px 10px; /* um pouco mais de padding */
+    padding: 15px 10px;
     border-radius: 8px;
     box-shadow: 0 0 8px rgba(0,0,0,0.15);
-    width: 180px; /* um pouco mais largo para não ficar apertado */
+    width: 180px;
     z-index: 100;
-    flex-direction: column; /* força os filhos ficarem em coluna */
-    gap: 8px; /* espaçamento entre botões */
+    flex-direction: column;
+    gap: 8px;
     white-space: nowrap;
 }
 
-/* Para os botões dentro dos menus */
 #profile button, #services button {
     width: 100%;
-    margin: 0; /* removido margin para usar gap */
+    margin: 0;
     background-color: #3498db;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    padding: 10px 8px; /* um pouco maior para melhor clique */
+    padding: 10px 8px;
     font-size: 1rem;
     text-align: center;
 }
@@ -57,10 +56,9 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
     background-color: #2980b9;
 }
 
-/* Botões do header continuam com posição relativa para ancorar os menus */
 #acoes > button {
     position: relative;
-    z-index: 110; /* um pouco maior que o menu para ficar clicável */
+    z-index: 110;
 }
 
 
