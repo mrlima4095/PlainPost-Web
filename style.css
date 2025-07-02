@@ -22,7 +22,7 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 #acoes button { flex: 1; white-space: nowrap; }
 #acoes a { flex 2;  }
 
-#profile, #services {
+#profile, #services { 
     display: none;
     position: absolute;
     top: 60px;
