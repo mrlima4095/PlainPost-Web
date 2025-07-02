@@ -130,8 +130,8 @@ window.onload = () => {
             else Swal.fire('Erro', 'Erro ao consultar.', 'error');
         },
         agent: () => window.location.href = "/agent",
-        gitea: () => window.location.href = "https://gitea.archsource.xyz",
         drive: () => window.location.href = "/drive",
+        gitea: () => window.location.href = "https://gitea.archsource.xyz",
         block: async () => {
             const { value: user } = await Swal.fire({
                 title: 'Bloquear usuário',
