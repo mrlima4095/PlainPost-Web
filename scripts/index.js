@@ -9,7 +9,7 @@ function hideAllMenus() {
 
 function toggleprofilemenu() {
     hideAllMenus();
-    if (|menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; }
+    if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; }
 }
 
 function togglemenu(menu) {
