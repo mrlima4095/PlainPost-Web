@@ -31,9 +31,6 @@ async function refreshInbox(fetchRequest) {
 }
 
 window.onload = () => {
-    const token = localStorage.getItem("Mail-Token");
-    if (!token) { window.location.href = "login"; return; }
-
     const fetchRequest = async (action, extraData = {}) => {
         try {
             const resposta = await fetch("https://archsource.xyz/api/mail", {
