@@ -42,7 +42,7 @@
         <button id="view_blocks" type="submit">Bloqueados</button>
 
         <br><h2>Segurança da Conta</h2><br>
-        <div id="acao">
+        <div class="acao">
             <button id="signout" type="submit">Encerrar sessão</button>
             <button id="signoff" type="submit">Apagar Conta</button>
         </div>
