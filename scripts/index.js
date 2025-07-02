@@ -125,13 +125,14 @@ window.onload = () => {
             if (status == 200) {
                 const result = await Swal.fire({
                     title: 'Suas moedas',
-                    html: `<strong>${response}</strong> moedas disponíveis.`,
+                    html: `Você possui <strong>${response}</strong> moedas.`,
                     icon: 'info',
                     showDenyButton: true,
                     denyButtonText: 'Enviar Moedas',
                     showCancelButton: true,
                     cancelButtonText: 'Obter Moedas',
-                    confirmButtonText: 'Fechar'
+                    confirmButtonText: 'Fechar',
+                    reverseButtons: true
                 });
 
                 if (result.isDenied) return buttons.transfer();
