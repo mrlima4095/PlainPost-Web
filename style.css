@@ -18,7 +18,7 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 
 #acoes { display: flex; align-items: center; gap: 5px; }
 #acoes img { width: 60px; height: 60px; object-fit: cover; cursor: pointer; }
-#acoes button { flex: 1; }
+#acoes button { flex: 1 1 100%; 
 
 #profile, #services {
     display: none;
