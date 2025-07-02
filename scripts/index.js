@@ -254,8 +254,8 @@ window.onload = () => {
         agent: () => window.location.href = "/agent",
         drive: () => window.location.href = "/drive",
         account: () => window.location.href = "/account",
+        security: () => window.location.href = "/security",
         gitea: () => window.location.href = "https://gitea.archsource.xyz",
-        security: () => { hideAllMenus(); document.getElementById("securityx").style.display = "block"; }
     };
 
     Object.keys(buttons).forEach(id => {
