@@ -7,34 +7,56 @@ function hideAllMenus() {
 }
 
 function toggle_profile_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; } else { menu_open = false; } }
-function abrirServicos() {
-    Swal.fire({
-        title: 'Serviços',
-        html: `
-<p>Escolha um dos serviços abaixo:</p>
-<div style="
-display: flex;
-overflow-x: auto;
-gap: 10px;
-margin-top: 20px;
-padding-bottom: 5px;
-">
-<button id="agentBtn" class="swal2-styled" style="white-space: nowrap;">🕵️ Agente S.</button>
-<button id="giteaBtn" class="swal2-styled" style="white-space: nowrap;">💻 ArchSource</button>
-<button id="driveBtn" class="swal2-styled" style="white-space: nowrap;">☁️ BinDrop</button>
-</div>
-`,
-        icon: 'info',
-        showConfirmButton: false,
-        showCancelButton: true,
-        cancelButtonText: 'Fechar',
-        didOpen: () => {
-            document.getElementById('agentBtn').onclick = () => window.location.href = "/agent";
-            document.getElementById('giteaBtn').onclick = () => window.location.href = "https://gitea.archsource.xyz";
-            document.getElementById('driveBtn').onclick = () => window.location.href = "/drive";
-        }
-    });
-}
+Swal.fire({
+    title: 'Serviços',
+    html: `
+        <p>Escolha um dos serviços abaixo:</p>
+        <div style="
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        ">
+            <button id="agentBtn" class="swal2-styled" style="
+                flex: 1 1 30%;
+                min-width: 80px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 0.9rem;
+            ">🕵️ Agente S.</button>
+
+            <button id="giteaBtn" class="swal2-styled" style="
+                flex: 1 1 30%;
+                min-width: 80px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 0.9rem;
+            ">💻 ArchSource</button>
+
+            <button id="driveBtn" class="swal2-styled" style="
+                flex: 1 1 30%;
+                min-width: 80px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 0.9rem;
+            ">☁️ BinDrop</button>
+        </div>
+    `,
+    icon: 'info',
+    showConfirmButton: false,
+    showCancelButton: true,
+    cancelButtonText: 'Fechar',
+    didOpen: () => {
+        document.getElementById('agentBtn').onclick = () => window.location.href = "/agent";
+        document.getElementById('giteaBtn').onclick = () => window.location.href = "https://gitea.archsource.xyz";
+        document.getElementById('driveBtn').onclick = () => window.location.href = "/drive";
+    }
+});
+
 
 async function refreshInbox(fetchRequest) {
     const { status, response } = await fetchRequest("read");
