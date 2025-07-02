@@ -10,6 +10,25 @@ function hideAllMenus() {
 function toggle_profile_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; } else { menu_open = false; } }
 function toogle_services_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("services").style.display = "block"; menu_open = true; } else { menu_open = false; } }
 
+function abrirServicos() {
+    Swal.fire({
+        title: 'Escolha um serviço',
+        showCancelButton: true,
+        showConfirmButton: false,
+        cancelButtonText: 'Fechar',
+        html: `
+            <button id="agentBtn" class="swal2-styled">Agente S.</button><br><br>
+            <button id="giteaBtn" class="swal2-styled">ArchSource</button><br><br>
+            <button id="driveBtn" class="swal2-styled">BinDrop (Drive)</button>
+        `,
+        didOpen: () => {
+            document.getElementById('agentBtn').onclick = () => window.location.href = "/agent";
+            document.getElementById('giteaBtn').onclick = () => window.location.href = "https://gitea.archsource.xyz";
+            document.getElementById('driveBtn').onclick = () => window.location.href = "/drive";
+        }
+    });
+}
+
 
 async function refreshInbox(fetchRequest) {
     const { status, response } = await fetchRequest("read");
