@@ -11,13 +11,7 @@ function toggle_profile_menu() { hideAllMenus(); if (!menu_open) { document.getE
 function toogle_services_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("services").style.display = "block"; menu_open = true; } else { menu_open = false; } }
 
 
-async function refreshInbox(fetchRequest, fromButton = false) {
-    const refreshButton = document.getElementById("refresh");
-    if (fromButton && refreshButton) {
-        refreshButton.disabled = true;
-        refreshButton.innerText = "Atualizando...";
-    }
-
+async function refreshInbox(fetchRequest) {
     const { status, response } = await fetchRequest("read");
     const inbox = document.getElementById("inbox");
     inbox.innerHTML = "";
