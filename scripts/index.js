@@ -12,8 +12,8 @@ function abrirServicos() {
         title: 'Serviços',
         html: `
             <p>Escolha um dos serviços abaixo:</p><br>
-            <div class="swal-btn-container">
-                <button id="agent" class="swal-btn">🕵️ Agente S.</button>
+            <div class="swal-button-container">
+                <button id="agent" class="swal-button">🕵️ Agente S.</button>
                 <button id="drive" class="swal-btn">☁️ BinDrop</button>
                 <button id="gitea" class="swal-btn">💻 ArchSource</button>
             </div>
