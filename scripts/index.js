@@ -7,14 +7,9 @@ function hideAllMenus() {
     document.getElementById("services").style.display = "none";
 }
 
-function toggleprofilemenu() { hideAllMenus(); if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; } }
-function toggleservicesmenu() { hideAllMenus(); if (!menu_open) { document.getElementById("services").style.display = "block"; menu_open = true; } }
+function toggle_profile_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; } }
+function toogle_services_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("services").style.display = "block"; menu_open = true; } }
 
-function togglemenu(menu) {
-    hideAllMenus();
-    document.getElementById(menu).style.display = 'block';
-    menu_open = true;
-}
 
 async function refreshInbox(fetchRequest, fromButton = false) {
     const refreshButton = document.getElementById("refresh");
