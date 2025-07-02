@@ -23,7 +23,12 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 #acoes button { flex: 1; white-space: nowrap; }
 
 header { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
-header img { width: 60px; height: 60px; object-fit: cover; cursor: pointer; }
+header img {
+    width: 40px; /* ajuste conforme o design */
+    height: 40px;
+    border-radius: 50%; /* opcional: deixa redondo */
+    object-fit: cover;
+}
 header button { flex: 1; white-space: nowrap; }
 
 #profile, #options, #security {
