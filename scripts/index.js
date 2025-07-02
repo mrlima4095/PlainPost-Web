@@ -144,24 +144,25 @@ window.onload = () => {
             else Swal.fire("Erro", "Erro ao desbloquear usuário.", "error");
         },
         read_blocked: async () => {
-            if (inbox === "spam") { inbox = "inbox"; refreshInbox(fetchRequest) return; }
+            if (inbox === "spam") { inbox = "inbox"; refreshInbox(fetchRequest) }
+            else {
+                const { status, response } = await fetchRequest("read_blocked");
+                const inbox = document.getElementById("inbox");
+                inbox.innerHTML = "";
 
-            const { status, response } = await fetchRequest("read_blocked");
-            const inbox = document.getElementById("inbox");
-            inbox.innerHTML = "";
-
-            if (status !== 200 || !response) {
-                inbox.innerHTML = "<p>Erro ao carregar mensagens de bloqueados.</p>";
-            } else if (Array.isArray(response)){
-                for (const msg of response) {
-                    const msgDiv = document.createElement("div");
-                    msgDiv.className = "mensagem";
-                    msgDiv.innerText = msg.content;
-                    msgDiv.dataset.messageId = msg.id;
-                    inbox.appendChild(msgDiv);
+                if (status !== 200 || !response) {
+                    inbox.innerHTML = "<p>Erro ao carregar mensagens de bloqueados.</p>";
+                } else if (Array.isArray(response)){
+                    for (const msg of response) {
+                        const msgDiv = document.createElement("div");
+                        msgDiv.className = "mensagem";
+                        msgDiv.innerText = msg.content;
+                        msgDiv.dataset.messageId = msg.id;
+                        inbox.appendChild(msgDiv);
+                    }
+                } else {
+                    inbox.innerHTML = "<p>Sem mensagens de usuários bloqueados.</p>";
                 }
-            } else {
-                inbox.innerHTML = "<p>Sem mensagens de usuários bloqueados.</p>";
             }
         },
         view_blocks: async () => {
