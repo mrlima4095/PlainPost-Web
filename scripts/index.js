@@ -330,6 +330,10 @@ window.onload = () => {
         });
     });
 
+    document.getElementById('agent').onclick = () => window.location.href = "/agent";
+    document.getElementById('gitea').onclick = () => window.location.href = "https://gitea.archsource.xyz";
+    document.getElementById('drive').onclick = () => window.location.href = "/drive";
+
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
 };
