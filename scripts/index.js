@@ -25,11 +25,6 @@ async function refreshInbox(fetchRequest) {
             inbox.appendChild(msgDiv);
         }
     }
-
-    if (fromButton && refreshButton) {
-        refreshButton.disabled = false;
-        refreshButton.innerText = "Atualizar";
-    }
 }
 
 window.onload = () => {
