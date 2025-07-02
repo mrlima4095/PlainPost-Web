@@ -19,16 +19,9 @@
 </head>
 <body>
     <div id="container">
-        <button id="back" type="submit">Retornar</button>
+        <button id="back" type="submit">⬅️ Retornar</button>
 
-        <br><h2>Moedas</h2><br>
-        <button id="coins" type="submit">Meu Saldo</button>
-        <div class="acoes">
-            <button id="transfer" type="submit">Transferir Moedas</button>
-            <button id="buycoins" type="submit">Obter Moedas</button>
-        </div>
-
-        <br><h2>Mural</h2><br>
+        <br><h2>📋 Mural</h2><br>
         <div class="acoes">
             <button id="mural" type="submit">Meu Mural</button>
             <button id="changepage" type="submit">Configurar Mural</button>
@@ -41,7 +34,7 @@
         </div>
         <button id="view_blocks" type="submit">Bloqueados</button>
 
-        <br><h2>Segurança da Conta</h2><br>
+        <br><h2>🔒 Segurança da Conta</h2><br>
         <div class="acoes">
             <button id="signout" type="submit">Encerrar sessão</button>
             <button id="signoff" type="submit">Apagar Conta</button>
