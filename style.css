@@ -23,7 +23,7 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 #acoes img { width: 60px; height: 60px; object-fit: cover; cursor: pointer; }
 #acoes button { flex: 1; white-space: nowrap; }
 
-#profile, #options, #security, #services {
+#profile, #services {
     display: none;
     position: absolute;
     top: 60px; /* aumentei para descer mais */
@@ -62,6 +62,7 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
     position: relative;
     z-index: 110; /* um pouco maior que o menu para ficar clicável */
 }
+
 
 
 form { display: flex; flex-direction: column; gap: 15px; }
