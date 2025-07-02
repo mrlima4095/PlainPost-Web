@@ -26,37 +26,42 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 #profile, #options, #security, #services {
     display: none;
     position: absolute;
-    top: 45px;
+    top: 60px; /* aumentei para descer mais */
     right: 10px;
     background-color: rgba(1, 153, 255, 0.12);
-    padding: 10px;
+    padding: 15px 10px; /* um pouco mais de padding */
     border-radius: 8px;
     box-shadow: 0 0 8px rgba(0,0,0,0.15);
-    width: 160px;
+    width: 180px; /* um pouco mais largo para não ficar apertado */
     z-index: 100;
-    flex-direction: column;
+    flex-direction: column; /* força os filhos ficarem em coluna */
+    gap: 8px; /* espaçamento entre botões */
+    white-space: nowrap;
 }
 
-#services button, #profile button {
+/* Para os botões dentro dos menus */
+#profile button, #services button {
     width: 100%;
-    margin: 5px 0;
+    margin: 0; /* removido margin para usar gap */
     background-color: #3498db;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    padding: 8px 10px;
+    padding: 10px 8px; /* um pouco maior para melhor clique */
     font-size: 1rem;
+    text-align: center;
 }
 
-#services button:hover, #profile button:hover {
+#profile button:hover, #services button:hover {
     background-color: #2980b9;
 }
 
+/* Botões do header continuam com posição relativa para ancorar os menus */
 #acoes > button {
     position: relative;
+    z-index: 110; /* um pouco maior que o menu para ficar clicável */
 }
-
 
 
 form { display: flex; flex-direction: column; gap: 15px; }
