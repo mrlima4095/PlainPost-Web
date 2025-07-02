@@ -33,16 +33,8 @@
             <button id="changebio" type="button">Mudar Biografia</button>
             <button id="buycoins" type="button">Obter Moedas</button>
 
-        <div id="inbox"></div>
-        <div id="acoes" class="acoes-flutuante">
-            <button id="send" type="submit">✏️</button>
-            <button id="clear" type="submit">🧹</button>
-            <button id="refresh" type="submit">🔄</button>
-        </div>
 
-
-
-        <div id="security" style="display: none;">
+        <div id="security">
             <h2>Ações de Segurança</h2><br>
             <button id="back-security" type="button">Retornar</button> 
             <div id="acoes">
@@ -52,8 +44,6 @@
             <button id="changepass" type="button">Trocar Senha</button>
         </div>
 
-        <button id="optionsbutton" type="button">Painel da Conta</button>
-            <button id="securitybutton" type="button">Segurança</button>
     </div>
 </body>
 </html>
