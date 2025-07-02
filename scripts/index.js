@@ -7,17 +7,20 @@ function hideAllMenus() {
 }
 
 function toggle_profile_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; } else { menu_open = false; } }
-
 function abrirServicos() {
     Swal.fire({
-        title: 'Escolha um serviço',
-        showCancelButton: true,
+        title: 'Serviços',
+        text: 'Escolha um dos serviços abaixo:',
+        icon: 'info',
         showConfirmButton: false,
+        showCancelButton: true,
         cancelButtonText: 'Fechar',
-        html: `
-            <button id="agentBtn" class="swal2-styled">Agente S.</button><br><br>
-            <button id="giteaBtn" class="swal2-styled">ArchSource</button><br><br>
-            <button id="driveBtn" class="swal2-styled">BinDrop (Drive)</button>
+        footer: `
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button id="agentBtn" class="swal2-styled">🕵️ Agente S.</button>
+                <button id="giteaBtn" class="swal2-styled">💻 ArchSource</button>
+                <button id="driveBtn" class="swal2-styled">☁️ BinDrop</button>
+            </div>
         `,
         didOpen: () => {
             document.getElementById('agentBtn').onclick = () => window.location.href = "/agent";
