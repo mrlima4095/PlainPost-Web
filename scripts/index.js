@@ -14,8 +14,8 @@ function abrirServicos() {
             <p>Escolha um dos serviços abaixo:</p>
             <div class="swal-btn-container">
                 <button id="agent" class="swal-btn">🕵️ Agente S.</button>
-                <button id="gitea" class="swal-btn">💻 ArchSource</button>
                 <button id="drive" class="swal-btn">☁️ BinDrop</button>
+                <button id="gitea" class="swal-btn">💻 ArchSource</button>
             </div>
         `,
         icon: 'info',
