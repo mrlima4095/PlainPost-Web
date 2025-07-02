@@ -4,11 +4,9 @@ function hideAllMenus() {
     document.getElementById("profile").style.display = "none";
     document.getElementById("options").style.display = "none";
     document.getElementById("security").style.display = "none";
-    document.getElementById("services").style.display = "none";
 }
 
 function toggle_profile_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; } else { menu_open = false; } }
-function toogle_services_menu() { hideAllMenus(); if (!menu_open) { document.getElementById("services").style.display = "block"; menu_open = true; } else { menu_open = false; } }
 
 function abrirServicos() {
     Swal.fire({
