@@ -24,8 +24,8 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 
 header { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
 header img {
-    width: 40px; /* ajuste conforme o design */
-    height: 40px;
+    width: 32px; /* ajuste conforme o design */
+    height: 32px;
     border-radius: 50%; /* opcional: deixa redondo */
     object-fit: cover;
 }
