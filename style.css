@@ -14,8 +14,8 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 
 #container h2, #container h3 { margin-top: 30px; margin-bottom: 10px; margin-bottom: 10px; color: #333; }
 #container p { margin-bottom: 20px; font-size: 0.9em; color: #666; }
-#container > button { display: block; width: 100%; margin-top: 10px; }
-#container h2 + button { margin-top: 10px; margin-bottom: 15px; }
+#conteiner > button { display: block; width: 100%; margin-top: 10px; }
+#conteiner h2 + button { margin-top: 10px; }
 
 #acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
 #acoes img { width: 60px; height: 60px; object-fit: cover; cursor: pointer; }
