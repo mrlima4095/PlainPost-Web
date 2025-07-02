@@ -58,15 +58,7 @@ form { display: flex; flex-direction: column; gap: 15px; }
 input[type="user"], input[type="password"], input[type="search"] { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
 input[type="search"] { width: 100%; max-width: none; }
 
-button { 
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #3498db;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
+button { padding: 10px; border: none; border-radius: 5px; background-color: #3498db; color: white; cursor: pointer; transition: background-color 0.2s ease; }
 button:hover { background-color: #2980b9; }
 
 #avatar { display: block; width: 95px; margin-top: 10px; margin-left: 45%; max-width: 400px; cursor: pointer; }
