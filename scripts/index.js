@@ -1,6 +1,6 @@
 let profileMenuOpen = false;
 let servicesMenuOpen = false;
-let inbox_type = "inbox";
+let inbox_type = "inbox"; 
 
 function hideAllMenus() { document.getElementById("profile").style.display = "none"; document.getElementById("services").style.display = "none"; profileMenuOpen = false; servicesMenuOpen = false; }
 

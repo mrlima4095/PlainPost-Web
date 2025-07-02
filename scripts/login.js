@@ -20,3 +20,4 @@ window.onload = () => {
     botoes[0].addEventListener("click", function (event) { event.preventDefault(); autenticar("login"); });
     botoes[1].addEventListener("click", function (event) { event.preventDefault(); autenticar("signup"); });
 };
+ 
