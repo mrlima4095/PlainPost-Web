@@ -69,7 +69,8 @@ button {
 button:hover { background-color: #2980b9; }
 
 #avatar { display: block; width: 95px; margin-top: 10px; margin-left: 45%; max-width: 400px; cursor: pointer; }
-#inbox { margin-top: 20px; text-align: left; max-height: 300px; overflow-y: auto; padding-right: 5px; }
+#inbox { margin-top: 20px; text-align: left; max-height: 80vh; overflow-y: auto; padding-right: 5px; }
+#menu { background-color: #3498db;}
 
 .mensagem { 
     padding: 8px 10px;
