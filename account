@@ -13,6 +13,8 @@
 </head>
 <body>
     <div id="container">
+        <button id="back" type="submit"></button>
+
         <h2>Moedas</h2><br>
         <button id="coins" type="button">Meu Saldo</button>
         <div id="acoes">
@@ -21,6 +23,11 @@
         </div><br>
             
         <h2>Configurações</h2><br>
+        <h3>Mural</h3><br>
+        <div id="acoes">
+            <button id="mural" type="button">Meu Mural</button>
+            <button id="changepage" type="button">Configurar Mural</button>
+        </div><br>
 
         <h3>Caixa de Spam</h3><br>
         <div id="acoes">
@@ -29,11 +36,7 @@
         </div>
         <button id="view_blocks">Bloqueados</button>
             
-        <h3>Mural</h3><br>
-        <div id="acoes">
-            <button id="mural" type="button">Meu Mural</button>
-            <button id="changepage" type="button">Configurar Mural</button>
-        </div><br>
+        
         <button id="changebio" type="button">Mudar Biografia</button>
 
         <h2>Ações de Segurança</h2><br>

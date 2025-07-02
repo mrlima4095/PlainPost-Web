@@ -250,6 +250,7 @@ window.onload = () => {
                 window.location.href = "login";
             } else Swal.fire("Erro", "Erro ao apagar conta.", "error");
         },
+        back: () => window.location.href = "/",
         agent: () => window.location.href = "/agent",
         drive: () => window.location.href = "/drive",
         account: () => window.location.href = "/account",
