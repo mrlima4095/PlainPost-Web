@@ -19,7 +19,7 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 #conteiner h2 + button { margin-top: 10px; }
 
 #acoes { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
-#acoes img { width: 40px; height: 40px; object-fit: cover; cursor: pointer; }
+#acoes img { width: 60px; height: 60px; object-fit: cover; cursor: pointer; }
 #acoes button { flex: 1; white-space: nowrap; }
 
 #profile, #options, #security {
