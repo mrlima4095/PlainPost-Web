@@ -144,7 +144,7 @@ window.onload = () => {
             else Swal.fire("Erro", "Erro ao desbloquear usuário.", "error");
         },
         read_blocked: async () => {
-
+            if (inbox === "spam") { inbox = "inbox"; refreshInbox(fetchRequest) return; }
 
             const { status, response } = await fetchRequest("read_blocked");
             const inbox = document.getElementById("inbox");
