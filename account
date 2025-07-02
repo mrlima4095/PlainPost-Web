@@ -12,7 +12,7 @@
     <script src="scripts/index.js"></script>
 </head>
 <body>
-    <div id="conteiner">
+    <div id="container">
         <h2></h2><br>
         <button id="transfer" type="button">Transferir Moedas</button>
 
