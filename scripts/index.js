@@ -11,9 +11,9 @@ function abrirServicos() {
     Swal.fire({
     title: 'Serviços',
     html: `
-        <p>Escolha um dos serviços abaixo:</p>
+        <p>Acesse abaixo outros de nossos serviços:</p><br>
         <div id="acoes">
-            <button id="agent" type="button" class="swal2-styled" style="
+            <button id="agent" type="submit" class="swal2-styled" style="
                 flex: 1 1 30%;
                 min-width: 80px;
                 white-space: nowrap;
@@ -22,7 +22,7 @@ function abrirServicos() {
                 font-size: 0.9rem;
             ">🕵️ Agente S.</button>
 
-            <button id="gitea" type="button" class="swal2-styled" style="
+            <button id="gitea" type="submit" class="swal2-styled" style="
                 flex: 1 1 30%;
                 min-width: 80px;
                 white-space: nowrap;
@@ -32,7 +32,7 @@ function abrirServicos() {
             ">💻 ArchSource</button>
         </div>
 
-        <button id="drive" type="button" class="swal2-styled" style="
+        <button id="drive" type="submit" class="swal2-styled" style="
             flex: 1 1 30%;
             min-width: 80px;
             white-space: nowrap;
