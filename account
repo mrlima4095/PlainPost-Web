@@ -20,7 +20,6 @@
 <body>
     <div id="container">
         <button id="back" type="submit">Retornar</button>
-        <button id="changebio" type="submit">Mudar Biografia</button>
 
         <br><h2>Moedas</h2><br>
         <button id="coins" type="submit">Meu Saldo</button>
@@ -41,6 +40,13 @@
             <button id="unblock" type="submit">Desbloquear</button>
         </div>
         <button id="view_blocks" type="submit">Bloqueados</button>
+
+        <br><h2>Segurança da Conta</h2><br>
+        <div id="acao">
+            <button id="signout" type="submit">Encerrar sessão</button>
+            <button id="signoff" type="submit">Apagar Conta</button>
+        </div>
+        <button id="changepass" type="submit">Trocar Senha</button>
     </div>
 </body>
 
