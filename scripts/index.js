@@ -1,35 +1,10 @@
 let profileMenuOpen = false;
 let servicesMenuOpen = false;
 
-function hideAllMenus() {
-    document.getElementById("profile").style.display = "none";
-    document.getElementById("services").style.display = "none";
-    profileMenuOpen = false;
-    servicesMenuOpen = false;
-}
+function hideAllMenus() { document.getElementById("profile").style.display = "none"; document.getElementById("services").style.display = "none"; profileMenuOpen = false; servicesMenuOpen = false; }
 
-function toggle_profile_menu() {
-    if (profileMenuOpen) {
-        document.getElementById("profile").style.display = "none";
-        profileMenuOpen = false;
-    } else {
-        hideAllMenus();
-        document.getElementById("profile").style.display = "flex";
-        profileMenuOpen = true;
-    }
-}
-
-function toggle_services_menu() {
-    if (servicesMenuOpen) {
-        document.getElementById("services").style.display = "none";
-        servicesMenuOpen = false;
-    } else {
-        hideAllMenus();
-        document.getElementById("services").style.display = "flex";
-        servicesMenuOpen = true;
-    }
-}
-
+function toggle_profile_menu() { if (profileMenuOpen) { document.getElementById("profile").style.display = "none"; profileMenuOpen = false; } else { hideAllMenus(); document.getElementById("profile").style.display = "flex"; profileMenuOpen = true; } }
+function toggle_services_menu() { if (servicesMenuOpen) { document.getElementById("services").style.display = "none"; servicesMenuOpen = false; } else { hideAllMenus(); document.getElementById("services").style.display = "flex"; servicesMenuOpen = true; } }
 
 
 async function refreshInbox(fetchRequest) {

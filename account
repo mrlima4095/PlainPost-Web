@@ -41,6 +41,32 @@
             </div>
             <button id="changepass" type="button">Trocar Senha</button>
         </div>
+        <div id="options" style="display: none;">
+            <h2>Painel da Conta</h2><br>
+            <div id="acoes">
+                <button id="mural" type="button">Meu Mural</button>
+                <button id="changepage" type="button">Configurar Mural</button>
+            </div><br>
+            <div id="acoes">
+                <button id="block">Bloquear usuario</button>
+                <button id="unblock">Desbloquear</button>
+            </div>
+            <div id="acoes">
+                <button id="read_blocked">Caixa de Spam</button>
+                <button id="view_blocks">Bloqueados</button>
+            </div><br>
+            <button id="changebio" type="button">Mudar Biografia</button>
+            <button id="buycoins" type="button">Obter Moedas</button>
+        </div>
+        <div id="securityx" style="display: none;">
+            <h2>Ações de Segurança</h2><br>
+            <button id="back-security" type="button">Retornar</button> 
+            <div id="acoes">
+                <button id="signout" type="button">Encerrar sessão</button>
+                <button id="signoff" type="button">Apagar Conta</button>
+            </div>
+            <button id="changepass" type="button">Trocar Senha</button>
+        </div>
 
     </div>
 </body>
