@@ -12,7 +12,7 @@
     <script src="scripts/login.js" defer></script>
 </head>
 <body>
-    <div id="conteiner">
+    <div id="container">
         <header>
             <h2>PlainPost - Login</h2>
             <p>Seja bem-vindo(a)!</p>
