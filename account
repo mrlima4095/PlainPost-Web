@@ -14,7 +14,6 @@
 <body>
     <div id="container">
         <h2>Moedas</h2><br>
-        <p>Confira, envie e obtenha moedas aqui!</p>
         <button id="coins" type="button">Meu Saldo</button>
         <div id="acoes">
             <button id="transfer" type="button">Transferir Moedas</button>
