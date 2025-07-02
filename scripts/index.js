@@ -1,5 +1,6 @@
 let profileMenuOpen = false;
 let servicesMenuOpen = false;
+let inbox = "inbox";
 
 function hideAllMenus() { document.getElementById("profile").style.display = "none"; document.getElementById("services").style.display = "none"; profileMenuOpen = false; servicesMenuOpen = false; }
 
@@ -46,7 +47,7 @@ window.onload = () => {
     };
 
     const buttons = {
-        refresh: () => refreshInbox(fetchRequest, true),
+        refresh: () => refreshInbox(fetchRequest),
         send: async () => {
             const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do usuário', showCancelButton: true });
             if (!target) return Swal.fire('Erro', 'Destinatário não pode estar vazio!', 'error');
@@ -143,6 +144,8 @@ window.onload = () => {
             else Swal.fire("Erro", "Erro ao desbloquear usuário.", "error");
         },
         read_blocked: async () => {
+
+
             const { status, response } = await fetchRequest("read_blocked");
             const inbox = document.getElementById("inbox");
             inbox.innerHTML = "";
