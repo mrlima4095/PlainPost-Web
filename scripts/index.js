@@ -41,7 +41,7 @@ window.onload = () => {
             });
 
             if (resposta.status === 401) {
-                window.location.href = "/login";
+                window.location.href = "login";
                 return { status: 401 };
             }
 
@@ -277,17 +277,13 @@ window.onload = () => {
             if (status === 200) Swal.fire("Sucesso", "Senha alterada com sucesso!", "success");
             else Swal.fire("Erro", "Erro ao trocar senha.", "error");
         },
-        signout: () => {
-            localStorage.removeItem("Mail-Token");
-            window.location.href = "/login";
-        },
+        signout: () => { await fetch("/api/logout", { method: "POST", credentials: "include" }); },
         signoff: async () => {
             const result = await Swal.fire({ title: "Tem certeza?", text: "Tem certeza que deseja apagar sua conta?", icon: "warning", showCancelButton: true, confirmButtonText: "Sim, apagar", cancelButtonText: "Cancelar" });
             if (!result.isConfirmed) return;
 
             const { status } = await fetchRequest("signoff");
             if (status === 200) {
-                localStorage.removeItem("Mail-Token");
                 await Swal.fire("Conta apagada!", "Sua conta foi removida com sucesso.", "success");
                 window.location.href = "login";
             } else Swal.fire("Erro", "Erro ao apagar conta.", "error");
