@@ -25,14 +25,39 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 
 #profile, #options, #security, #services {
     display: none;
-    margin-top: 10px;
+    position: absolute;
+    top: 45px;
+    right: 10px;
     background-color: rgba(1, 153, 255, 0.12);
-    padding: 15px;
+    padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    box-shadow: 0 0 8px rgba(0,0,0,0.15);
+    width: 160px;
+    z-index: 100;
+    flex-direction: column;
 }
-#profile button, #options button, #security button { width: 100%; margin-top: 8px; }
+
+#services button, #profile button {
+    width: 100%;
+    margin: 5px 0;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px 10px;
+    font-size: 1rem;
+}
+
+#services button:hover, #profile button:hover {
+    background-color: #2980b9;
+}
+
+#acoes > button {
+    position: relative;
+}
+
+
 
 form { display: flex; flex-direction: column; gap: 15px; }
 
