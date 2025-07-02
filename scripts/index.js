@@ -38,9 +38,16 @@ window.onload = () => {
         try {
             const resposta = await fetch("https://archsource.xyz/api/mail", {
                 method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": token },
-                body: JSON.stringify({ action, ...extraData })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ action, ...extraData }),
+                credentials: "include"
             });
+
+            if (resposta.status === 401) {
+                window.location.href = "/login";
+                return { status: 401 };
+            }
+
             const dados = await resposta.json();
             return { status: resposta.status, response: dados.response };
         } catch {
