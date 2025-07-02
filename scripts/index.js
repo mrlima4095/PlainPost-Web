@@ -47,9 +47,7 @@ window.onload = () => {
 
             const dados = await resposta.json();
             return { status: resposta.status, response: dados.response };
-        } catch {
-            return { status: 0 };
-        }
+        } catch { return { status: 0 }; }
     };
 
     const buttons = {
