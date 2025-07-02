@@ -18,7 +18,6 @@
 
         <h2>Moedas</h2><br>
         <button id="coins" type="submit">Meu Saldo</button>
-        
         <div id="acoes">
             <button id="transfer" type="submit">Transferir Moedas</button>
             <button id="buycoins" type="submit">Obter Moedas</button>
