@@ -11,18 +11,18 @@ function abrirServicos() {
     Swal.fire({
         title: 'Serviços',
         html: `
-  <p>Escolha um dos serviços abaixo:</p>
-  <div style="
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      margin-top: 20px;
-      padding-bottom: 5px;
-  ">
-      <button id="agentBtn" class="swal2-styled" style="white-space: nowrap;">🕵️ Agente S.</button>
-      <button id="giteaBtn" class="swal2-styled" style="white-space: nowrap;">💻 ArchSource</button>
-      <button id="driveBtn" class="swal2-styled" style="white-space: nowrap;">☁️ BinDrop</button>
-  </div>
+<p>Escolha um dos serviços abaixo:</p>
+<div style="
+display: flex;
+overflow-x: auto;
+gap: 10px;
+margin-top: 20px;
+padding-bottom: 5px;
+">
+<button id="agentBtn" class="swal2-styled" style="white-space: nowrap;">🕵️ Agente S.</button>
+<button id="giteaBtn" class="swal2-styled" style="white-space: nowrap;">💻 ArchSource</button>
+<button id="driveBtn" class="swal2-styled" style="white-space: nowrap;">☁️ BinDrop</button>
+</div>
 `,
         icon: 'info',
         showConfirmButton: false,
