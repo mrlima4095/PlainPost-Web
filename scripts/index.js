@@ -1,6 +1,6 @@
 let profileMenuOpen = false;
 let servicesMenuOpen = false;
-let inbox = "inbox";
+let inbox_type = "inbox";
 
 function hideAllMenus() { document.getElementById("profile").style.display = "none"; document.getElementById("services").style.display = "none"; profileMenuOpen = false; servicesMenuOpen = false; }
 
@@ -9,6 +9,8 @@ function toggle_services_menu() { if (servicesMenuOpen) { document.getElementByI
 
 
 async function refreshInbox(fetchRequest) {
+    inbox_type = "inbox";
+
     const { status, response } = await fetchRequest("read");
     const inbox = document.getElementById("inbox");
     inbox.innerHTML = "";
@@ -144,8 +146,9 @@ window.onload = () => {
             else Swal.fire("Erro", "Erro ao desbloquear usuário.", "error");
         },
         read_blocked: async () => {
-            if (inbox === "spam") { inbox = "inbox"; refreshInbox(fetchRequest) }
+            if (inbox_type == "spam") { inbox_type = "inbox"; refreshInbox(fetchRequest) }
             else {
+                inbox_type = "spam";
                 const { status, response } = await fetchRequest("read_blocked");
                 const inbox = document.getElementById("inbox");
                 inbox.innerHTML = "";
