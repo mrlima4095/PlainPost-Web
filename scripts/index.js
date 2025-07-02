@@ -7,10 +7,8 @@ function hideAllMenus() {
     document.getElementById("services").style.display = "none";
 }
 
-function toggleprofilemenu() {
-    hideAllMenus();
-    if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; }
-}
+function toggleprofilemenu() { hideAllMenus(); if (!menu_open) { document.getElementById("profile").style.display = "block"; menu_open = true; } }
+function toggleservicesmenu() { hideAllMenus(); if (!menu_open) { document.getElementById("services").style.display = "block"; menu_open = true; } }
 
 function togglemenu(menu) {
     hideAllMenus();
