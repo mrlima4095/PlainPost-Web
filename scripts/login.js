@@ -7,7 +7,7 @@ async function autenticar(api) {
     try {
         const resposta = await fetch("https://archsource.xyz/api/" + api, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username, password }) });
 
-        if (resposta.status == 200 || resposta.status == 201) { const raw = await resposta.json(); localStorage.setItem("Mail-Token", raw.response); window.location.href = "/"; } 
+        if (resposta.status == 200 || resposta.status == 201) { window.location.href = "/"; } 
         else if (resposta.status == 401) { Swal.fire("Erro", "Usuário ou senha incorretos!"); }
         else if (resposta.status == 409) { Swal.fire("Erro", "Este nome de usuário já está em uso!"); }
     } catch (erro) { Swal.fire("Erro", "Erro na conexão com o servidor.", "error"); }
