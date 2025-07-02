@@ -12,14 +12,8 @@ function abrirServicos() {
     title: 'Serviços',
     html: `
         <p>Escolha um dos serviços abaixo:</p>
-        <div style="
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: center;
-        ">
-            <button id="agentBtn" class="swal2-styled" style="
+        <div id="acoes">
+            <button id="agent" type="button" class="swal2-styled" style="
                 flex: 1 1 30%;
                 min-width: 80px;
                 white-space: nowrap;
@@ -28,7 +22,7 @@ function abrirServicos() {
                 font-size: 0.9rem;
             ">🕵️ Agente S.</button>
 
-            <button id="giteaBtn" class="swal2-styled" style="
+            <button id="gitea" type="button" class="swal2-styled" style="
                 flex: 1 1 30%;
                 min-width: 80px;
                 white-space: nowrap;
@@ -36,16 +30,16 @@ function abrirServicos() {
                 text-overflow: ellipsis;
                 font-size: 0.9rem;
             ">💻 ArchSource</button>
-
-            <button id="driveBtn" class="swal2-styled" style="
-                flex: 1 1 30%;
-                min-width: 80px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                font-size: 0.9rem;
-            ">☁️ BinDrop</button>
         </div>
+
+        <button id="drive" type="button" class="swal2-styled" style="
+            flex: 1 1 30%;
+            min-width: 80px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 0.9rem;
+        ">☁️ BinDrop</button>
     `,
     icon: 'info',
     showConfirmButton: false,
