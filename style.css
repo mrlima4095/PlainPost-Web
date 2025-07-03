@@ -55,7 +55,7 @@ body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items:
 form { display: flex; flex-direction: column; gap: 15px; }
 
 input[type="user"], input[type="password"], input[type="search"], input[type="url"] { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-input[type="search"] { width: 100%; max-width: none; }
+input[type="search"], input[type="url"] { width: 100%; max-width: none; }
 
 button { padding: 10px; border: none; border-radius: 5px; background-color: #3498db; color: white; cursor: pointer; transition: background-color 0.2s ease; }
 button:hover { background-color: #2980b9; }

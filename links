@@ -37,6 +37,11 @@
     <div id="container">
         <h2>Encurtador</h2>
         <input type="url" id="url" placeholder="Cole sua URL aqui...">
+        <div id="acoes">
+            <button onclick="upload()">Enviar Arquivo</button>
+            <button onclick="listar()">Atualizar lista</button>
+        </div>
+        <button onclick="plainpost()">Retornar</button><br><br>
         <button onclick="encurtar()">Encurtar</button>
 
         <br><h3>Meus Links</h3>
