@@ -73,12 +73,25 @@ async function loadHistory() {
 
     try {
         const res = await fetch("/api/agent/history", { method: "GET", credentials: "include" });
-        if (!res.ok) { Swal.fire("Erro", "Erro ao carregar histórico.", "error"); container.style.display = "none"; return; }
+
+        if (res.status === 401) {
+            window.location.href = "/login";
+            return;
+        }
+
+        if (!res.ok) {
+            Swal.fire("Erro", "Erro ao carregar histórico.", "error");
+            container.style.display = "none";
+            return;
+        }
 
         const data = await res.json();
 
         if (Array.isArray(data.response)) {
-            if (data.response.length === 0) { container.style.display = "none"; return; }
+            if (data.response.length === 0) {
+                container.style.display = "none";
+                return;
+            }
 
             container.style.display = "flex";
 
@@ -86,18 +99,25 @@ async function loadHistory() {
                 const msg = document.createElement("div");
                 msg.className = m.role === "user" ? "msg-user" : "msg-bot";
 
-                if (m.role === "user") { msg.textContent = m.content; } 
-                else { msg.innerHTML = DOMPurify.sanitize(marked.parse(m.content)); }
+                if (m.role === "user") {
+                    msg.textContent = m.content;
+                } else {
+                    msg.innerHTML = DOMPurify.sanitize(marked.parse(m.content));
+                }
 
                 container.appendChild(msg);
             });
-
-        } else { container.style.display = "none"; }
+        } else {
+            container.style.display = "none";
+        }
 
         container.scrollTop = container.scrollHeight;
 
-    } catch (e) { container.style.display = "none"; }
+    } catch (e) {
+        container.style.display = "none";
+    }
 }
+
 
 
 async function clearHistory() {
