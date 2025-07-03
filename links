@@ -75,21 +75,32 @@
         }
 
         async function apagar(id) {
-            const res = await fetch("/api/short", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify({ action: "delete", id: id })
+            const confirm = await Swal.fire({
+                title: 'Tem certeza?',
+                text: 'Você deseja excluir este link encurtado?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
             });
 
-            const data = await res.json();
-            alert(data.response);
-            listarLinks();
+            if (confirm.isConfirmed) {
+                const res = await fetch("/api/short", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({ action: "delete", id: id })
+                });
+
+                const data = await res.json();
+                Swal.fire("Pronto!", data.response, "success");
+                listarLinks();
+            }
         }
 
         async function encurtar() {
             const url = document.getElementById("url").value.trim();
-            if (!url) return alert("Informe uma URL!");
+            if (!url) return Swal.fire("Erro", "Informe uma URL!", "error");
 
             const res = await fetch("/api/short", {
                 method: "POST",
@@ -99,8 +110,10 @@
             });
 
             const data = await res.json();
-            if (data.response) alert("Novo link: /s/" + data.response);
-            listarLinks();
+            if (data.response) {
+                Swal.fire("Link criado!", "Novo link: /s/" + data.response, "success");
+                listarLinks();
+            }
         }
 
         listarLinks();
