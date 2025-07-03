@@ -49,7 +49,10 @@ window.onload = () => {
             return { status: resposta.status, response: dados.response };
         } catch { return { status: 0 }; }
     };
-        send: async () => {
+
+    const buttons = {
+        refresh: () => refreshInbox(fetchRequest),
+                send: async () => {
             const savedDraft = JSON.parse(localStorage.getItem("draft") || "null");
 
             let destinatario = savedDraft?.to || "";
@@ -134,7 +137,6 @@ window.onload = () => {
                 }
             }
         },
-
         clear: async () => {
             const confirm = await Swal.fire({ title: 'Tem certeza?', text: 'Tem certeza que deseja limpar suas mensagens?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
             if (!confirm.isConfirmed) return;
