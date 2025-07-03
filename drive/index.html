@@ -13,20 +13,20 @@
         const apiBase = 'https://archsource.xyz/api/drive';
 
         async function status() {
-            const token = localStorage.getItem("Mail-Token");
-            if (!token) { window.location.href = "/login"; }
-
             try {
                 const resposta = await fetch("https://archsource.xyz/api/mail", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": token },
-                    body: JSON.stringify({ action: "status" })
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ action: "status" }),
+                    credentials: "include"
                 });
 
                 if (resposta.status == 200) { return; }
                 else if (resposta.status == 401) { window.location.href = "/login"; }
                 else { Swal.fire("Erro", "Ocorreu um erro interno!", "error"); }
-            } catch { Swal.fire('Erro', 'Erro na conexão.', 'error'); } 
+            } catch {
+                Swal.fire('Erro', 'Erro na conexão.', 'error');
+            }
         }
 
         async function upload() {
