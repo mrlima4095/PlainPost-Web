@@ -61,10 +61,7 @@ window.onload = () => {
             const openSendDialog = async () => {
                 return await Swal.fire({
                     title: "Nova Mensagem",
-                    html: `
-                        <input id="swal-dest" class="swal2-input" placeholder="Destinatário" value="${destinatario}">
-                        <textarea id="swal-msg" class="swal2-textarea" placeholder="Escreva sua mensagem...">${mensagem}</textarea>
-                    `,
+                    html: `<input id="swal-dest" class="swal2-input" placeholder="Destinatário" value="${destinatario}"><textarea id="swal-msg" class="swal2-textarea" placeholder="Escreva sua mensagem...">${mensagem}</textarea>`,
                     confirmButtonText: "📤 Enviar",
                     showCancelButton: true,
                     cancelButtonText: "❌ Cancelar",
