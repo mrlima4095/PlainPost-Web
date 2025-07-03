@@ -30,7 +30,7 @@
         <div class="acoes">
             <button id="block" type="submit">🚫 Bloquear Usuário</button>
             <button id="unblock" type="submit">✅ Desbloquear</button>
-        </div> 
+        </div>
         <button id="view_blocks" type="submit">📛 Bloqueados</button>
 
         <br><h3>🔒 Segurança da Conta</h3><br>
