@@ -17,10 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function request() {
     const promptInput = document.getElementById("prompt");
     const query = promptInput.value.trim();
-    if (!query) {
-        loadHistory();
-        return;
-    }
+     if (!query) { loadHistory(); return; }
 
     promptInput.value = "";
 
