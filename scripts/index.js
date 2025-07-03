@@ -209,16 +209,7 @@ window.onload = () => {
         },
         mural: async () => {
             const { status, response } = await fetchRequest("status");
-            if (status == 200) {
-                try {
-                    const resposta = await fetch("https://archsource.xyz/mural/" + response, { method: "GET" });
-                    const dados = await resposta.json();
-
-                    if (resposta.status === 404) Swal.fire('Erro', 'Você não tem um mural configurado.', 'error');
-                } catch {
-                    window.location.href = "/mural/" + response; 
-                }               
-            }
+            if (status == 200) window.location.href = "/mural/" + response; 
             else if (status == 401) window.location.href = "/login";
             else Swal.fire('Erro', 'Ocorreu um erro interno.', 'error');
         },
