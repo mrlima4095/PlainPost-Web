@@ -2,58 +2,48 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Encurtador de Links</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .linkItem {
-            background: #e9f1fb;
-            padding: 10px;
+            background: #f2f2f2;
             border-radius: 5px;
-            margin: 5px 0;
+            padding: 10px;
+            margin-bottom: 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-family: monospace;
         }
-
-        .linkItem button {
-            margin-left: 10px;
+        .linkItem a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .linkItem a:hover {
+            text-decoration: underline;
+        }
+        .linkInfo {
+            flex-grow: 1;
+        }
+        .linkActions button {
+            background-color: crimson;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            cursor: pointer;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
-    <div id="container">
-        <h2>Encurtador de Links</h2>
-        <input type="url" id="url" placeholder="Cole sua URL aqui...">
-        <button onclick="encurtar()">Encurtar (5 moedas)</button>
+    <h2>Encurtador</h2>
+    <input type="url" id="urlInput" placeholder="Cole sua URL aqui...">
+    <button onclick="encurtar()">Encurtar</button>
 
-        <h3>Meus Links</h3>
-        <div id="meusLinks"></div>
-
-        <div id="shortResult"></div>
-    </div>
+    <h3>Meus Links</h3>
+    <div id="meusLinks"></div>
 
     <script>
-        async function encurtar() {
-            const url = document.getElementById("url").value.trim();
-            if (!url) return Swal.fire("Erro", "Insira uma URL válida.", "error");
-
-            const res = await fetch("/api/short", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ action: "create", url }),
-                credentials: "include"
-            });
-
-            const data = await res.json();
-            if (res.status === 200) {
-                document.getElementById("shortResult").innerText = `Novo link: ${data.response}`;
-                listarLinks();
-            } else { 
-                Swal.fire("Erro", data.response || "Erro ao encurtar.", "error");
-            }
-        }
         async function listarLinks() {
             const res = await fetch("/api/short", {
                 method: "POST",
@@ -69,56 +59,20 @@
             if (Array.isArray(data.response)) {
                 data.response.forEach(item => {
                     const div = document.createElement("div");
-                    div.className = "linkItem clickable-link";
-                    div.dataset.shortId = item.id;
-                    div.dataset.url = item.url;
+                    div.className = "linkItem";
 
                     div.innerHTML = `
-                        <span><strong>/s/${item.id}</strong></span>
-                        <button onclick="apagar('${item.id}')">Excluir</button>
+                        <div class="linkInfo">
+                            <a href="/s/${item.id}" target="_blank">/s/${item.id}</a> - ${item.url}
+                        </div>
+                        <div class="linkActions">
+                            <button onclick="apagar('${item.id}')">Excluir</button>
+                        </div>
                     `;
                     container.appendChild(div);
                 });
             }
         }
-
-        document.getElementById("meusLinks").addEventListener("click", async function (e) {
-            const el = e.target.closest(".clickable-link");
-            if (!el) return;
-
-            const shortId = el.dataset.shortId;
-            const targetUrl = el.dataset.url;
-
-            const result = await Swal.fire({
-                title: "Link Encurtado",
-                html: `
-                    <div style="text-align: left">
-                        <p><strong>Link curto:</strong> <a href="/s/${shortId}" target="_blank">/s/${shortId}</a></p>
-                        <p><strong>Destino:</strong> <code>${targetUrl}</code></p>
-                    </div>
-                `,
-                showConfirmButton: false,
-                showDenyButton: true,
-                denyButtonText: "Excluir",
-                showCancelButton: true,
-                cancelButtonText: "Fechar"
-            });
-
-            if (result.isDenied) {
-                const confirm = await Swal.fire({
-                    title: "Tem certeza?",
-                    text: `Excluir o link /s/${shortId}?`,
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Sim, excluir",
-                    cancelButtonText: "Cancelar"
-                });
-
-                if (confirm.isConfirmed) {
-                    await apagar(shortId);
-                }
-            }
-        });
 
         async function apagar(id) {
             const res = await fetch("/api/short", {
@@ -129,7 +83,23 @@
             });
 
             const data = await res.json();
-            await Swal.fire("Status", data.response, "info");
+            alert(data.response);
+            listarLinks();
+        }
+
+        async function encurtar() {
+            const url = document.getElementById("url").value.trim();
+            if (!url) return alert("Informe uma URL!");
+
+            const res = await fetch("/api/short", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ action: "create", url: url })
+            });
+
+            const data = await res.json();
+            if (data.response) alert("Novo link: /s/" + data.response);
             listarLinks();
         }
 
