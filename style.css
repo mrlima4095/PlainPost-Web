@@ -76,7 +76,7 @@ button[data-tooltip]:hover::after, button[data-tooltip]:hover::before { opacity:
 .acoes-flutuante button { width: 40px; height: 40px; padding: 0; font-size: 1.2rem; } 
 
 .swal2-popup {
-    max-width: 65% !important; 
+    max-width: 70% !important; 
     /*width: 100% !important;*/
     box-sizing: border-box;
 }
