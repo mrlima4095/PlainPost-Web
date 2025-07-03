@@ -122,6 +122,8 @@
             }
         }
 
+        function plainpost() { window.location.href = "/"; }
+
         listar();
     </script>
 </body>
