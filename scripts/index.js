@@ -88,7 +88,6 @@ window.onload = () => {
             while (true) {
                 const { value, isConfirmed, dismiss } = await openSendDialog();
 
-                // ENVIAR
                 if (isConfirmed && value) {
                     const { to, content } = value;
                     const { status } = await fetchRequest("send", { to, content });
@@ -113,7 +112,7 @@ window.onload = () => {
                         text: "Tem certeza que deseja apagar o destinatário e o conteúdo?",
                         icon: "warning",
                         showCancelButton: true,
-                        confirmButtonText: "Sim, limpar",
+                        confirmButtonText: "🧹 Sim, limpar",
                         cancelButtonText: "❌ Cancelar"
                     });
 
@@ -121,13 +120,12 @@ window.onload = () => {
                         destinatario = "";
                         mensagem = "";
                         localStorage.removeItem("draft");
-                        continue; // Reabre a caixa limpa
+                        continue;
                     } else {
-                        continue; // Reabre com os mesmos dados
+                        continue;
                     }
                 }
 
-                // CANCELAR ou clicar fora (ou ESC)
                 if (dismiss === Swal.DismissReason.cancel || dismiss === Swal.DismissReason.backdrop || dismiss === Swal.DismissReason.esc) {
                     destinatario = document.getElementById("swal-dest")?.value.trim() || "";
                     mensagem = document.getElementById("swal-msg")?.value.trim() || "";
@@ -142,9 +140,6 @@ window.onload = () => {
                 }
             }
         },
-
-
-
         clear: async () => {
             const confirm = await Swal.fire({ title: 'Tem certeza?', text: 'Tem certeza que deseja limpar suas mensagens?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
             if (!confirm.isConfirmed) return;
