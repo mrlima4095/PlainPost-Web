@@ -49,9 +49,6 @@ window.onload = () => {
             return { status: resposta.status, response: dados.response };
         } catch { return { status: 0 }; }
     };
-
-    const buttons = {
-        refresh: () => refreshInbox(fetchRequest),
         send: async () => {
             const savedDraft = JSON.parse(localStorage.getItem("draft") || "null");
 
@@ -64,6 +61,7 @@ window.onload = () => {
                     html: `
                         <input id="swal-dest" class="swal2-input" placeholder="Destinatário" value="${destinatario}">
                         <textarea id="swal-msg" class="swal2-textarea" placeholder="Escreva sua mensagem...">${mensagem}</textarea>
+                        <button id="btn-clear" class="swal2-styled" style="background:#d33;margin-top:10px;">🧹 Limpar</button>
                     `,
                     confirmButtonText: "Enviar",
                     showCancelButton: true,
@@ -77,6 +75,11 @@ window.onload = () => {
                     },
                     didOpen: () => {
                         document.getElementById("swal-dest").focus();
+                        document.getElementById("btn-clear").addEventListener("click", () => {
+                            document.getElementById("swal-dest").value = "";
+                            document.getElementById("swal-msg").value = "";
+                            localStorage.removeItem("draft");
+                        });
                     }
                 });
 
@@ -95,10 +98,9 @@ window.onload = () => {
 
                     refreshInbox(fetchRequest);
                     break;
-                } 
-                
+                }
+
                 if (dismiss === Swal.DismissReason.cancel) {
-                    // Clicou em "Cancelar" => pode ser Sair/Voltar/Salvar Rascunho
                     destinatario = document.getElementById("swal-dest").value.trim();
                     mensagem = document.getElementById("swal-msg").value.trim();
 
@@ -110,30 +112,29 @@ window.onload = () => {
                             showDenyButton: true,
                             showCancelButton: true,
                             confirmButtonText: "Voltar",
-                            denyButtonText: "Sair",
                             cancelButtonText: "Salvar Rascunho",
+                            denyButtonText: "Sair",
                             reverseButtons: true
                         });
 
                         if (result.isConfirmed) {
-                            // Voltar para tela de envio sem quebrar o loop
                             continue;
                         } else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
-                            // Salvar rascunho
                             localStorage.setItem("draft", JSON.stringify({ to: destinatario, content: mensagem }));
                             Swal.fire("Rascunho salvo", "Você pode continuar depois.", "success");
                             break;
                         } else if (result.isDenied) {
-                            // Sair sem salvar
                             localStorage.removeItem("draft");
                             break;
                         }
                     } else {
-                        break; // Nada preenchido, só fechar
+                        localStorage.removeItem("draft");
+                        break;
                     }
                 }
             }
         },
+
         clear: async () => {
             const confirm = await Swal.fire({ title: 'Tem certeza?', text: 'Tem certeza que deseja limpar suas mensagens?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
             if (!confirm.isConfirmed) return;
