@@ -30,21 +30,28 @@
         }
 
         async function upload() {
-            const token = localStorage.getItem("Mail-Token");
-            if (!token) { window.location.href = "/login"; }
-
             const file = document.getElementById('fileInput').files[0];
             if (!file) return Swal.fire("Erro", "Selecione um arquivo!", "error");
 
             const formData = new FormData();
             formData.append('file', file);
 
-            const res = await fetch(`${apiBase}/upload`, { method: 'POST', headers: { "Authorization": token }, body: formData });
+            const res = await fetch(`${apiBase}/upload`, {
+                method: 'POST',
+                body: formData,
+                credentials: "include"
+            });
+
             const data = await res.json();
 
-            if (data.success) { Swal.fire("Sucesso", "Arquivo enviado com sucesso!", "success"); listar(); } 
-            else { Swal.fire("Erro", data.error || "Erro ao enviar.", "error"); }
+            if (data.success) {
+                Swal.fire("Sucesso", "Arquivo enviado com sucesso!", "success");
+                listar();
+            } else {
+                Swal.fire("Erro", data.error || "Erro ao enviar.", "error");
+            }
         }
+
 
         async function listar() {
             const token = localStorage.getItem("Mail-Token");
