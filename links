@@ -37,19 +37,20 @@
     <div id="container">
         <h2>Encurtador</h2>
         <input type="url" id="url" placeholder="Cole sua URL aqui...">
+        <br>
         <div id="acoes">
-            <button onclick="upload()">Enviar Arquivo</button>
+            <button onclick="encurtar()">Encurtar</button>
             <button onclick="listar()">Atualizar lista</button>
         </div>
         <button onclick="plainpost()">Retornar</button><br><br>
-        <button onclick="encurtar()">Encurtar</button>
+        
 
         <br><h3>Meus Links</h3>
         <div id="meusLinks"></div>
     </div>
 
     <script>
-        async function listarLinks() {
+        async function listar() {
             const res = await fetch("/api/short", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -99,7 +100,7 @@
 
                 const data = await res.json();
                 Swal.fire("Pronto!", data.response, "success");
-                listarLinks();
+                listar();
             }
         }
 
@@ -121,7 +122,7 @@
             }
         }
 
-        listarLinks();
+        listar();
     </script>
 </body>
 </html>
