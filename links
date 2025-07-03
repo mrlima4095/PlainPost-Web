@@ -25,7 +25,7 @@
 <body>
     <div id="container">
         <h2>Encurtador de Links</h2>
-        <input type="url" id="urlInput" placeholder="Cole sua URL aqui...">
+        <input type="url" id="url" placeholder="Cole sua URL aqui...">
         <button onclick="encurtar()">Encurtar (5 moedas)</button>
 
         <h3>Meus Links</h3>
