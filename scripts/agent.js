@@ -48,11 +48,9 @@ async function request() {
     try {
         const res = await fetch("/api/agent", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": token
-            },
-            body: JSON.stringify({ prompt: query })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: query }),
+            credentials: "include"
         });
 
         if (res.status === 403) {
