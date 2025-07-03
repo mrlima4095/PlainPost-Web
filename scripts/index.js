@@ -277,7 +277,7 @@ window.onload = () => {
             if (status === 200) Swal.fire("Sucesso", "Senha alterada com sucesso!", "success");
             else Swal.fire("Erro", "Erro ao trocar senha.", "error");
         },
-        signout: () => { await fetch("/api/logout", { method: "POST", credentials: "include" }); },
+        signout: async () => { fetchRequest("logout"); },
         signoff: async () => {
             const result = await Swal.fire({ title: "Tem certeza?", text: "Tem certeza que deseja apagar sua conta?", icon: "warning", showCancelButton: true, confirmButtonText: "Sim, apagar", cancelButtonText: "Cancelar" });
             if (!result.isConfirmed) return;
