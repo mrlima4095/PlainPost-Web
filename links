@@ -36,12 +36,14 @@
     </style>
 </head>
 <body>
-    <h2>Encurtador</h2>
-    <input type="url" id="urlInput" placeholder="Cole sua URL aqui...">
-    <button onclick="encurtar()">Encurtar</button>
+    <div id="container">
+        <h2>Encurtador</h2>
+        <input type="url" id="urlInput" placeholder="Cole sua URL aqui...">
+        <button onclick="encurtar()">Encurtar</button>
 
-    <h3>Meus Links</h3>
-    <div id="meusLinks"></div>
+        <h3>Meus Links</h3>
+        <div id="meusLinks"></div>
+    </div>
 
     <script>
         async function listarLinks() {
