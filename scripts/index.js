@@ -102,7 +102,6 @@ window.onload = () => {
                     break;
                 }
 
-                // LIMPAR
                 if (dismiss === Swal.DismissReason.deny) {
                     const confirmar = await Swal.fire({
                         title: "Limpar mensagem?",
