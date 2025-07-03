@@ -36,7 +36,7 @@
 
     <script>
         async function encurtar() {
-            const url = document.getElementById("urlInput").value.trim();
+            const url = document.getElementById("url").value.trim();
             if (!url) return Swal.fire("Erro", "Insira uma URL válida.", "error");
 
             const res = await fetch("/api/short", {
