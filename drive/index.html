@@ -139,15 +139,32 @@
         function plainpost() { window.location.href = "/"; }
 
         async function deletar(fileId) {
-            const result = await Swal.fire({ title: "Tem certeza?", text: "Tem certeza que deseja apagar o arquivo? (Esta ação é irreversível!)", icon: "warning", showCancelButton: true, confirmButtonText: "Sim, apagar", cancelButtonText: "Cancelar" });
+            const result = await Swal.fire({
+                title: "Tem certeza?",
+                text: "Deseja apagar o arquivo? (Esta ação é irreversível!)",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sim, apagar",
+                cancelButtonText: "Cancelar"
+            });
+
             if (!result.isConfirmed) return;
 
-            const res = await fetch(`${apiBase}/delete/${fileId}`, { method: 'DELETE' });
+            const res = await fetch(`${apiBase}/delete/${fileId}`, {
+                method: 'DELETE',
+                credentials: "include"
+            });
+
             const data = await res.json();
 
-            if (data.success) { Swal.fire("Sucesso", "Arquivo apagado com sucesso!", "success"); listar(); } 
-            else { Swal.fire("Erro", "Erro ao excluir o arquivo.", "error"); }
+            if (data.success) {
+                Swal.fire("Sucesso", "Arquivo apagado com sucesso!", "success");
+                listar();
+            } else {
+                Swal.fire("Erro", "Erro ao excluir o arquivo.", "error");
+            }
         }
+
 
         function formatarData(iso) { const dt = new Date(iso); return dt.toLocaleString('pt-BR'); }
 
