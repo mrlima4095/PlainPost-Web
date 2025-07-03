@@ -17,9 +17,6 @@
     <script src="scripts/index.js"></script>
 </head>
 <body>
-
-
-
     <div id="container">
         <button id="back" type="submit">⬅️ Retornar</button>
 
