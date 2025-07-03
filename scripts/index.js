@@ -52,7 +52,7 @@ window.onload = () => {
 
     const buttons = {
         refresh: () => refreshInbox(fetchRequest),
-                send: async () => {
+        send: async () => {
             const savedDraft = JSON.parse(localStorage.getItem("draft") || "null");
 
             let destinatario = savedDraft?.to || "";
