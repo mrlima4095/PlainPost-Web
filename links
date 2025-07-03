@@ -101,7 +101,7 @@
             const data = await res.json();
             if (data.response) {
                 Swal.fire("Link criado!", "Novo link: /s/" + data.response, "success");
-                listarLinks();
+                listar();
             }
         }
 
