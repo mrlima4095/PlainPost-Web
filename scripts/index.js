@@ -62,12 +62,7 @@ window.onload = () => {
 
             const { status } = await fetchRequest("send", { to: target, content });
 
-            if (status == 200) {
-                Swal.fire({
-                    title: '✅ Sucesso',
-                    text: 'Sua mensagem foi enviada!',
-                    icon: 'success'
-                });
+            if (status == 200) { Swal.fire({ title: 'Sucesso', text: 'Sua mensagem foi enviada!', icon: 'success' });
             } else if (status == 404) {
                 Swal.fire({
                     title: '❌ Erro',
