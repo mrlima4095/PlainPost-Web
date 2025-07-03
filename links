@@ -58,7 +58,7 @@
                 confirmButtonText: 'Sim, excluir!',
                 cancelButtonText: 'Cancelar'
             });
-
+        
             if (confirm.isConfirmed) {
                 const res = await fetch("/api/short", {
                     method: "POST",
@@ -66,30 +66,37 @@
                     credentials: "include",
                     body: JSON.stringify({ action: "delete", id: id })
                 });
-
+        
                 const data = await res.json();
-                Swal.fire("Pronto!", data.response, "success");
-                listar();
+                if (res.status === 200) {
+                    Swal.fire("Pronto!", data.response, "success");
+                    listar();
+                } else {
+                    Swal.fire("Erro", data.response || "Erro desconhecido.", "error");
+                }
             }
         }
-
+        
         async function encurtar() {
             const url = document.getElementById("url").value.trim();
             if (!url) return Swal.fire("Erro", "Informe uma URL!", "error");
-
+        
             const res = await fetch("/api/short", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
                 body: JSON.stringify({ action: "create", url: url })
             });
-
+        
             const data = await res.json();
-            if (data.response) {
+            if (res.status === 200) {
                 Swal.fire("Link criado!", "Novo link: /s/" + data.response, "success");
                 listar();
+            } else {
+                Swal.fire("Erro", data.response || "Erro desconhecido.", "error");
             }
         }
+
 
         function plainpost() { window.location.href = "/"; }
 
