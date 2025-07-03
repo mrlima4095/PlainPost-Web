@@ -50,7 +50,7 @@ window.onload = () => {
     const buttons = {
         refresh: () => refreshInbox(fetchRequest),
         send: async () => {
-            const { value: target, isConfirmed: isTargetConfirmed } = await Swal.fire({ title: '✉️ Destinatário:', input: 'text', inputPlaceholder: 'Nome do usuário', showCancelButton: true, confirmButtonText: 'Próximo', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'O destinatário não pode estar vazio!'; } });
+            const { value: target, isConfirmed: isTargetConfirmed } = await Swal.fire({ title: '👤 Destinatário:', input: 'text', inputPlaceholder: 'Nome do usuário', showCancelButton: true, confirmButtonText: 'Próximo', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'O destinatário não pode estar vazio!'; } });
             if (!isTargetConfirmed) return;
 
             const { value: content, isConfirmed: isContentConfirmed } = await Swal.fire({ title: '📝 Mensagem:', input: 'text', inputPlaceholder: 'Escreva sua mensagem', showCancelButton: true, confirmButtonText: 'Avançar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'A mensagem não pode estar vazia!'; } });
@@ -78,21 +78,23 @@ window.onload = () => {
             refreshInbox(fetchRequest);
         },
         transfer: async () => {
-            const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do destinatário', showCancelButton: true });
-            if (!target) return Swal.fire('Erro', 'Destinatário não pode estar vazio!', 'error');
+            const { value: target, isConfirmed: isTargetConfirmed } = await Swal.fire({ title: '👤 Destinatário:', input: 'text', inputPlaceholder: 'Nome do usuário', showCancelButton: true, confirmButtonText: 'Próximo', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'O destinatário não pode estar vazio!'; } });
+            if (!isTargetConfirmed) return;
 
-            const { value: amount } = await Swal.fire({ title: 'Quantidade:', input: 'number', inputPlaceholder: 'Quantas moedas?', inputAttributes: { min: 1 }, showCancelButton: true });
-            if (!amount) return Swal.fire('Erro', 'Você precisa informar a quantidade!', 'error');
+            const { value: amount, isConfirmed: isAmountConfirmed } = await Swal.fire({ title: '💰 Quantidade:', input: 'number', inputPlaceholder: 'Quantas moedas?', inputAttributes: { min: 1 }, showCancelButton: true, confirmButtonText: 'Avançar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value || value <= 0) return 'Insira uma quantia válida!'; } });
+            if (!isAmountConfirmed) return;
 
-            const confirm = await Swal.fire({ title: 'Confirmar transferência', icon: 'warning', text: `Tem certeza que deseja enviar ${amount} moedas para ${target}?`, showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
-            if (!confirm.isConfirmed) return Swal.fire('Cancelado', 'Transferência cancelada.', 'info');
+            const confirm = await Swal.fire({ title: '⚠️ Confirmar transferência', icon: 'warning', text: `Tem certeza que deseja enviar ${amount} moedas para ${target}?`, showCancelButton: true, confirmButtonText: '✅ Enviar', cancelButtonText: '❌ Cancelar' });
+
+            if (!confirm.isConfirmed) return Swal.fire({ title: 'Cancelado', text: 'Transferência cancelada.', icon: 'info' });
 
             const { status } = await fetchRequest("transfer", { to: target, amount });
-            if (status == 200) Swal.fire('Sucesso', 'Moedas enviadas!', 'success');
-            else if (status == 404) Swal.fire('Erro', 'O destinatário não foi encontrado!', 'error');
-            else if (status == 406) Swal.fire('Erro', 'A quantia de moedas a ser enviada é inválida!', 'error');
-            else if (status == 401) Swal.fire('Erro', 'Saldo insuficiente!', 'error');
-            else Swal.fire('Erro', 'Erro ao transferir.', 'error');
+
+            if (status == 200) Swal.fire({ title: 'Sucesso', text: 'Moedas enviadas!', icon: 'success' }); 
+            else if (status == 404)  Swal.fire({ title: 'Erro', text: 'O destinatário não foi encontrado!', icon: 'error' });
+            else if (status == 406)  Swal.fire({ title: 'Erro', text: 'A quantia de moedas a ser enviada é inválida!', icon: 'error' });
+            else if (status == 401)  Swal.fire({ title: 'Erro', text: 'Saldo insuficiente!', icon: 'error' }); 
+            else Swal.fire({ title: '❌ Erro', text: 'Erro ao transferir.', icon: 'error' });
         },
         search: async () => {
             const { value: user } = await Swal.fire({ title: 'Quem deseja procurar?', input: 'text', inputPlaceholder: 'Nome de usuário', showCancelButton: true });
