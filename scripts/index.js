@@ -69,7 +69,7 @@ window.onload = () => {
                 showCancelButton: true
             });
             if (!content) return Swal.fire({
-                title: '❌ Erro',
+                title: 'Erro',
                 text: 'Você não pode mandar uma mensagem vazia!',
                 icon: 'error'
             });
@@ -82,33 +82,13 @@ window.onload = () => {
                 confirmButtonText: '✅ Enviar',
                 cancelButtonText: '❌ Cancelar'
             });
-            if (!confirm.isConfirmed) return Swal.fire({
-                title: '❌ Cancelado',
-                text: 'Envio cancelado.',
-                icon: 'info'
-            });
+            if (!confirm.isConfirmed) { return Swal.fire({ title: 'Cancelado', text: 'Envio cancelado.', icon: 'info' }); }
 
             const { status } = await fetchRequest("send", { to: target, content });
 
-            if (status == 200) {
-                Swal.fire({
-                    title: '✅ Sucesso',
-                    text: 'Sua mensagem foi enviada!',
-                    icon: 'success'
-                });
-            } else if (status == 404) {
-                Swal.fire({
-                    title: '❌ Erro',
-                    text: 'O destinatário não foi encontrado!',
-                    icon: 'error'
-                });
-            } else {
-                Swal.fire({
-                    title: '❌ Erro',
-                    text: 'Erro ao enviar mensagem.',
-                    icon: 'error'
-                });
-            }
+            if (status == 200) { Swal.fire({ title: 'Sucesso', text: 'Sua mensagem foi enviada!', icon: 'success' }); }
+            else if (status == 404) { Swal.fire({ title: 'Erro', text: 'O destinatário não foi encontrado!', icon: 'error' }); } 
+            else { Swal.fire({ title: 'Erro', text: 'Erro ao enviar mensagem.', icon: 'error' }); }
 
             refreshInbox(fetchRequest);
         },
