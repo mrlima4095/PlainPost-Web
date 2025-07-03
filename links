@@ -35,6 +35,25 @@
     </div>
 
     <script>
+        async function encurtar() {
+            const url = document.getElementById("urlInput").value.trim();
+            if (!url) return Swal.fire("Erro", "Insira uma URL válida.", "error");
+
+            const res = await fetch("/api/short", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ action: "create", url }),
+                credentials: "include"
+            });
+
+            const data = await res.json();
+            if (res.status === 200) {
+                document.getElementById("shortResult").innerText = `Novo link: ${data.response}`;
+                listarLinks();
+            } else {
+                Swal.fire("Erro", data.response || "Erro ao encurtar.", "error");
+            }
+        }
         async function listarLinks() {
             const res = await fetch("/api/short", {
                 method: "POST",
@@ -114,7 +133,6 @@
             listarLinks();
         }
 
-        // Chamada inicial para preencher os links ao carregar a página
         listarLinks();
     </script>
 </body>
