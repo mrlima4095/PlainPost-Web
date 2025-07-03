@@ -72,8 +72,8 @@ window.onload = () => {
             if (!confirm.isConfirmed) return;
 
             const { status } = await fetchRequest("clear");
-            if (status == 200) Swal.fire('Sucesso', 'Suas mensagens foram apagadas!', 'success');
-            else Swal.fire('Erro', 'Erro ao limpar mensagens.', 'error');
+            if (status == 200) Swal.fire(title: 'Sucesso', text: 'Suas mensagens foram apagadas!', icon: 'success');
+            else Swal.fire(title: 'Erro', text: 'Erro ao limpar mensagens.', icon: 'error');
 
             refreshInbox(fetchRequest);
         },
