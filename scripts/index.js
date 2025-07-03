@@ -52,7 +52,7 @@ window.onload = () => {
 
     const buttons = {
         refresh: () => refreshInbox(fetchRequest),
-        send: async () => {
+                send: async () => {
             const savedDraft = JSON.parse(localStorage.getItem("draft") || "null");
 
             let destinatario = savedDraft?.to || "";
@@ -87,6 +87,20 @@ window.onload = () => {
 
                 if (isConfirmed && value) {
                     const { to, content } = value;
+
+                    const confirmar = await Swal.fire({
+                        title: 'Confirmar envio',
+                        html: `Tem certeza que deseja enviar a seguinte mensagem para <strong>${to}</strong>?<br><br><em>${content}</em>`,
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: '📤 Enviar',
+                        cancelButtonText: '❌ Cancelar'
+                    });
+
+                    if (!confirmar.isConfirmed) {
+                        continue;
+                    }
+
                     const { status } = await fetchRequest("send", { to, content });
 
                     if (status === 200) {
