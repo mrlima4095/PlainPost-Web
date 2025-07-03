@@ -56,11 +56,7 @@ window.onload = () => {
                 inputPlaceholder: 'Nome do usuário',
                 showCancelButton: true
             });
-            if (!target) return Swal.fire({
-                title: '❌ Erro',
-                text: 'Destinatário não pode estar vazio!',
-                icon: 'error'
-            });
+            if (!target) return Swal.fire({ title: 'Erro', text: 'Destinatário não pode estar vazio!', icon: 'error' });
 
             const { value: content } = await Swal.fire({
                 title: '📝 Mensagem:',
@@ -86,9 +82,9 @@ window.onload = () => {
 
             const { status } = await fetchRequest("send", { to: target, content });
 
-            if (status == 200) { Swal.fire({ title: 'Sucesso', text: 'Sua mensagem foi enviada!', icon: 'success' }); }
-            else if (status == 404) { Swal.fire({ title: 'Erro', text: 'O destinatário não foi encontrado!', icon: 'error' }); } 
-            else { Swal.fire({ title: 'Erro', text: 'Erro ao enviar mensagem.', icon: 'error' }); }
+            if (status == 200) Swal.fire({ title: 'Sucesso', text: 'Sua mensagem foi enviada!', icon: 'success' });
+            else if (status == 404) Swal.fire({ title: 'Erro', text: 'O destinatário não foi encontrado!', icon: 'error' }); 
+            else Swal.fire({ title: 'Erro', text: 'Erro ao enviar mensagem.', icon: 'error' }); 
 
             refreshInbox(fetchRequest);
         },
