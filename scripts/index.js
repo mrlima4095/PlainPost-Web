@@ -58,18 +58,20 @@ window.onload = () => {
             let destinatario = savedDraft?.to || "";
             let mensagem = savedDraft?.content || "";
 
-            while (true) {
-                const { value, isConfirmed, dismiss } = await Swal.fire({
+            const openSendDialog = async () => {
+                return await Swal.fire({
                     title: "Nova Mensagem",
                     html: `
                         <input id="swal-dest" class="swal2-input" placeholder="Destinatário" value="${destinatario}">
                         <textarea id="swal-msg" class="swal2-textarea" placeholder="Escreva sua mensagem...">${mensagem}</textarea>
                     `,
-                    confirmButtonText: "Enviar",
+                    confirmButtonText: "📤 Enviar",
                     showCancelButton: true,
-                    cancelButtonText: "Cancelar",
+                    cancelButtonText: "❌ Cancelar",
                     showDenyButton: true,
                     denyButtonText: "🧹 Limpar",
+                    allowOutsideClick: true,
+                    allowEscapeKey: true,
                     preConfirm: () => {
                         const to = document.getElementById("swal-dest").value.trim();
                         const content = document.getElementById("swal-msg").value.trim();
@@ -81,6 +83,10 @@ window.onload = () => {
                         document.getElementById("swal-dest").focus();
                     }
                 });
+            };
+
+            while (true) {
+                const { value, isConfirmed, dismiss } = await openSendDialog();
 
                 // ENVIAR
                 if (isConfirmed && value) {
@@ -102,16 +108,29 @@ window.onload = () => {
 
                 // LIMPAR
                 if (dismiss === Swal.DismissReason.deny) {
-                    destinatario = "";
-                    mensagem = "";
-                    localStorage.removeItem("draft");
-                    continue; // Reabre a janela de envio limpa
+                    const confirmar = await Swal.fire({
+                        title: "Limpar mensagem?",
+                        text: "Tem certeza que deseja apagar o destinatário e o conteúdo?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Sim, limpar",
+                        cancelButtonText: "Cancelar"
+                    });
+
+                    if (confirmar.isConfirmed) {
+                        destinatario = "";
+                        mensagem = "";
+                        localStorage.removeItem("draft");
+                        continue; // Reabre a caixa limpa
+                    } else {
+                        continue; // Reabre com os mesmos dados
+                    }
                 }
 
-                // CANCELAR
-                if (dismiss === Swal.DismissReason.cancel) {
-                    destinatario = document.getElementById("swal-dest").value.trim();
-                    mensagem = document.getElementById("swal-msg").value.trim();
+                // CANCELAR ou clicar fora (ou ESC)
+                if (dismiss === Swal.DismissReason.cancel || dismiss === Swal.DismissReason.backdrop || dismiss === Swal.DismissReason.esc) {
+                    destinatario = document.getElementById("swal-dest")?.value.trim() || "";
+                    mensagem = document.getElementById("swal-msg")?.value.trim() || "";
 
                     if (destinatario || mensagem) {
                         localStorage.setItem("draft", JSON.stringify({ to: destinatario, content: mensagem }));
@@ -119,10 +138,12 @@ window.onload = () => {
                         localStorage.removeItem("draft");
                     }
 
-                    break; // Sai da função
+                    break;
                 }
             }
         },
+
+
 
         clear: async () => {
             const confirm = await Swal.fire({ title: 'Tem certeza?', text: 'Tem certeza que deseja limpar suas mensagens?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
