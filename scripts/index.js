@@ -57,30 +57,18 @@ window.onload = () => {
             if (!isContentConfirmed) return;
 
             const confirm = await Swal.fire({ title: '📤 Enviar mensagem', html: `Destinatário: <strong>${target}</strong><br><br>Conteúdo: <em>${content}</em>`, icon: 'question', showCancelButton: true, confirmButtonText: '✅ Enviar', cancelButtonText: '❌ Cancelar' }); 
-            if (!confirm.isConfirmed) { return Swal.fire({ title: 'Cancelado', text: 'Envio cancelado.', icon: 'info' });
-            }
+            if (!confirm.isConfirmed) return Swal.fire({ title: 'Cancelado', text: 'Envio cancelado.', icon: 'info' });
 
             const { status } = await fetchRequest("send", { to: target, content });
 
-            if (status == 200) { Swal.fire({ title: 'Sucesso', text: 'Sua mensagem foi enviada!', icon: 'success' });
-            } else if (status == 404) {
-                Swal.fire({
-                    title: '❌ Erro',
-                    text: 'O destinatário não foi encontrado!',
-                    icon: 'error'
-                });
-            } else {
-                Swal.fire({
-                    title: '❌ Erro',
-                    text: 'Erro ao enviar mensagem.',
-                    icon: 'error'
-                });
-            }
+            if (status == 200) Swal.fire({ title: 'Sucesso', text: 'Sua mensagem foi enviada!', icon: 'success' });
+            else if (status == 404) Swal.fire({ title: 'Erro', text: 'O destinatário não foi encontrado!', icon: 'error' });
+            else Swal.fire({ title: 'Erro', text: 'Erro ao enviar mensagem.', icon: 'error' });
 
             refreshInbox(fetchRequest);
         },
         clear: async () => {
-            const confirm = await Swal.fire({ title: 'Tem certeza?', icon: 'warning', text: 'Tem certeza que deseja limpar suas mensagens?', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
+            const confirm = await Swal.fire({ title: 'Tem certeza?', icon: 'warning', text: 'Tem certeza que deseja limpar suas mensagens?', showCancelButton: true, confirmButtonText: '✅ Apagar', cancelButtonText: '❌ Cancelar' });
             if (!confirm.isConfirmed) return;
 
             const { status } = await fetchRequest("clear");
