@@ -50,25 +50,25 @@ window.onload = () => {
     const buttons = {
         refresh: () => refreshInbox(fetchRequest),
         send: async () => {
-            const { value: target } = await Swal.fire({
-                title: '👤 Destinatário:',
+            const { value: target, isConfirmed: isTargetConfirmed } = await Swal.fire({
+                title: '✉️ Destinatário:',
                 input: 'text',
                 inputPlaceholder: 'Nome do usuário',
-                showCancelButton: true
-            });
-            if (!target) return Swal.fire({ title: 'Erro', text: 'Destinatário não pode estar vazio!', icon: 'error' });
+                showCancelButton: true, confirmButtonText: 'Próximo', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'O destinatário não pode estar vazio!'; } });
+            if (!isTargetConfirmed) return;
 
-            const { value: content } = await Swal.fire({
+            const { value: content, isConfirmed: isContentConfirmed } = await Swal.fire({
                 title: '📝 Mensagem:',
                 input: 'text',
                 inputPlaceholder: 'Escreva sua mensagem',
-                showCancelButton: true
+                showCancelButton: true,
+                confirmButtonText: 'Avançar',
+                cancelButtonText: 'Cancelar',
+                inputValidator: (value) => {
+                    if (!value) return 'A mensagem não pode estar vazia!';
+                }
             });
-            if (!content) return Swal.fire({
-                title: 'Erro',
-                text: 'Você não pode mandar uma mensagem vazia!',
-                icon: 'error'
-            });
+            if (!isContentConfirmed) return;
 
             const confirm = await Swal.fire({
                 title: '📤 Enviar mensagem',
@@ -78,13 +78,36 @@ window.onload = () => {
                 confirmButtonText: '✅ Enviar',
                 cancelButtonText: '❌ Cancelar'
             });
-            if (!confirm.isConfirmed) { return Swal.fire({ title: 'Cancelado', text: 'Envio cancelado.', icon: 'info' }); }
+
+            if (!confirm.isConfirmed) {
+                return Swal.fire({
+                    title: '❌ Cancelado',
+                    text: 'Envio cancelado.',
+                    icon: 'info'
+                });
+            }
 
             const { status } = await fetchRequest("send", { to: target, content });
 
-            if (status == 200) Swal.fire({ title: 'Sucesso', text: 'Sua mensagem foi enviada!', icon: 'success' });
-            else if (status == 404) Swal.fire({ title: 'Erro', text: 'O destinatário não foi encontrado!', icon: 'error' }); 
-            else Swal.fire({ title: 'Erro', text: 'Erro ao enviar mensagem.', icon: 'error' }); 
+            if (status == 200) {
+                Swal.fire({
+                    title: '✅ Sucesso',
+                    text: 'Sua mensagem foi enviada!',
+                    icon: 'success'
+                });
+            } else if (status == 404) {
+                Swal.fire({
+                    title: '❌ Erro',
+                    text: 'O destinatário não foi encontrado!',
+                    icon: 'error'
+                });
+            } else {
+                Swal.fire({
+                    title: '❌ Erro',
+                    text: 'Erro ao enviar mensagem.',
+                    icon: 'error'
+                });
+            }
 
             refreshInbox(fetchRequest);
         },
