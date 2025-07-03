@@ -85,9 +85,9 @@ button[data-tooltip]:hover::after, button[data-tooltip]:hover::before { opacity:
 .swal2-textarea {
     display: block;
     margin: 10px auto;
-    width: 100% !important;
+    /*width: 100% !important;
     max-width: 100% !important;
-    text-align: left;
+    */text-align: left;
     box-sizing: border-box;
     overflow-x: hidden;
     white-space: pre-wrap;
