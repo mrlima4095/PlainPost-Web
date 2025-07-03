@@ -51,7 +51,7 @@ window.onload = () => {
         refresh: () => refreshInbox(fetchRequest),
         send: async () => {
             const { value: target } = await Swal.fire({
-                title: '✉️ Destinatário:',
+                title: '👤 Destinatário:',
                 input: 'text',
                 inputPlaceholder: 'Nome do usuário',
                 showCancelButton: true
