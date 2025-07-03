@@ -15,12 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 async function request() {
-    const token = localStorage.getItem("Mail-Token");
-    if (!token) {
-        window.location.href = "login";
-        return;
-    }
-
     const promptInput = document.getElementById("prompt");
     const query = promptInput.value.trim();
     if (!query) {
@@ -77,9 +71,6 @@ async function request() {
 }
 
 async function loadHistory() {
-    const token = localStorage.getItem("Mail-Token");
-    if (!token) { window.location.href = "login"; return; }
-
     const container = document.getElementById("mensagens");
     container.innerHTML = "";
 
@@ -113,14 +104,11 @@ async function loadHistory() {
 
 
 async function clearHistory() {
-    const token = localStorage.getItem("Mail-Token");
-    if (!token) { window.location.href = "login"; return; }
-
     const confirm = await Swal.fire({ title: 'Tem certeza?', text: 'Tem certeza que deseja limpar suas mensagens?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
     if (!confirm.isConfirmed) return;
 
     try {
-        const res = await fetch("/api/agent/forget", { method: "POST", headers: { "Authorization": token } });
+        const res = await fetch("/api/agent/forget", { method: "POST", credentials: "include" });
         if (!res.ok) { Swal.fire("Erro", "Erro ao limpar histórico.", "error"); return; }
 
         await loadHistory();
