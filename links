@@ -32,23 +32,6 @@
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body>
-    <div id="container">
-        <h2>Encurtador</h2>
-        <input type="url" id="url" placeholder="Cole sua URL aqui...">
-        <br>
-        <div id="acoes">
-            <button onclick="encurtar()">Encurtar</button>
-            <button onclick="listar()">Atualizar lista</button>
-        </div>
-        <button onclick="plainpost()">Retornar</button><br><br>
-        
-
-        <br><h3>Meus Links</h3>
-        <div id="meusLinks"></div>
-    </div>
-
     <script>
         async function listar() {
             const res = await fetch("/api/short", {
@@ -126,5 +109,23 @@
 
         listar();
     </script>
+</head>
+<body>
+    <div id="container">
+        <h2>Encurtador</h2>
+        <input type="url" id="url" placeholder="Cole sua URL aqui...">
+        <br>
+        <div id="acoes">
+            <button onclick="encurtar()">Encurtar</button>
+            <button onclick="listar()">Atualizar lista</button>
+        </div>
+        <button onclick="plainpost()">Retornar</button><br><br>
+        
+
+        <br><h3>Meus Links</h3>
+        <div id="meusLinks"></div>
+    </div>
+
+    
 </body>
 </html>
