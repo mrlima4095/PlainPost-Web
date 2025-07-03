@@ -75,7 +75,7 @@ async function loadHistory() {
     container.innerHTML = "";
 
     try {
-        const res = await fetch("/api/agent/history", { method: "GET", headers: { "Authorization": token } });
+        const res = await fetch("/api/agent/history", { method: "GET", credentials: "include" });
         if (!res.ok) { Swal.fire("Erro", "Erro ao carregar histórico.", "error"); container.style.display = "none"; return; }
 
         const data = await res.json();
