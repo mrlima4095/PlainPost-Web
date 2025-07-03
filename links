@@ -7,21 +7,6 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
-    /* Incluindo o estilo base fornecido */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-    body { background-color: #f0f2f5; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; overflow-x: hidden; }
-
-    #container {
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-    }
-    input[type="url"] { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
-    #shortResult { margin-top: 20px; word-break: break-word; }
     .linkItem { background: #e9f1fb; padding: 10px; border-radius: 5px; margin: 5px 0; display: flex; justify-content: space-between; align-items: center; }
     .linkItem button { margin-left: 10px; }
   </style>
@@ -37,81 +22,89 @@
 
     <div id="shortResult"></div>
   </div>
+<div id="meusLinks"></div>
 
-  <script>
-    async function encurtar() {
-      const url = document.getElementById("urlInput").value.trim();
-      if (!url) return Swal.fire("Erro", "Insira uma URL válida.", "error");
+    <script>
+        async function listarLinks() {
+            const res = await fetch("/api/short", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ action: "list" }),
+                credentials: "include"
+            });
 
-      const res = await fetch("/api/short", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "create", url }),
-        credentials: "include"
-      });
+            const data = await res.json();
+            const container = document.getElementById("meusLinks");
+            container.innerHTML = "";
 
-      const data = await res.json();
-      if (res.status === 200) {
-        document.getElementById("shortResult").innerText = `Novo link: ${data.response}`;
-        listarLinks();
-      } else {
-        Swal.fire("Erro", data.response || "Erro ao encurtar.", "error");
-      }
-    }
+            if (Array.isArray(data.response)) {
+                data.response.forEach(item => {
+                    const div = document.createElement("div");
+                    div.className = "linkItem clickable-link";
+                    div.dataset.shortId = item.id;
+                    div.dataset.url = item.url;
 
-    async function listarLinks() {
-      const res = await fetch("/api/short", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "list" }),
-        credentials: "include"
-      });
+                    div.innerHTML = `
+                        <span><strong>/s/${item.id}</strong></span>
+                        <button onclick="apagar('${item.id}')">Excluir</button>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
 
-      const data = await res.json();
-      const container = document.getElementById("meusLinks");
-      container.innerHTML = "";
+        // Evento de clique nos links encurtados
+        document.getElementById("meusLinks").addEventListener("click", async function (e) {
+            const el = e.target.closest(".clickable-link");
+            if (!el) return;
 
-      if (Array.isArray(data.response)) {
-        data.response.forEach(item => {
-          const div = document.createElement("div");
-          div.className = "linkItem";
-          div.innerHTML = `
-            <span>/s/${item.id}</span>
-            <button onclick="apagar('${item.id}')">Excluir</button>
-          `;
-          container.appendChild(div);
+            const shortId = el.dataset.shortId;
+            const targetUrl = el.dataset.url;
+
+            const result = await Swal.fire({
+                title: "Link Encurtado",
+                html: `
+                    <div style="text-align: left">
+                        <p><strong>Link curto:</strong> <a href="/s/${shortId}" target="_blank">/s/${shortId}</a></p>
+                        <p><strong>Destino:</strong> <code>${targetUrl}</code></p>
+                    </div>
+                `,
+                showConfirmButton: false,
+                showDenyButton: true,
+                denyButtonText: "Excluir",
+                showCancelButton: true,
+                cancelButtonText: "Fechar"
+            });
+
+            if (result.isDenied) {
+                const confirm = await Swal.fire({
+                    title: "Tem certeza?",
+                    text: `Excluir o link /s/${shortId}?`,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Sim, excluir",
+                    cancelButtonText: "Cancelar"
+                });
+
+                if (confirm.isConfirmed) {
+                    await apagar(shortId);
+                }
+            }
         });
-      }
-    }
 
-    async function apagar(id) {
-      const confirma = await Swal.fire({
-        title: "Excluir?",
-        text: `Deseja apagar o link /s/${id}?`,
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Sim",
-        cancelButtonText: "Cancelar"
-      });
-      if (!confirma.isConfirmed) return;
+        // Função para apagar link
+        async function apagar(id) {
+            const res = await fetch("/api/short", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ action: "delete", id: id })
+            });
 
-      const res = await fetch("/api/short", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "delete", id }),
-        credentials: "include"
-      });
-
-      const data = await res.json();
-      if (res.status === 200) {
-        Swal.fire("Sucesso", "Link excluído!", "success");
-        listarLinks();
-      } else {
-        Swal.fire("Erro", data.response || "Erro ao apagar.", "error");
-      }
-    }
-
-    window.onload = listarLinks;
-  </script>
+            const data = await res.json();
+            await Swal.fire("Status", data.response, "info");
+            listarLinks();
+        }
+    </script>
 </body>
 </html>
