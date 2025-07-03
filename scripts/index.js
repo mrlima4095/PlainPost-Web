@@ -53,22 +53,91 @@ window.onload = () => {
     const buttons = {
         refresh: () => refreshInbox(fetchRequest),
         send: async () => {
-            const { value: target } = await Swal.fire({ title: 'Destinatário:', input: 'text', inputPlaceholder: 'Nome do usuário', showCancelButton: true });
+            const { value: target } = await Swal.fire({
+                title: 'Destinatário:',
+                input: 'text',
+                inputPlaceholder: 'Nome do usuário',
+                showCancelButton: true,
+            });
             if (!target) return Swal.fire('Erro', 'Destinatário não pode estar vazio!', 'error');
 
-            const { value: content } = await Swal.fire({ title: 'Mensagem:', input: 'text', inputPlaceholder: 'Escreva sua mensagem', showCancelButton: true });
-            if (!content) return Swal.fire('Erro', 'Você não pode mandar uma mensagem vazia!', 'error');
+            let draftContent = "";
+            let isSaved = false;
 
-            const confirm = await Swal.fire({ title: 'Enviar mensagem', html: `Destinatário: <strong>${target}</strong><br><br>Conteúdo: <em>${content}</em>`, icon: 'question', showCancelButton: true, confirmButtonText: 'Enviar', cancelButtonText: 'Cancelar' });
-            if (!confirm.isConfirmed) return Swal.fire('Cancelado', 'Envio cancelado.', 'info');
+            while (true) {
+                const { value: content, dismiss, isConfirmed } = await Swal.fire({
+                    title: `Nova Mensagem para ${target}`,
+                    html: `
+                        <textarea id="messageContent" rows="8" style="width:100%;resize:vertical;" placeholder="Escreva sua mensagem aqui...">${draftContent}</textarea>
+                    `,
+                    showCancelButton: true,
+                    showDenyButton: true,
+                    confirmButtonText: 'Enviar',
+                    cancelButtonText: 'Voltar',
+                    denyButtonText: 'Salvar Rascunho',
+                    preConfirm: () => {
+                        const content = document.getElementById('messageContent').value.trim();
+                        if (!content) {
+                            Swal.showValidationMessage("Você não pode mandar uma mensagem vazia!");
+                            return false;
+                        }
+                        return content;
+                    },
+                    didOpen: () => {
+                        document.getElementById("messageContent").focus();
+                    }
+                });
 
-            const { status } = await fetchRequest("send", { to: target, content });
-            if (status == 200) Swal.fire('Sucesso', 'Sua mensagem foi enviada!', 'success');
-            else if (status == 404) Swal.fire('Erro', 'O destinatário não foi encontrado!', 'error');
-            else Swal.fire('Erro', 'Erro ao enviar mensagem.', 'error');
+                if (isConfirmed) {
+                    const { status } = await fetchRequest("send", { to: target, content });
+                    if (status == 200) Swal.fire('Sucesso', 'Sua mensagem foi enviada!', 'success');
+                    else if (status == 404) Swal.fire('Erro', 'O destinatário não foi encontrado!', 'error');
+                    else Swal.fire('Erro', 'Erro ao enviar mensagem.', 'error');
+                    refreshInbox(fetchRequest);
+                    break;
+                } else if (dismiss === Swal.DismissReason.cancel) {
+                    const confirmExit = await Swal.fire({
+                        title: "Deseja sair sem enviar?",
+                        text: "Sua mensagem será perdida se não for salva.",
+                        icon: "warning",
+                        showCancelButton: true,
+                        showDenyButton: true,
+                        confirmButtonText: "Sair",
+                        denyButtonText: "Voltar",
+                        cancelButtonText: "Salvar Rascunho"
+                    });
 
-            refreshInbox(fetchRequest);
+                    if (confirmExit.isConfirmed) break;
+                    else if (confirmExit.isDenied) continue;
+                    else {
+                        const content = document.getElementById("messageContent")?.value?.trim();
+                        if (content) {
+                            const drafts = JSON.parse(localStorage.getItem("drafts") || "[]");
+                            drafts.push({ to: target, content, date: new Date().toISOString() });
+                            localStorage.setItem("drafts", JSON.stringify(drafts));
+                            Swal.fire("Salvo", "Rascunho salvo com sucesso!", "success");
+                            isSaved = true;
+                            break;
+                        } else {
+                            Swal.fire("Erro", "Mensagem vazia não pode ser salva.", "error");
+                        }
+                    }
+                } else if (dismiss === Swal.DismissReason.deny) {
+                    const content = document.getElementById("messageContent")?.value?.trim();
+                    if (content) {
+                        const drafts = JSON.parse(localStorage.getItem("drafts") || "[]");
+                        drafts.push({ to: target, content, date: new Date().toISOString() });
+                        localStorage.setItem("drafts", JSON.stringify(drafts));
+                        Swal.fire("Salvo", "Rascunho salvo com sucesso!", "success");
+                        isSaved = true;
+                        break;
+                    } else {
+                        Swal.fire("Erro", "Mensagem vazia não pode ser salva.", "error");
+                    }
+                }
+            }
         },
+
         clear: async () => {
             const confirm = await Swal.fire({ title: 'Tem certeza?', text: 'Tem certeza que deseja limpar suas mensagens?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim', cancelButtonText: 'Cancelar' });
             if (!confirm.isConfirmed) return;
