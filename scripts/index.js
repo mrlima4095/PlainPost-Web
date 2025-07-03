@@ -114,7 +114,7 @@ window.onload = () => {
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonText: "Sim, limpar",
-                        cancelButtonText: "Cancelar"
+                        cancelButtonText: "❌ Cancelar"
                     });
 
                     if (confirmar.isConfirmed) {
