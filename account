@@ -17,7 +17,7 @@
     <script src="scripts/index.js"></script>
 </head>
 <body>
-    <div id="container"> 
+    <div id="container">
         <button id="back" type="submit">⬅️ Retornar</button>
 
         <br><br><h3>📋 Mural</h3><br>
