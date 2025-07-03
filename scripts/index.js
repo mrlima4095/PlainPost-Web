@@ -145,7 +145,6 @@ window.onload = () => {
                 Swal.fire('Erro', 'Erro ao consultar.', 'error');
             }
         },
-
         block: async () => {
             const { value: user } = await Swal.fire({
                 title: 'Bloquear usuário',
