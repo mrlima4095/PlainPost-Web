@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Encurtador de Links</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <style>
-    .linkItem { background: #e9f1fb; padding: 10px; border-radius: 5px; margin: 5px 0; display: flex; justify-content: space-between; align-items: center; }
-    .linkItem button { margin-left: 10px; }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encurtador de Links</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .linkItem {
+            background: #e9f1fb;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .linkItem button {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
-  <div id="container">
-    <h2>Encurtador de Links</h2>
-    <input type="url" id="urlInput" placeholder="Cole sua URL aqui...">
-    <button onclick="encurtar()">Encurtar (5 moedas)</button>
+    <div id="container">
+        <h2>Encurtador de Links</h2>
+        <input type="url" id="urlInput" placeholder="Cole sua URL aqui...">
+        <button onclick="encurtar()">Encurtar (5 moedas)</button>
 
-    <h3>Meus Links</h3>
-    <div id="meusLinks"></div>
+        <h3>Meus Links</h3>
+        <div id="meusLinks"></div>
 
-    <div id="shortResult"></div>
-  </div>
-<div id="meusLinks"></div>
+        <div id="shortResult"></div>
+    </div>
 
     <script>
         async function listarLinks() {
@@ -53,7 +63,6 @@
             }
         }
 
-        // Evento de clique nos links encurtados
         document.getElementById("meusLinks").addEventListener("click", async function (e) {
             const el = e.target.closest(".clickable-link");
             if (!el) return;
@@ -92,7 +101,6 @@
             }
         });
 
-        // Função para apagar link
         async function apagar(id) {
             const res = await fetch("/api/short", {
                 method: "POST",
@@ -105,6 +113,9 @@
             await Swal.fire("Status", data.response, "info");
             listarLinks();
         }
+
+        // Chamada inicial para preencher os links ao carregar a página
+        listarLinks();
     </script>
 </body>
 </html>
