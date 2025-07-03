@@ -93,12 +93,10 @@
                 Swal.fire("Link criado!", "Novo link: /s/" + data.response, "success");
                 listar();
             } 
-            else if (res.status === 401) window.location.href = "/login"
-            else if (res.status === 429) Swal.fire("Erro", "Você atingiu o limite de 5 links curtos", "error");
-            else if (res.status === 429) Swal.fire("Erro", "Você atingiu o limite de 5 links curtos", "error");
-            else {
-                Swal.fire("Erro", data.response || "Erro desconhecido.", "error");
-            }
+            else if (res.status === 401) window.location.href = "/login";
+            else if (res.status === 402) Swal.fire("Erro", "Saldo insuficiente!", "error");
+            else if (res.status === 429) Swal.fire("Erro", "Você atingiu o limite de 5 links curtos!", "error");
+            else Swal.fire("Erro", data.response || "Erro desconhecido.", "error");
         }
 
 
