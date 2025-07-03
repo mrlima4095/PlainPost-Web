@@ -54,10 +54,11 @@
 
 
         async function listar() {
-            const token = localStorage.getItem("Mail-Token");
-            if (!token) { window.location.href = "/login"; }
+            const res = await fetch(`${apiBase}/list`, {
+                method: "GET",
+                credentials: "include"
+            });
 
-            const res = await fetch(`${apiBase}/list`, { method: "GET", headers: { "Authorization": token } });
             const arquivos = await res.json();
 
             const tbody = document.querySelector('#arquivoTabela tbody');
@@ -77,6 +78,7 @@
                 tbody.appendChild(tr);
             });
         }
+
 
         function compartilhar(fileId) { const link = `${apiBase}/download/${fileId}`; navigator.clipboard.writeText(link).then(() => { Swal.fire("Link copiado!", "O link de download foi copiado para a área de transferência.", "success"); }).catch(() => { Swal.fire("Erro", "Não foi possível copiar o link.", "error"); }); }
         //function mostrarPropriedades(arquivo) { Swal.fire({ title: 'Propriedades do Arquivo', html: `<b>Nome:</b> ${arquivo.filename}<br> <b>Tamanho:</b> ${(arquivo.size / 1024 / 1024).toFixed(2)} MB<br> <b>Enviado em:</b> ${formatarData(arquivo.upload_time)}<br> <b>Expira em:</b> ${arquivo.expire_time ? formatarData(arquivo.expire_time) : 'Permanente'} `, icon: 'info' }); }
@@ -108,28 +110,29 @@
 
             if (!confirmacao.isConfirmed) return;
 
-            const token = localStorage.getItem("Mail-Token");
             try {
                 const resposta = await fetch("https://archsource.xyz/api/drive/extend_expires", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json", "Authorization": token },
-                    body: JSON.stringify({ file_id: fileId })
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ file_id: fileId }),
+                    credentials: "include"
                 });
 
                 const data = await resposta.json();
 
                 if (resposta.status === 200) {
                     Swal.fire("Sucesso", "Validade estendida até: " + formatarData(data.new_expire_time), "success");
-                    listar(); 
-                } 
-                else if (resposta.status === 401) { Swal.fire("Erro", "Saldo insuficiente.", "error"); }
-                else {
+                    listar();
+                } else if (resposta.status === 401) {
+                    Swal.fire("Erro", "Saldo insuficiente.", "error");
+                } else {
                     Swal.fire("Erro", data.response || "Erro ao estender validade.", "error");
                 }
             } catch (e) {
                 Swal.fire("Erro", "Erro na conexão com o servidor.", "error");
             }
         }
+
 
         function baixar(fileId) { window.open(`${apiBase}/download/${fileId}`, '_blank'); }
 
