@@ -116,7 +116,8 @@ window.onload = () => {
                             showCancelButton: true,
                             confirmButtonText: "Voltar",
                             cancelButtonText: "Salvar Rascunho",
-                            denyButtonText: "Sair"
+                            denyButtonText: "Sair",
+                            reverseButtons: true
                         });
 
                         if (result.isConfirmed) {
