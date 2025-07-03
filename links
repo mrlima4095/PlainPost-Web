@@ -115,7 +115,7 @@
             <button onclick="encurtar()" type="submit">🔗 Encurtar</button>
             <button onclick="listar()">🔄</Atualizar lista</button>
         </div>
-        <button onclick="plainpost()">Retornar</button><br><br>
+        <button onclick="plainpost()">⬅️ Retornar</button><br><br>
 
         <br><h3>Meus Links</h3><border>
         <div id="meusLinks"></div>
