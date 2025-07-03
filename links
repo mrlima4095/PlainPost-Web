@@ -16,12 +16,8 @@
             font-family: monospace;
         }
         .linkItem a { color: #007bff; text-decoration: none; }
-        .linkItem a:hover {
-            text-decoration: underline;
-        }
-        .linkInfo {
-            flex-grow: 1;
-        }
+        .linkItem a:hover { text-decoration: underline; } 
+        .linkInfo { flex-grow: 1; }
         .linkActions button {
             background-color: crimson;
             color: white;
