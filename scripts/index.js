@@ -112,6 +112,7 @@ window.onload = () => {
 
             if (status == 200) Swal.fire({ title: '📄 Resultado', html: response.replaceAll("\\n", "<br>").replaceAll("\n", "<br>"), icon: 'info' });
             else if (status == 404) Swal.fire({ title: 'Erro', text: 'O usuário não foi encontrado!', icon: 'error' });
+            else if (status == 405) Swal.fire({ title: 'Erro', text: 'Não é possível procurar informações sobre contas que não são do PlainPost!', icon: 'error' });
             else Swal.fire({ title: 'Erro', text: 'Erro ao procurar.', icon: 'error' }); 
         },
         me: async () => {
