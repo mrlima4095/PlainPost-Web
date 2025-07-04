@@ -186,9 +186,10 @@ window.onload = () => {
         },
         mural: async () => {
             const { status, response } = await fetchRequest("status");
+            
             if (status == 200) window.location.href = "/mural/" + response; 
             else if (status == 401) window.location.href = "/login";
-            else Swal.fire('Erro', 'Ocorreu um erro interno.', 'error');
+            else Swal.fire({title: 'Erro', text: 'Ocorreu um erro interno.', icon: 'error'}});
         },
         changepage: async () => {
             const { value: file_id } = await Swal.fire({ title: 'ID do arquivo:', input: 'text', inputPlaceholder: 'Link do arquivo do BinDrop', showCancelButton: true });
