@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Denúncia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <h2>Denunciar Conteúdo</h2>
+        <form action="/api/report" method="POST">
+            <label for="tipo">O que você deseja denunciar?</label>
+            <select id="tipo" name="tipo" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="mensagem">Mensagem</option>
+                <option value="mural">Mural</option>
+                <option value="arquivo_bdrop">Arquivo do BinDrop</option>
+                <option value="link_curto">Link curto para locais inseguros</option>
+                <option value="outros">Outros</option>
+            </select>
+
+            <label for="reporter">Seu nome de usuário</label>
+            <input type="text" id="reporter" name="reporter" placeholder="Seu usuário PlainPost" required>
+
+            <label for="id_denunciado">ID do usuário denunciado</label>
+            <input type="text" id="id_denunciado" name="id_denunciado" placeholder="Apenas usuários PlainPost" required>
+
+            <label for="descricao">Descreva o ocorrido</label>
+            <textarea id="descricao" name="descricao" rows="5" placeholder="Explique o que aconteceu e por que está denunciando." required></textarea>
+
+            <label for="provas">Links com provas (se houver)</label>
+            <input type="url" id="provas" name="provas" placeholder="Cole aqui URLs de provas (opcional)">
+
+            <label for="data">Data do ocorrido</label>
+            <input type="date" id="data" name="data" required>
+
+            <label for="hora">Hora aproximada</label>
+            <input type="time" id="hora" name="hora">
+
+            <label>
+                <input type="checkbox" name="captcha" required>
+                Eu não sou um robô
+            </label>
+
+            <button type="submit">Enviar denúncia</button>
+        </form>
+    </div>
+</body>
+</html>
