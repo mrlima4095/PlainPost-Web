@@ -50,55 +50,21 @@ window.onload = () => {
     const buttons = {
         refresh: () => refreshInbox(fetchRequest),
         send: async () => {
-            const { value: target, isConfirmed: isTargetConfirmed } = await Swal.fire({
-                title: '👤 Destinatário:',
-                input: 'text',
-                inputPlaceholder: 'Nome do usuário',
-                showCancelButton: true,
-                confirmButtonText: 'Próximo',
-                cancelButtonText: 'Cancelar',
-                inputValidator: (value) => { if (!value) return 'O destinatário não pode estar vazio!'; }
-            });
+            const { value: target, isConfirmed: isTargetConfirmed } = await Swal.fire({ title: '👤 Destinatário:', input: 'text', inputPlaceholder: 'Nome do usuário', showCancelButton: true, confirmButtonText: 'Próximo', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'O destinatário não pode estar vazio!'; } });
             if (!isTargetConfirmed) return;
 
             let subject = "";
             if (target.includes("@")) {
-                const { value: subj, isConfirmed: isSubjectConfirmed } = await Swal.fire({
-                    title: '✉️ Assunto (opcional):',
-                    input: 'text',
-                    inputPlaceholder: 'Assunto da mensagem',
-                    showCancelButton: true,
-                    confirmButtonText: 'Próximo',
-                    cancelButtonText: 'Pular',
-                    // Não há inputValidator para ser opcional
-                });
-                if (!isSubjectConfirmed) return; // Se cancelar no assunto, cancela tudo
-                subject = subj || ""; // Pode ser vazio
+                const { value: subj, isConfirmed: isSubjectConfirmed } = await Swal.fire({ title: '✉️ Assunto (opcional):', input: 'text', inputPlaceholder: 'Assunto da mensagem', showCancelButton: true, confirmButtonText: 'Próximo', cancelButtonText: 'Pular', });
+                if (!isSubjectConfirmed) return; 
+
+                subject = subj || "";
             }
 
-            const { value: content, isConfirmed: isContentConfirmed } = await Swal.fire({
-                title: '📝 Mensagem:',
-                input: 'text',
-                inputPlaceholder: 'Escreva sua mensagem',
-                showCancelButton: true,
-                confirmButtonText: 'Avançar',
-                cancelButtonText: 'Cancelar',
-                inputValidator: (value) => { if (!value) return 'A mensagem não pode estar vazia!'; }
-            });
+            const { value: content, isConfirmed: isContentConfirmed } = await Swal.fire({ title: '📝 Mensagem:', input: 'text', inputPlaceholder: 'Escreva sua mensagem', showCancelButton: true, confirmButtonText: 'Avançar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'A mensagem não pode estar vazia!'; } });
             if (!isContentConfirmed) return;
 
-            const confirmHtml = `Destinatário: <strong>${target}</strong><br>` +
-                (subject ? `Assunto: <strong>${subject}</strong><br>` : "") +
-                `<br>Conteúdo: <em>${content}</em>`;
-
-            const confirm = await Swal.fire({
-                title: 'Enviar mensagem',
-                html: confirmHtml,
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Enviar',
-                cancelButtonText: 'Cancelar'
-            });
+            const confirm = await Swal.fire({ title: 'Enviar mensagem', html: `Destinatário: <strong>${target}</strong><br>` + (subject ? `Assunto: <strong>${subject}</strong><br>` : "") + `<br>Conteúdo: <em>${content}</em>`, icon: 'question', showCancelButton: true, confirmButtonText: 'Enviar', cancelButtonText: 'Cancelar' });
             if (!confirm.isConfirmed) return Swal.fire({ title: 'Cancelado', text: 'Envio cancelado.', icon: 'info' });
 
             const { status } = await fetchRequest("send", { to: target, subject, content });
