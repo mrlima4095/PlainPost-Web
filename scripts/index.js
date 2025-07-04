@@ -175,12 +175,14 @@ window.onload = () => {
         },
         view_blocks: async () => {
             const { status, response } = await fetchRequest("blocked_users");
+
             if (status === 200 && Array.isArray(response)) {
                 const lista = response.length > 0 ? response.join("<br>") : "Nenhum usuário bloqueado.";
-                Swal.fire("Usuários bloqueados", lista, "info");
-            } else {
-                Swal.fire("Erro", "Erro ao buscar usuários bloqueados.", "error");
-            }
+
+                Swal.fire({ title: '🚫 Usuários bloqueados', html: lista, icon: 'info', confirmButtonText: 'Fechar' });
+
+            } 
+            else Swal.fire({ title: 'Erro', text: 'Erro ao buscar usuários bloqueados.', icon: 'error' }); 
         },
         mural: async () => {
             const { status, response } = await fetchRequest("status");
