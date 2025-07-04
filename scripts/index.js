@@ -192,58 +192,48 @@ window.onload = () => {
             else Swal.fire({ title: 'Erro', text: 'Ocorreu um erro interno.', icon: 'error' });
         },
         changepage: async () => {
-            const { value: file_id } = await Swal.fire({ title: 'ID do arquivo:', input: 'text', inputPlaceholder: 'Link do arquivo do BinDrop', showCancelButton: true });
-            if (!file_id) return Swal.fire('Erro', 'O ID não pode estar vazio!', 'error');
-
-            const { status } = await fetchRequest("changepage", { file_id });
-            if (status == 200) Swal.fire('Sucesso', 'A pagina do seu mural foi alterada!', 'success');
-            else if (status == 404) Swal.fire('Erro', 'O arquivo não foi encontrado, ou você não é o dono dele!', 'error');
-            else if (status == 406) Swal.fire('Erro', 'O arquivo foi negado! Isto pode ocorrer caso o arquivo seja binario ou esta pagina possua JavaScript.', 'error');
-            else if (status == 410) Swal.fire('Erro', 'O arquivo não está disponível!', 'error');
-            else Swal.fire('Erro', 'Erro ao alterar a pagina.', 'error');
-        },
-        changebio: async () => {
-            const { value: content } = await Swal.fire({ title: 'Biografia:', input: 'text', inputPlaceholder: 'O que está pensando?', showCancelButton: true });
-            if (!content) return Swal.fire('Erro', 'Sua biografia não pode estar vazia!', 'error');
-
-            const { status } = await fetchRequest("changebio", { bio: content });
-            if (status == 200) Swal.fire('Sucesso', 'Sua biografia foi alterada!', 'success');
-            else Swal.fire('Erro', 'Erro ao alterar sua biografia.', 'error');
-        },
-        buycoins: async () => {
-            const { value: quantidade } = await Swal.fire({
-                title: 'Obter Moedas',
-                input: 'number',
-                inputPlaceholder: 'Quantas moedas?', inputAttributes: { min: 1 },
-                confirmButtonText: 'Enviar Solicitação',
+            const { value: file_id, isConfirmed } = await Swal.fire({
+                title: '📄 ID do arquivo',
+                input: 'text',
+                inputPlaceholder: 'Link do arquivo do BinDrop',
                 showCancelButton: true,
-                cancelButtonText: 'Cancelar'
+                confirmButtonText: 'Alterar',
+                cancelButtonText: 'Cancelar',
+                inputValidator: (value) => {
+                    if (!value) return 'O ID não pode estar vazio!';
+                }
             });
 
-            if (quantidade && quantidade > 0) {
+            if (!isConfirmed) return;
 
-                try {
-                    const res = await fetchRequest("send", {
-                        to: "admin",
-                        content: `Deseja comprar ${quantidade} moedas`
-                    });
-                    if (res.status === 200) {
-                        Swal.fire("Solicitado!", "Aguarde o contato da administração.", "success");
-                    } else {
-                        Swal.fire("Erro", "Não foi possível enviar sua solicitação.", "error");
-                    }
-                } catch (error) {
-                    Swal.fire("Erro", "Erro de rede ao enviar solicitação.", "error");
-                }
-            }
+            const { status } = await fetchRequest("changepage", { file_id });
+
+            if (status === 200) Swal.fire({ title: 'Sucesso', text: 'A página do seu mural foi alterada!', icon: 'success' });
+            else if (status === 404) Swal.fire({ title: 'Erro', text: 'O arquivo não foi encontrado ou você não é o dono dele!', icon: 'error' });
+            else if (status === 406) Swal.fire({ title: 'Erro', text: 'O arquivo foi negado! Pode ser binário ou conter JavaScript.', icon: 'error' });
+            else if (status === 410) Swal.fire({ title: 'Arquivo indisponível', text: 'O arquivo não está mais disponível.', icon: 'warning' });
+            else Swal.fire({ title: 'Erro', text: 'Erro ao alterar a página.', icon: 'error' });
         },
-        changepass: async () => {
-            const { value: newpass } = await Swal.fire({ title: "Trocar Senha", input: "password", inputPlaceholder: "Nova senha", showCancelButton: true });
-            if (!newpass) return;
+        changebio: async () => {
+            const { value: content, isConfirmed } = await Swal.fire({ title: '✏️ Alterar Biografia', input: 'text', inputPlaceholder: 'O que está pensando?', showCancelButton: true, confirmButtonText: 'Salvar', cancelButtonText: 'Cancelar', nputValidator: (value) => { if (!value) return 'Sua biografia não pode estar vazia!'; } });
+            if (!isConfirmed) return;
 
-            const { status } = await fetchRequest("changepass", { newpass });
-            if (status === 200) Swal.fire("Sucesso", "Senha alterada com sucesso!", "success");
-            else Swal.fire("Erro", "Erro ao trocar senha.", "error");
+            const { status } = await fetchRequest("changebio", { bio: content });
+
+            if (status === 200) Swal.fire({ title: 'Sucesso', text: 'Sua biografia foi alterada!', icon: 'success' });
+            else Swal.fire({ title: 'Erro', text: 'Erro ao alterar sua biografia.', icon: 'error' }); 
+        },
+        buycoins: async () => {
+            const { value: quantidade, isConfirmed } = await Swal.fire({ title: '💰 Obter Moedas', input: 'number', inputPlaceholder: 'Quantas moedas?', inputAttributes: { min: 1 }, showCancelButton: true, confirmButtonText: 'Enviar Solicitação', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value || parseInt(value) <= 0) { return 'Informe uma quantidade válida!'; } } }); 
+            if (!isConfirmed) return;
+
+            try {
+                const res = await fetchRequest("send", { to: "admin", content: `Deseja comprar ${quantidade} moedas` });
+
+                if (res.status === 200) Swal.fire({ title: 'Solicitado!', text: 'Aguarde o contato da administração.', icon: 'success' });
+                else Swal.fire({ title: 'Erro', text: 'Não foi possível enviar sua solicitação.', icon: 'error' });
+            } catch (error) { Swal.fire({ title: 'Erro de rede', text: 'Não foi possível se conectar ao servidor.', icon: 'error' });
+            }
         },
         signout: async () => { fetchRequest("logout"); },
         signoff: async () => {
@@ -330,3 +320,4 @@ window.onload = () => {
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
 };
+ 
