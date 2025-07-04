@@ -211,7 +211,7 @@ window.onload = () => {
             else Swal.fire({ title: 'Erro', text: 'Erro ao alterar a página.', icon: 'error' });
         },
         changebio: async () => {
-            const { value: content, isConfirmed } = await Swal.fire({ title: '✏️ Alterar Biografia', input: 'text', inputPlaceholder: 'O que está pensando?', showCancelButton: true, confirmButtonText: 'Salvar', cancelButtonText: 'Cancelar', nputValidator: (value) => { if (!value) return 'Sua biografia não pode estar vazia!'; } });
+            const { value: content, isConfirmed } = await Swal.fire({ title: '✏️ Alterar Biografia', input: 'text', inputPlaceholder: 'O que está pensando?', showCancelButton: true, confirmButtonText: 'Salvar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'Sua biografia não pode estar vazia!'; } });
             if (!isConfirmed) return;
 
             const { status } = await fetchRequest("changebio", { bio: content });
