@@ -134,7 +134,7 @@ window.onload = () => {
 
             const { status } = await fetchRequest("block", { user_to_block: user });
 
-            if (status === 200) Swal.fire({ title: 'Sucesso', html: `Usuário <strong>${user}<strong> bloqueado!`, icon: 'success' });
+            if (status === 200) Swal.fire({ title: 'Sucesso', html: `Usuário <strong>${user}</strong> bloqueado!`, icon: 'success' });
             else if (status === 404) Swal.fire({ title: 'Erro', text: 'Usuário não encontrado.', icon: 'error' });
             else if (status === 405) Swal.fire({ title: 'Erro', text: 'Você não pode bloquear você mesmo.', icon: 'error' });
             else if (status === 409) Swal.fire({ title: 'Atenção', text: 'Usuário já está bloqueado.', icon: 'info' });
@@ -146,7 +146,7 @@ window.onload = () => {
 
             const { status } = await fetchRequest("unblock", { user_to_unblock: user });
 
-            if (status === 200) Swal.fire({ title: '✅ Sucesso', text: `Usuário '${user}' desbloqueado!`, icon: 'success' }); 
+            if (status === 200) Swal.fire({ title: 'Sucesso', text: `Usuário <strong>${user}</strong> desbloqueado!`, icon: 'success' }); 
             else if (status === 404) Swal.fire({ title: 'Erro', text: 'Usuário não está bloqueado.', icon: 'error' }); 
             else Swal.fire({ title: 'Erro', text: 'Erro ao desbloquear usuário.', icon: 'error' });
         },
