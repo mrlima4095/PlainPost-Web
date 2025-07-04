@@ -60,7 +60,7 @@
 
         async function encurtar() {
             const url = document.getElementById("url").value.trim();
-            if (!url) return Swal.fire({ title: '⚠️ Erro', text: 'Informe uma URL!', icon: 'error' });
+            if (!url) return Swal.fire({ title: 'Erro', text: 'Informe uma URL!', icon: 'error' });
 
             const res = await fetch("/api/short", {
                 method: "POST",
