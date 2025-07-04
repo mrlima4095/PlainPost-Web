@@ -1,49 +1,140 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Formulário de Denúncia</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Formulário de Denúncia</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    body {
+      background-color: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    #container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #444;
+      margin-bottom: 5px;
+    }
+
+    select, input[type="text"], input[type="url"],
+    input[type="date"], input[type="time"], textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .row input[type="date"],
+    .row input[type="time"] {
+      flex: 1;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+  </style>
 </head>
 <body>
-    <div id="container">
-        <h2>Denunciar Conteúdo</h2>
-        <form action="/api/report" method="POST">
-            <label for="tipo">O que você deseja denunciar?</label>
-            <select id="tipo" name="tipo" required>
-                <option value="" disabled selected>Selecione uma opção</option>
-                <option value="mensagem">Mensagem</option>
-                <option value="mural">Mural</option>
-                <option value="arquivo_bdrop">Arquivo do BinDrop</option>
-                <option value="link_curto">Link curto para locais inseguros</option>
-                <option value="outros">Outros</option>
-            </select>
+  <div id="container">
+    <h2>Denunciar Conteúdo</h2>
+    <form action="/api/report" method="POST">
+      
+      <label for="tipo">O que você deseja denunciar?</label>
+      <select id="tipo" name="tipo" required>
+        <option value="" disabled selected>Selecione uma opção</option>
+        <option value="mensagem">Mensagem</option>
+        <option value="mural">Mural</option>
+        <option value="arquivo_bdrop">Arquivo do BinDrop</option>
+        <option value="link_curto">Link curto para locais inseguros</option>
+        <option value="outros">Outros</option>
+      </select>
 
-            <label for="reporter">Seu nome de usuário</label>
-            <input type="text" id="reporter" name="reporter" placeholder="Seu usuário PlainPost" required>
+      <label for="id_denunciado">ID do usuário denunciado</label>
+      <input type="text" id="id_denunciado" name="id_denunciado" placeholder="Apenas contas do PlainPost" required>
 
-            <label for="id_denunciado">ID do usuário denunciado</label>
-            <input type="text" id="id_denunciado" name="id_denunciado" placeholder="Apenas usuários PlainPost" required>
+      <label for="descricao">Descreva o ocorrido</label>
+      <textarea id="descricao" name="descricao" placeholder="Explique detalhadamente o que aconteceu." required></textarea>
 
-            <label for="descricao">Descreva o ocorrido</label>
-            <textarea id="descricao" name="descricao" rows="5" placeholder="Explique o que aconteceu e por que está denunciando." required></textarea>
+      <label for="provas">Links com provas (opcional)</label>
+      <input type="url" id="provas" name="provas" placeholder="https://exemplo.com/prova">
 
-            <label for="provas">Links com provas (se houver)</label>
-            <input type="url" id="provas" name="provas" placeholder="Cole aqui URLs de provas (opcional)">
+      <div class="row">
+        <div>
+          <label for="data">Data do ocorrido</label>
+          <input type="date" id="data" name="data" required>
+        </div>
+        <div>
+          <label for="hora">Hora aproximada</label>
+          <input type="time" id="hora" name="hora">
+        </div>
+      </div>
 
-            <label for="data">Data do ocorrido</label>
-            <input type="date" id="data" name="data" required>
+      <label class="checkbox">
+        <input type="checkbox" name="captcha" required>
+        Eu não sou um robô
+      </label>
 
-            <label for="hora">Hora aproximada</label>
-            <input type="time" id="hora" name="hora">
-
-            <label>
-                <input type="checkbox" name="captcha" required>
-                Eu não sou um robô
-            </label>
-
-            <button type="submit">Enviar denúncia</button>
-        </form>
-    </div>
+      <button type="submit">Enviar denúncia</button>
+    </form>
+  </div>
 </body>
 </html>
