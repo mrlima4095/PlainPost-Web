@@ -118,26 +118,15 @@ window.onload = () => {
         },
         coins: async () => {
             const { status, response } = await fetchRequest("coins");
-            if (status == 200) {
-                const result = await Swal.fire({
-                    title: 'Suas moedas',
-                    html: `Você possui <strong>${response}</strong> moedas.`,
-                    icon: 'info',
-                    showDenyButton: true,
-                    denyButtonText: 'Enviar Moedas',
-                    showCancelButton: true,
-                    cancelButtonText: 'Obter Moedas',
-                    confirmButtonText: 'Fechar',
-                    reverseButtons: true
-                });
+
+            if (status === 200) {
+                const result = await Swal.fire({ title: '💰 Suas moedas', html: `Você possui <strong>${response}</strong> moedas.`, icon: 'info', showDenyButton: true, denyButtonText: '📤 Enviar Moedas', showCancelButton: true, cancelButtonText: '🛒 Obter Moedas', confirmButtonText: '❌ Fechar', reverseButtons: true });
 
                 if (result.isDenied) return buttons.transfer();
                 else if (result.dismiss === Swal.DismissReason.cancel) return buttons.buycoins();
-            } else if (status == 404) {
-                window.location.href = "login";
-            } else {
-                Swal.fire('Erro', 'Erro ao consultar.', 'error');
             }
+            else if (status === 404) window.location.href = "login";
+            else Swal.fire({ title: 'Erro', text: 'Erro ao consultar.', icon: 'error' }); 
         },
         block: async () => {
             const { value: user } = await Swal.fire({
