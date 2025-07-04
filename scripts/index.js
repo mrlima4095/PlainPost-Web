@@ -56,7 +56,7 @@ window.onload = () => {
             const { value: content, isConfirmed: isContentConfirmed } = await Swal.fire({ title: '📝 Mensagem:', input: 'text', inputPlaceholder: 'Escreva sua mensagem', showCancelButton: true, confirmButtonText: 'Avançar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'A mensagem não pode estar vazia!'; } });
             if (!isContentConfirmed) return;
 
-            const confirm = await Swal.fire({ title: 'Enviar mensagem', html: `Destinatário: <strong>${target}</strong><br><br>Conteúdo: <em>${content}</em>`, icon: 'question', showCancelButton: true, confirmButtonText: '✅ Enviar', cancelButtonText: '❌ Cancelar' }); 
+            const confirm = await Swal.fire({ title: 'Enviar mensagem', html: `Destinatário: <strong>${target}</strong><br><br>Conteúdo: <em>${content}</em>`, icon: 'question', showCancelButton: true, confirmButtonText: 'Enviar', cancelButtonText: 'Cancelar' }); 
             if (!confirm.isConfirmed) return Swal.fire({ title: 'Cancelado', text: 'Envio cancelado.', icon: 'info' });
 
             const { status } = await fetchRequest("send", { to: target, content });
@@ -68,7 +68,7 @@ window.onload = () => {
             refreshInbox(fetchRequest);
         },
         clear: async () => {
-            const confirm = await Swal.fire({ title: 'Tem certeza?', icon: 'warning', text: 'Tem certeza que deseja limpar suas mensagens?', showCancelButton: true, confirmButtonText: '✅ Apagar', cancelButtonText: '❌ Cancelar' });
+            const confirm = await Swal.fire({ title: 'Tem certeza?', icon: 'warning', text: 'Tem certeza que deseja limpar suas mensagens?', showCancelButton: true, confirmButtonText: 'Apagar', cancelButtonText: 'Cancelar' });
             if (!confirm.isConfirmed) return;
 
             const { status } = await fetchRequest("clear");
@@ -84,7 +84,7 @@ window.onload = () => {
             const { value: amount, isConfirmed: isAmountConfirmed } = await Swal.fire({ title: '💰 Quantidade:', input: 'number', inputPlaceholder: 'Quantas moedas?', inputAttributes: { min: 1 }, showCancelButton: true, confirmButtonText: 'Avançar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value || value <= 0) return 'Insira uma quantia válida!'; } });
             if (!isAmountConfirmed) return;
 
-            const confirm = await Swal.fire({ title: 'Confirmar transferência', icon: 'question', text: `Tem certeza que deseja enviar ${amount} moedas para ${target}?`, showCancelButton: true, confirmButtonText: '✅ Enviar', cancelButtonText: '❌ Cancelar' });
+            const confirm = await Swal.fire({ title: 'Confirmar transferência', icon: 'question', text: `Tem certeza que deseja enviar ${amount} moedas para ${target}?`, showCancelButton: true, confirmButtonText: 'Enviar', cancelButtonText: 'Cancelar' });
 
             if (!confirm.isConfirmed) return Swal.fire({ title: 'Cancelado', text: 'Transferência cancelada.', icon: 'info' });
 
@@ -110,7 +110,7 @@ window.onload = () => {
             const { status, response } = await fetchRequest("me");
 
             if (status === 200) {
-                const { isConfirmed } = await Swal.fire({ title: '👤 Seus dados', html: response.replaceAll("\\n", "<br>").replaceAll("\n", "<br>"), icon: 'info', showCancelButton: true, cancelButtonText: '❌ Fechar', confirmButtonText: '✏️ Mudar Biografia' });
+                const { isConfirmed } = await Swal.fire({ title: '👤 Seus dados', html: response.replaceAll("\\n", "<br>").replaceAll("\n", "<br>"), icon: 'info', showCancelButton: true, cancelButtonText: 'Fechar', confirmButtonText: 'Mudar Biografia' });
                 if (isConfirmed) buttons.changebio();
             }
             else if (status === 404) window.location.href = "login"; 
