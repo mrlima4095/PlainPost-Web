@@ -25,8 +25,8 @@
             <input type="password" id="senha" name="senha" required /><br /><br />
 
             <div id="captcha">
-                <input type="checkbox" id="naoSouRobo" />
-                <label for="naoSouRobo">Não sou um robô</label>
+                <input type="checkbox" id="not-robot" />
+                <label for="not-robot">Não sou um robô</label>
             </div>
 
             <div id="acoes">

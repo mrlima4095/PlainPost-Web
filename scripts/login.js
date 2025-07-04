@@ -1,7 +1,7 @@
 async function autenticar(api) {
     const usernameInput = document.getElementById("email");
     const passwordInput = document.getElementById("senha");
-    const captchaCheckbox = document.getElementById("naoSouRobo");
+    const captchaCheckbox = document.getElementById("not-robot");
 
     const username = usernameInput.value.trim();
     const password = passwordInput.value.trim();
