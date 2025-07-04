@@ -254,9 +254,6 @@ window.onload = () => {
             const result = await Swal.fire({ title: 'Tem certeza?', text: 'Deseja apagar sua conta definitivamente?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim, apagar', cancelButtonText: 'Cancelar' });
             if (!result.isConfirmed) return;
 
-            const { value: password, isConfirmed } = await Swal.fire({ title: 'Confirme sua senha', input: 'password', inputPlaceholder: 'Digite sua senha', showCancelButton: true, confirmButtonText: 'Confirmar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'Senha é obrigatória!'; } }); 
-            if (!isConfirmed) return;
-
             const finalConfirm = await Swal.fire({ title: 'Confirmação final', text: 'Tem certeza absoluta que deseja apagar sua conta? Esta ação não pode ser desfeita.', icon: 'warning', showCancelButton: true, confirmButtonText: 'Apagar conta', cancelButtonText: 'Cancelar' }); 
             if (!finalConfirm.isConfirmed) return;
 
