@@ -221,8 +221,7 @@ window.onload = () => {
 
                 if (res.status === 200) Swal.fire({ title: 'Solicitado!', text: 'Aguarde o contato da administração.', icon: 'success' });
                 else Swal.fire({ title: 'Erro', text: 'Não foi possível enviar sua solicitação.', icon: 'error' });
-            } catch (error) { Swal.fire({ title: 'Erro de rede', text: 'Não foi possível se conectar ao servidor.', icon: 'error' });
-            }
+            } catch (error) { Swal.fire({ title: 'Erro de rede', text: 'Não foi possível se conectar ao servidor.', icon: 'error' }); }
         },
         signout: async () => { fetchRequest("logout"); },
         signoff: async () => {
