@@ -13,7 +13,7 @@ async function autenticar(api) {
         const resposta = await fetch("https://archsource.xyz/api/" + api, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username, password }) });
 
         if (resposta.status === 200 || resposta.status === 201) { window.location.href = "/"; } 
-        else if (resposta.status === 401) { Swal.fire({ title: "Erro", text: "Usuário ou senha incorretos!", icon: "error" });  usernameInput.value = ""; passwordInput.value = ""; captchaCheckbox.checked = false; } 
+        else if (resposta.status === 401) { Swal.fire({ title: "Erro", text: "Usuário ou senha incorretos!", icon: "error" }); usernameInput.value = ""; passwordInput.value = ""; } 
         else if (resposta.status === 409) { Swal.fire({ title: "Erro", text: "Este nome de usuário já está em uso!", icon: "error"}); }
     } 
     catch (erro) { Swal.fire({ title: "Erro", text: "Erro na conexão com o servidor.", icon: "error" }); }
