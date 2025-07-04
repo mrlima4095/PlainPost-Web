@@ -105,8 +105,7 @@ window.onload = () => {
             else Swal.fire({ title: 'Erro', text: 'Erro ao transferir.', icon: 'error' });
         },
         search: async () => {
-            const { value: user, isConfirmed } = await Swal.fire({ title: '🔍 Quem deseja procurar?', input: 'text', inputPlaceholder: 'Nome de usuário', showCancelButton: true, confirmButtonText: 'Buscar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'Insira um nome de usuário!'; } });
-            if (!isConfirmed) return;
+            const user = document.getElementById("search_msgs").value.trim();
 
             const { status, response } = await fetchRequest("search", { user });
 
@@ -349,7 +348,12 @@ window.onload = () => {
             msg.style.display = texto.includes(termo) ? "" : "none";
         });
     });
-
+    document.getElementById("search_msgs").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            buttons.search();
+        }
+    });
 
     refreshInbox(fetchRequest);
     setInterval(() => refreshInbox(fetchRequest), 60000);
