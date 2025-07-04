@@ -16,9 +16,8 @@ async function autenticar(api) {
         else if (resposta.status === 401) { Swal.fire({ title: "Erro", text: "Usuário ou senha incorretos!", icon: "error" });  usernameInput.value = ""; passwordInput.value = ""; captchaCheckbox.checked = false; } 
         else if (resposta.status === 409) { Swal.fire({ title: "Erro", text: "Este nome de usuário já está em uso!", icon: "error"}); }
     } 
-    catch (erro) Swal.fire({ title: "Erro", text: "Erro na conexão com o servidor.", icon: "error" }); 
+    catch (erro) { Swal.fire({ title: "Erro", text: "Erro na conexão com o servidor.", icon: "error" }); }
 }
-
 
 window.onload = () => {
     const form = document.querySelector("form");
