@@ -20,12 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         async function listar() {
-            const res = await fetch("/api/short", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ action: "list" }),
-                credentials: "include"
-            });
+            const res = await fetch("/api/short", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "list" }), credentials: "include" });
 
             const data = await res.json();
             const container = document.getElementById("meusLinks");
@@ -50,33 +45,16 @@
         }
 
         async function apagar(id) {
-            const confirm = await Swal.fire({
-                title: '🗑️ Tem certeza?',
-                text: 'Você deseja excluir este link encurtado?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Sim, excluir!',
-                cancelButtonText: 'Cancelar'
-            });
+            const confirm = await Swal.fire({ title: '🗑️ Tem certeza?', text: 'Você deseja excluir este link encurtado?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim, excluir!', cancelButtonText: 'Cancelar' });
 
             if (confirm.isConfirmed) {
-                const res = await fetch("/api/short", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                    body: JSON.stringify({ action: "delete", id: id })
-                });
+                const res = await fetch("/api/short", { method: "POST", headers: { "Content-Type": "application/json" }, credentials: "include", body: JSON.stringify({ action: "delete", id: id }) });
 
                 const data = await res.json();
 
-                if (res.status === 200) {
-                    Swal.fire({ title: '✅ Pronto!', text: data.response, icon: 'success' });
-                    listar();
-                } else if (res.status === 404) {
-                    Swal.fire({ title: '❌ Erro', text: 'Link não encontrado.', icon: 'error' });
-                } else {
-                    Swal.fire({ title: '❌ Erro', text: data.response || 'Erro desconhecido.', icon: 'error' });
-                }
+                if (res.status === 200) { Swal.fire({ title: 'Pronto!', text: "Link curto removido.", icon: 'success' }); listar(); } 
+                else if (res.status === 404) Swal.fire({ title: 'Erro', text: 'Link não encontrado.', icon: 'error' }); 
+                else Swal.fire({ title: 'Erro', text: data.response || 'Erro desconhecido.', icon: 'error' }); 
             }
         }
 
