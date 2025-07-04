@@ -100,7 +100,7 @@ window.onload = () => {
 
             if (status == 200) Swal.fire({ title: 'Sucesso', text: 'Moedas enviadas!', icon: 'success' }); 
             else if (status == 404) Swal.fire({ title: 'Erro', text: 'O destinatário não foi encontrado!', icon: 'error' });
-            else if (status == 404) Swal.fire({ title: 'Erro', text: 'Você só pode transferir moedas entre contas do PlainPost!', icon: 'error' });
+            else if (status == 405) Swal.fire({ title: 'Erro', text: 'Você só pode transferir moedas entre contas do PlainPost!', icon: 'error' });
             else if (status == 406) Swal.fire({ title: 'Erro', text: 'A quantia de moedas a ser enviada é inválida!', icon: 'error' });
             else if (status == 402) Swal.fire({ title: 'Erro', text: 'Saldo insuficiente!', icon: 'error' }); 
             else Swal.fire({ title: 'Erro', text: 'Erro ao transferir.', icon: 'error' });
