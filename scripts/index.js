@@ -146,7 +146,7 @@ window.onload = () => {
 
             const { status } = await fetchRequest("unblock", { user_to_unblock: user });
 
-            if (status === 200) Swal.fire({ title: 'Sucesso', text: `Usuário <strong>${user}</strong> desbloqueado!`, icon: 'success' }); 
+            if (status === 200) Swal.fire({ title: 'Sucesso', html: `Usuário <strong>${user}</strong> desbloqueado!`, icon: 'success' }); 
             else if (status === 404) Swal.fire({ title: 'Erro', text: 'Usuário não está bloqueado.', icon: 'error' }); 
             else Swal.fire({ title: 'Erro', text: 'Erro ao desbloquear usuário.', icon: 'error' });
         },
