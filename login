@@ -24,6 +24,11 @@
             <label for="senha">Senha:</label><br />
             <input type="password" id="senha" name="senha" required /><br /><br />
 
+            <div id="captcha">
+                <input type="checkbox" id="naoSouRobo" />
+                <label for="naoSouRobo">Não sou um robô</label>
+            </div>
+
             <div id="acoes">
                 <button type="button">Entrar</button>
                 <button type="button">Registrar-se</button>
