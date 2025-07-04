@@ -225,14 +225,22 @@ window.onload = () => {
         },
         signout: async () => { fetchRequest("logout"); },
         signoff: async () => {
-            const result = await Swal.fire({ title: "Tem certeza?", text: "Tem certeza que deseja apagar sua conta?", icon: "warning", showCancelButton: true, confirmButtonText: "Sim, apagar", cancelButtonText: "Cancelar" });
+            const result = await Swal.fire({ title: 'Tem certeza?', text: 'Deseja apagar sua conta definitivamente?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Sim, apagar', cancelButtonText: 'Cancelar' });
             if (!result.isConfirmed) return;
+
+            const { value: password, isConfirmed } = await Swal.fire({ title: 'Confirme sua senha', input: 'password', inputPlaceholder: 'Digite sua senha', showCancelButton: true, confirmButtonText: 'Confirmar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'Senha é obrigatória!'; } }); 
+            if (!isConfirmed) return;
+
+            const finalConfirm = await Swal.fire({ title: 'Confirmação final', text: 'Tem certeza absoluta que deseja apagar sua conta? Esta ação não pode ser desfeita.', icon: 'warning', showCancelButton: true, confirmButtonText: 'Apagar conta', cancelButtonText: 'Cancelar' }); 
+            if (!finalConfirm.isConfirmed) return;
 
             const { status } = await fetchRequest("signoff");
             if (status === 200) {
-                await Swal.fire("Conta apagada!", "Sua conta foi removida com sucesso.", "success");
+                await Swal.fire({ title: 'Conta apagada!', text: 'Sua conta foi removida com sucesso.', icon: 'success' });
                 window.location.href = "login";
-            } else Swal.fire("Erro", "Erro ao apagar conta.", "error");
+            } 
+
+            else Swal.fire({ title: 'Erro', text: 'Erro ao apagar conta.', icon: 'error' });
         },
         back: () => window.location.href = "/",
         agent: () => window.location.href = "/agent",
