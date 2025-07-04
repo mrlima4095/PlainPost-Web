@@ -269,8 +269,9 @@ window.onload = () => {
         const [, hora, data, autor, conteudo] = match;
 
         Swal.fire({
-            title: "Mensagem",
+            title: "✉️ Mensagem",
             html: `<div style="text-align:center; white-space:pre-wrap;"><strong>Hora:</strong> ${hora}<br><strong>Data</strong>: ${data}<br><strong>Remetente</strong>: ${autor}<br><br>${conteudo}</div>`,
+            icon: "info",
             showConfirmButton: true,
             confirmButtonText: "Responder",
             showDenyButton: true,
