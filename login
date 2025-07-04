@@ -27,7 +27,7 @@
             <div id="captcha">
                 <input type="checkbox" id="not-robot" />
                 <label for="not-robot">Não sou um robô</label>
-            </div>
+            </div><br />
 
             <div id="acoes">
                 <button type="button">Entrar</button>
