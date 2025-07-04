@@ -192,18 +192,7 @@ window.onload = () => {
             else Swal.fire({ title: 'Erro', text: 'Ocorreu um erro interno.', icon: 'error' });
         },
         changepage: async () => {
-            const { value: file_id, isConfirmed } = await Swal.fire({
-                title: '📄 ID do arquivo',
-                input: 'text',
-                inputPlaceholder: 'Link do arquivo do BinDrop',
-                showCancelButton: true,
-                confirmButtonText: 'Alterar',
-                cancelButtonText: 'Cancelar',
-                inputValidator: (value) => {
-                    if (!value) return 'O ID não pode estar vazio!';
-                }
-            });
-
+            const { value: file_id, isConfirmed } = await Swal.fire({ title: '📄 ID do arquivo', input: 'text', inputPlaceholder: 'Link do arquivo do BinDrop', showCancelButton: true, confirmButtonText: 'Alterar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'O ID não pode estar vazio!'; } }); 
             if (!isConfirmed) return;
 
             const { status } = await fetchRequest("changepage", { file_id });
