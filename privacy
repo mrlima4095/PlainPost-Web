@@ -19,18 +19,16 @@
 
         <p>Ao criar uma conta no PlainPost, você declara estar ciente e de acordo com os seguintes termos:</p>
 
-        <ul>
-            <li><strong>1.</strong> Seus dados pessoais e credenciais são tratados com confidencialidade e não são compartilhados com terceiros.</li>
-            <li><strong>2.</strong> As mensagens enviadas são armazenadas com medidas de proteção contra acesso não autorizado.</li>
-            <li><strong>3.</strong> Após o envio, as mensagens não podem ser apagadas para garantir a integridade do sistema.</li>
-            <li><strong>4.</strong> Você pode bloquear e desbloquear usuários para evitar comunicações indesejadas.</li>
-            <li><strong>5.</strong> Utilizamos cookies para autenticação e segurança da sua sessão.</li>
-            <li><strong>6.</strong> Você pode excluir permanentemente sua conta, incluindo todas as mensagens, arquivos e dados associados.</li>
-            <li><strong>7.</strong> Arquivos enviados têm tempo de expiração e são removidos automaticamente quando esse tempo termina.</li>
-            <li><strong>8.</strong> Mecanismos internos são empregados para manter a segurança e privacidade de seus dados.</li>
-            <li><strong>9.</strong> O envio de scripts ou conteúdos maliciosos nos murais é expressamente proibido e bloqueado automaticamente.</li>
-            <li><strong>10.</strong> O uso de serviços adicionais, como assistente virtual ou encurtador de links, pode estar sujeito a limites e custos internos (ex: uso de moedas virtuais).</li>
-        </ul>
+        <strong>1.</strong> Seus dados pessoais e credenciais são tratados com confidencialidade e não são compartilhados com terceiros.
+        <strong>2.</strong> As mensagens enviadas são armazenadas com medidas de proteção contra acesso não autorizado.
+        <strong>3.</strong> Após o envio, as mensagens não podem ser apagadas para garantir a integridade do sistema.
+        <strong>4.</strong> Você pode bloquear e desbloquear usuários para evitar comunicações indesejadas.
+        <strong>5.</strong> Utilizamos cookies para autenticação e segurança da sua sessão.
+        <strong>6.</strong> Você pode excluir permanentemente sua conta, incluindo todas as mensagens, arquivos e dados associados.
+        <strong>7.</strong> Arquivos enviados têm tempo de expiração e são removidos automaticamente quando esse tempo termina.
+        <strong>8.</strong> Mecanismos internos são empregados para manter a segurança e privacidade de seus dados.
+        <strong>9.</strong> O envio de scripts ou conteúdos maliciosos nos murais é expressamente proibido e bloqueado automaticamente.
+        <strong>10.</strong> O uso de serviços adicionais, como assistente virtual ou encurtador de links, pode estar sujeito a limites e custos internos (ex: uso de moedas virtuais).
 
         <p>Se você não concorda com estes termos, não deve utilizar o serviço.</p>
         <p>Esta política pode ser atualizada a qualquer momento, e será responsabilidade do usuário revisá-la periodicamente.</p>
