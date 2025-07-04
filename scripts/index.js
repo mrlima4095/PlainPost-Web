@@ -129,34 +129,26 @@ window.onload = () => {
             else Swal.fire({ title: 'Erro', text: 'Erro ao consultar.', icon: 'error' }); 
         },
         block: async () => {
-            const { value: user } = await Swal.fire({
-                title: 'Bloquear usuário',
-                input: 'text',
-                inputPlaceholder: 'Nome de usuário',
-                showCancelButton: true
-            });
-            if (!user) return;
+            const { value: user, isConfirmed } = await Swal.fire({ title: '🚫 Bloquear usuário', input: 'text', inputPlaceholder: 'Nome de usuário', showCancelButton: true, confirmButtonText: 'Bloquear', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'Informe um nome de usuário!'; } });
+            if (!isConfirmed) return;
 
-            const { status, response } = await fetchRequest("block", { user_to_block: user });
-            if (status === 200) Swal.fire("Sucesso", "Usuário '" + user + "' bloqueado!", "success");
-            else if (status === 404) Swal.fire("Erro", "Usuário não encontrado.", "error");
-            else if (status === 405) Swal.fire("Erro", "Você não pode bloquear você mesmo.", "error");
-            else if (status === 409) Swal.fire("Atenção", "Usuário já está bloqueado.", "info");
-            else Swal.fire("Erro", "Erro ao bloquear usuário.", "error");
+            const { status } = await fetchRequest("block", { user_to_block: user });
+
+            if (status === 200) Swal.fire({ title: 'Sucesso', text: `Usuário '${user}' bloqueado!`, icon: 'success' });
+            else if (status === 404) Swal.fire({ title: 'Erro', text: 'Usuário não encontrado.', icon: 'error' });
+            else if (status === 405) Swal.fire({ title: 'Erro', text: 'Você não pode bloquear você mesmo.', icon: 'error' });
+            else if (status === 409) Swal.fire({ title: 'Atenção', text: 'Usuário já está bloqueado.', icon: 'info' });
+            else  Swal.fire({ title: 'Erro', text: 'Erro ao bloquear usuário.', icon: 'error' });
         },
         unblock: async () => {
-            const { value: user } = await Swal.fire({
-                title: 'Desbloquear usuário',
-                input: 'text',
-                inputPlaceholder: 'Nome de usuário',
-                showCancelButton: true
-            });
-            if (!user) return;
+            const { value: user, isConfirmed } = await Swal.fire({ title: '🔓 Desbloquear usuário', input: 'text', inputPlaceholder: 'Nome de usuário', showCancelButton: true, confirmButtonText: 'Desbloquear', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'Informe um nome de usuário!'; } });
+            if (!isConfirmed) return;
 
-            const { status, response } = await fetchRequest("unblock", { user_to_unblock: user });
-            if (status === 200) Swal.fire("Sucesso", "Usuário '" + user + "' desbloqueado!", "success");
-            else if (status === 404) Swal.fire("Erro", "Usuário não está bloqueado.", "error");
-            else Swal.fire("Erro", "Erro ao desbloquear usuário.", "error");
+            const { status } = await fetchRequest("unblock", { user_to_unblock: user });
+
+            if (status === 200) Swal.fire({ title: '✅ Sucesso', text: `Usuário '${user}' desbloqueado!`, icon: 'success' }); 
+            else if (status === 404) Swal.fire({ title: 'Erro', text: 'Usuário não está bloqueado.', icon: 'error' }); 
+            else Swal.fire({ title: 'Erro', text: 'Erro ao desbloquear usuário.', icon: 'error' });
         },
         read_blocked: async () => {
             if (inbox_type == "spam") { inbox_type = "inbox"; refreshInbox(fetchRequest) }
