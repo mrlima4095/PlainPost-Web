@@ -120,7 +120,7 @@ window.onload = () => {
             const { status, response } = await fetchRequest("coins");
 
             if (status === 200) {
-                const result = await Swal.fire({ title: '💰 Suas moedas', html: `Você possui <strong>${response}</strong> moedas.`, icon: 'info', showDenyButton: true, denyButtonText: '📤 Enviar Moedas', showCancelButton: true, cancelButtonText: '🛒 Obter Moedas', confirmButtonText: '❌ Fechar', reverseButtons: true });
+                const result = await Swal.fire({ title: '💰 Suas moedas', html: `Você possui <strong>${response}</strong> moedas.`, icon: 'info', showDenyButton: true, denyButtonText: 'Enviar Moedas', showCancelButton: true, cancelButtonText: 'Obter Moedas', confirmButtonText: 'Fechar', reverseButtons: true });
 
                 if (result.isDenied) return buttons.transfer();
                 else if (result.dismiss === Swal.DismissReason.cancel) return buttons.buycoins();
