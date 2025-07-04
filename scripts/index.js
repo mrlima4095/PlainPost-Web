@@ -210,6 +210,25 @@ window.onload = () => {
             else if (status === 410) Swal.fire({ title: 'Arquivo indisponível', text: 'O arquivo não está mais disponível.', icon: 'warning' });
             else Swal.fire({ title: 'Erro', text: 'Erro ao alterar a página.', icon: 'error' });
         },
+        changepass: async () => {
+            const { value: newpass, isConfirmed: confirmed } = await Swal.fire({
+                title: '🔒 Nova senha',
+                input: 'password',
+                inputPlaceholder: 'Digite a nova senha',
+                inputAttributes: { autocapitalize: 'off', autocorrect: 'off' },
+                showCancelButton: true,
+                confirmButtonText: 'Mudar senha',
+                cancelButtonText: 'Cancelar',
+                inputValidator: (value) => { if (!value) return 'A senha não pode estar vazia!'; if (value.length < 4) return 'A senha deve ter pelo menos 4 caracteres.'; }
+            });
+
+            if (!confirmed) return;
+
+            const { status } = await fetchRequest("changepass", { newpass });
+
+            if (status === 200) Swal.fire({ title: 'Sucesso', text: 'Sua senha foi alterada com sucesso!', icon: 'success' });
+            else Swal.fire({ title: 'Erro', text: 'Erro ao alterar a senha.', icon: 'error' });
+        },
         changebio: async () => {
             const { value: content, isConfirmed } = await Swal.fire({ title: '✏️ Alterar Biografia', input: 'text', inputPlaceholder: 'O que está pensando?', showCancelButton: true, confirmButtonText: 'Salvar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value) return 'Sua biografia não pode estar vazia!'; } });
             if (!isConfirmed) return;
