@@ -84,7 +84,7 @@ window.onload = () => {
             const { value: amount, isConfirmed: isAmountConfirmed } = await Swal.fire({ title: '💰 Quantidade:', input: 'number', inputPlaceholder: 'Quantas moedas?', inputAttributes: { min: 1 }, showCancelButton: true, confirmButtonText: 'Avançar', cancelButtonText: 'Cancelar', inputValidator: (value) => { if (!value || value <= 0) return 'Insira uma quantia válida!'; } });
             if (!isAmountConfirmed) return;
 
-            const confirm = await Swal.fire({ title: 'Confirmar transferência', icon: 'warning', text: `Tem certeza que deseja enviar ${amount} moedas para ${target}?`, showCancelButton: true, confirmButtonText: '✅ Enviar', cancelButtonText: '❌ Cancelar' });
+            const confirm = await Swal.fire({ title: 'Confirmar transferência', icon: 'question', text: `Tem certeza que deseja enviar ${amount} moedas para ${target}?`, showCancelButton: true, confirmButtonText: '✅ Enviar', cancelButtonText: '❌ Cancelar' });
 
             if (!confirm.isConfirmed) return Swal.fire({ title: 'Cancelado', text: 'Transferência cancelada.', icon: 'info' });
 
