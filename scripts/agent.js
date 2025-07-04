@@ -44,7 +44,7 @@ async function request() {
             credentials: "include"
         });
 
-        if (res.status === 403) {
+        if (res.status === 402) {
             Swal.fire("Erro", "Saldo insuficiente para continuar.", "error");
             thinking.textContent = "❌ Saldo insuficiente.";
             return;
