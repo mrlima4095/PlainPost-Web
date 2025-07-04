@@ -6,38 +6,17 @@ async function autenticar(api) {
     const username = usernameInput.value.trim();
     const password = passwordInput.value.trim();
 
-    // Verifica se os campos estão preenchidos
-    if (!username || !password) {
-        Swal.fire("Campos obrigatórios", "Preencha todos os campos.", "warning");
-        return;
-    }
-
-    // Verifica se o usuário marcou o checkbox
-    if (!captchaCheckbox.checked) {
-        Swal.fire("Verificação necessária", "Marque a caixa 'Não sou um robô' para continuar.", "warning");
-        return;
-    }
+    if (!username || !password) { Swal.fire({ title: "Campos obrigatórios", text: "Preencha todos os campos.", icon: "warning" }); return; }
+    if (!captchaCheckbox.checked) { Swal.fire({ title: "Verificação necessária", text: "Marque a caixa 'Não sou um robô' para continuar.", icon: "warning" }); return; }
 
     try {
-        const resposta = await fetch("https://archsource.xyz/api/" + api, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password })
-        });
+        const resposta = await fetch("https://archsource.xyz/api/" + api, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username, password }) });
 
-        if (resposta.status === 200 || resposta.status === 201) {
-            window.location.href = "/";
-        } else if (resposta.status === 401) {
-            Swal.fire("Erro", "Usuário ou senha incorretos!", "error");
-            usernameInput.value = "";
-            passwordInput.value = "";
-            captchaCheckbox.checked = false;
-        } else if (resposta.status === 409) {
-            Swal.fire("Erro", "Este nome de usuário já está em uso!", "error");
-        }
-    } catch (erro) {
-        Swal.fire("Erro", "Erro na conexão com o servidor.", "error");
-    }
+        if (resposta.status === 200 || resposta.status === 201) { window.location.href = "/"; } 
+        else if (resposta.status === 401) { Swal.fire({ title: "Erro", text: "Usuário ou senha incorretos!", icon: "error" });  usernameInput.value = ""; passwordInput.value = ""; captchaCheckbox.checked = false; } 
+        else if (resposta.status === 409) { Swal.fire({ title: "Erro", text: "Este nome de usuário já está em uso!", icon: "error"}); }
+    } 
+    catch (erro) Swal.fire({ title: "Erro", text: "Erro na conexão com o servidor.", icon: "error" }); 
 }
 
 
