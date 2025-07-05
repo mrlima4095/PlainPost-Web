@@ -60,12 +60,10 @@
                     <input type="time" id="hora" name="hora">
                 </div>
             </div>
-            <div id="acoes">
-                <input type="checkbox" name="captcha" required>
-                <label for="captcha">Eu não sou um robô</label>
-            </div>
-
-            <br><br>
+            <div id="captcha">
+                <input type="checkbox" id="not-robot" />
+                <label for="not-robot">Não sou um robô</label>
+            </div><br><br>
 
             <p><strong>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</strong></p><a href="/docs/report">Ler mais sobre denúncias</a><br><br>
             
