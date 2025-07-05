@@ -1,140 +1,91 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Formulário de Denúncia</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: sans-serif;
-    }
+    <meta charset="UTF-8">
+    <title>Denunciar usuario</title>
 
-    body {
-      background-color: #f0f2f5;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-    }
 
-    #container {
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
-      width: 100%;
-    }
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <style>
+        
+        label { font-weight: bold; color: #444; margin-bottom: 5px; }
 
-    h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 20px;
-    }
+        select, input[type="text"], input[type="url"], input[type="date"], input[type="time"], textarea { padding: 10px; border: 1px solid #ccc; border-radius: 6px; width: 100%; }
+        textarea { resize: vertical; min-height: 100px; }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+        .row { display: flex; gap: 10px; }
+        .row input[type="date"], .row input[type="time"] { flex: 1; }
 
-    label {
-      font-weight: bold;
-      color: #444;
-      margin-bottom: 5px;
-    }
+        .checkbox { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
 
-    select, input[type="text"], input[type="url"],
-    input[type="date"], input[type="time"], textarea {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      width: 100%;
-    }
+        .info-text { font-size: 0.9em; background-color: #f9f9f9; border-left: 4px solid #3498db; padding: 10px; border-radius: 4px; color: #333; display: none; }
+    </style>
 
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .row {
-      display: flex;
-      gap: 10px;
-    }
-
-    .row input[type="date"],
-    .row input[type="time"] {
-      flex: 1;
-    }
-
-    button {
-      padding: 12px;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    button:hover {
-      background-color: #2980b9;
-    }
-
-    .checkbox {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.95rem;
-    }
-  </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-  <div id="container">
-    <h2>Denunciar Conteúdo</h2>
-    <form action="/api/report" method="POST">
-      
-      <label for="tipo">O que você deseja denunciar?</label>
-      <select id="tipo" name="tipo" required>
-        <option value="" disabled selected>Selecione uma opção</option>
-        <option value="mensagem">Mensagem</option>
-        <option value="mural">Mural</option>
-        <option value="arquivo_bdrop">Arquivo do BinDrop</option>
-        <option value="link_curto">Link curto para locais inseguros</option>
-        <option value="outros">Outros</option>
-      </select>
+    <div id="container">
+        <h2>Denunciar Conteúdo</h2>
+        <form action="/api/report" method="POST">
+            <label for="tipo">O que você deseja denunciar?</label>
+            <select id="tipo" name="tipo" required onchange="mostrarAjuda()">
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="mensagem">Mensagem</option>
+                <option value="mural">Mural</option>
+                <option value="arquivo_bdrop">Arquivo do BinDrop</option>
+                <option value="link_curto">Link curto para locais inseguros</option>
+                <option value="outros">Outros</option>
+            </select>
 
-      <label for="id_denunciado">ID do usuário denunciado</label>
-      <input type="text" id="id_denunciado" name="id_denunciado" placeholder="Apenas contas do PlainPost" required>
+            <div id="ajuda" class="info-text"></div>
 
-      <label for="descricao">Descreva o ocorrido</label>
-      <textarea id="descricao" name="descricao" placeholder="Explique detalhadamente o que aconteceu." required></textarea>
+            <label for="id_denunciado">ID do usuário denunciado</label>
+            <input type="text" id="id_denunciado" name="id_denunciado" placeholder="Apenas contas do PlainPost" required>
 
-      <label for="provas">Links com provas (opcional)</label>
-      <input type="url" id="provas" name="provas" placeholder="https://exemplo.com/prova">
+            <label for="descricao">Descreva o ocorrido</label>
+            <textarea id="descricao" name="descricao" placeholder="Explique detalhadamente o que aconteceu." required></textarea>
 
-      <div class="row">
-        <div>
-          <label for="data">Data do ocorrido</label>
-          <input type="date" id="data" name="data" required>
-        </div>
-        <div>
-          <label for="hora">Hora aproximada</label>
-          <input type="time" id="hora" name="hora">
-        </div>
-      </div>
+            <label for="provas">Links com provas (opcional)</label>
+            <input type="url" id="provas" name="provas" placeholder="https://exemplo.com/prova">
 
-      <label class="checkbox">
-        <input type="checkbox" name="captcha" required>
-        Eu não sou um robô
-      </label>
+            <div class="row">
+                <div>
+                    <label for="data">Data do ocorrido</label>
+                    <input type="date" id="data" name="data" required>
+                </div>
+                <div>
+                    <label for="hora">Hora aproximada</label>
+                    <input type="time" id="hora" name="hora">
+                </div>
+            </div>
 
-      <button type="submit">Enviar denúncia</button>
-    </form>
-  </div>
+            <label class="checkbox">
+                <input type="checkbox" name="captcha" required>
+                Eu não sou um robô
+            </label>
+
+            <button type="submit">Enviar denúncia</button>
+        </form>
+    </div>
+
+    <script>
+        function mostrarAjuda() {
+            const tipo = document.getElementById("tipo").value;
+            const ajuda = document.getElementById("ajuda");
+            ajuda.style.display = "block";
+
+            const mensagens = {
+                mensagem: "Ao denunciar uma mensagem é importante que você não apague ela, pois durante a investigação verificaremos ela em nosso banco de dados. Apagá-la atrapalhará a investigação e o caso pode ser desconsiderado.",
+                mural: "Recomendamos que envie fotos com a página carregada e, se conseguir, salve o HTML e envie o link da cópia. Isso ajudará nas investigações caso o denunciado altere a página.",
+                arquivo_bdrop: "Cole o link do arquivo como prova. Se não souber a quem o arquivo pertence, preencha o campo de denunciado como 'desconhecido'.",
+                link_curto: "Cole o link como prova. Se não souber a quem ele pertence, preencha o campo de denunciado como 'desconhecido'.",
+                outros: ""
+            };
+
+            ajuda.textContent = mensagens[tipo] || "";
+            if (!mensagens[tipo]) ajuda.style.display = "none";
+        }
+    </script>
 </body>
 </html>
