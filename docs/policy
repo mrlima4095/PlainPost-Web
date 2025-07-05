@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PlainPost</title>
 
-    <link rel="../stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -31,7 +31,7 @@
             
         <p>Se você não concorda com estes termos, não deve utilizar o serviço.</p>
         <p>Esta política pode ser atualizada a qualquer momento, e será responsabilidade do usuário revisá-la periodicamente.</p><br><br>
-        
+
         <button id="back" type="button">Retornar</button>
     </div>
 </body>
