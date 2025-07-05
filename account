@@ -32,7 +32,8 @@
             <button id="unblock" type="submit">✅ Desbloquear</button>
         </div>
         <button id="view_blocks" type="submit">📛 Bloqueados</button>
-        <br><a href="report">Denunciar usuário</a><br>
+        <button id="report" type="submit">Denunciar usuário</button>
+
 
         <br><h3>🔒 Segurança da Conta</h3><br>
         <div class="acoes">
@@ -40,6 +41,8 @@
             <button id="signoff" type="submit">🗑️ Apagar Conta</button>
         </div>
         <button id="changepass" type="submit">🔑 Trocar Senha</button>
+
+        <br><a href="report">Denunciar usuário</a><br>
     </div>
 </body>
 </html>

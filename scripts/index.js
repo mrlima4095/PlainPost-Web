@@ -271,6 +271,7 @@ window.onload = () => {
         agent: () => window.location.href = "/agent",
         drive: () => window.location.href = "/drive",
         short: () => window.location.href = "/links",
+        report: () => window.location.href = "/report",
         account: () => window.location.href = "/account",
         security: () => window.location.href = "/security",
         gitea: () => window.location.href = "https://gitea.archsource.xyz",
