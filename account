@@ -44,7 +44,6 @@
         <div id="acoes" class="acoes-flutuante">
             <button id="back" type="submit">⬅️</button>
         </div>
-        <div id="inbox" style="display: none;"></div>
     </div>
 </body>
 </html>
