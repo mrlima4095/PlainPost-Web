@@ -28,10 +28,7 @@
     <div id="container">
         <h2>Denunciar Conteúdo</h2>
 
-        <p>Não realize mais de uma denúncia sobre o mesmo caso!</p>
-        <p>Fazer denúncias falsas ou obstruir investigações pode trazer-lhes problemas.</p>
-        <p>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</p>
-            
+
         <form action="/api/report" method="POST">
             <label for="tipo">O que você deseja denunciar?</label>
             <select id="tipo" name="tipo" required onchange="mostrarAjuda()">
@@ -69,6 +66,11 @@
                 <input type="checkbox" name="captcha" required>
                 Eu não sou um robô
             </label><br><br>
+
+            <p>Não realize mais de uma denúncia sobre o mesmo caso!</p>
+            <p>Fazer denúncias falsas ou obstruir investigações pode trazer-lhes problemas.</p>
+            <p>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</p><br><br>
+            
 
             <button type="submit">Enviar denúncia</button>
         </form>
