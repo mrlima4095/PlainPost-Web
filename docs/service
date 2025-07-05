@@ -32,7 +32,7 @@
         <p><b>12.</b> </p>
         <br><br>
             
-        <button id="back" type="button">Retornar</button>
+        <button id="back" type="button">⬅️ Retornar</button>
     </div>
 </body>
 </html>

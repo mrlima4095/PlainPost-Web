@@ -32,7 +32,7 @@
         <p>Se você não concorda com estes termos, não deve utilizar o serviço.</p>
         <p>Esta política pode ser atualizada a qualquer momento, e será responsabilidade do usuário revisá-la periodicamente.</p><br><br>
         
-        <button id="back" type="button">Retornar</button>
+        <button id="back" type="button">⬅️ Retornar</button>
     </div>
 </body>
 </html>
