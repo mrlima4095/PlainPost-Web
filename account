@@ -43,7 +43,7 @@
         <button id="changepass" type="submit">🔑 Trocar Senha</button>
 
         <br><a href="docs">Documentos</a><br>
-        <div id="acoes" class="acoes-flutuantes">
+        <div id="acoes" class="acoes-flutuante">
             <button id="back" type="submit">⬅️ Retornar</button>
         </div>
     </div>
