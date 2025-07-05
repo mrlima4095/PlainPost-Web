@@ -33,11 +33,11 @@
             <label for="tipo">O que você deseja denunciar?</label>
             <select id="tipo" name="tipo" required onchange="mostrarAjuda()">
                 <option value="" disabled selected>Selecione uma opção</option>
-                <option value="mensagem">Mensagem</option>
+                <option value="mail">Mensagem</option>
                 <option value="mural">Mural</option>
-                <option value="arquivo_bdrop">Arquivo do BinDrop</option>
-                <option value="link_curto">Link curto para locais inseguros</option>
-                <option value="outros">Outros</option>
+                <option value="file">Arquivo do BinDrop</option>
+                <option value="short_link">Link curto para locais inseguros</option>
+                <option value="others">Outros</option>
             </select>
 
             <div id="ajuda" class="info-text"></div>
