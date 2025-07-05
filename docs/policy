@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PlainPost</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        window.onload = () => { document.getElementById("back").addEventListener("click", () => { window.location.href = "/login"; }); };
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h2>Política de Privacidade</h2><br>
+
+        <p>Ao criar uma conta no PlainPost, você declara estar ciente e de acordo com os seguintes termos:</p>
+        <p><b>1.</b> Seus dados e credenciais são criptografados e não os compartilhamos com ninguém;</p>
+        <p><b>2.</b> Após o envio, as mensagens não podem ser apagadas para garantir a integridade do sistema;</p>
+        <p><b>3.</b> A administração não fará nenhum serviço de moderação de mensagens;</p>
+        <p><b>4.</b> Você pode bloquear e desbloquear usuários para evitar comunicações indesejadas;</p>
+        <p><b>5.</b> Arquivos maiores que 20 MB carregados para o BinDrop somem após 5 horas a menos que você compre adicionais de tempo para ele.</p>
+        <p><b>6.</b> O envio de scripts ou conteúdos maliciosos nos murais é expressamente proibido e bloqueado automaticamente;</p>
+        <p><b>7.</b> Não nos responsabilizamos, em nenhuma hipótese, sobre como os usuários utilizam as moedas virtuais deste serviço;</p>
+        <p><b>8.</b> O uso de recursos adicionais, como o Agente S. (Modelo de linguagem de I.A), encurtador de links e outros, pode estar sujeito a limites e custos internos;</p>
+        <p><b>9.</b> Não realize upload de arquivos para o BinDrop que contenha dados sensíveis ou dados de terceiros sem autorização; Qualquer conteúdo ilegal encontrado ou denunciado pode ser encaminhado as autoridades locais;</p>
+        <p><b>10.</b> Você pode excluir permanentemente sua conta, incluindo todas as mensagens, arquivos e dados associados.</p>
+            
+        <p>Se você não concorda com estes termos, não deve utilizar o serviço.</p>
+        <p>Esta política pode ser atualizada a qualquer momento, e será responsabilidade do usuário revisá-la periodicamente.</p><br><br>
+        <button id="back" type="button">Retornar</button>
+    </div>
+</body>
+</html>
