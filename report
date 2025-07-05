@@ -67,9 +67,8 @@
                 Eu não sou um robô
             </label><br><br>
 
-            <p><strong>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</strong></p><br><br>
+            <p><strong>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</strong></p><br><br><a href="/docs/report">Ler mais sobre denúncias</a>
             
-
             <button type="submit">Enviar denúncia</button>
         </form>
     </div>
