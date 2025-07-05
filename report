@@ -61,10 +61,11 @@
                 </div>
             </div>
 
-            <label class="checkbox">
+            
                 <input type="checkbox" name="captcha" required>
-                Eu não sou um robô
-            </label><br><br>
+                <label for="captcha">Eu não sou um robô</label>
+
+            <br><br>
 
             <p><strong>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</strong></p><a href="/docs/report">Ler mais sobre denúncias</a><br><br>
             
