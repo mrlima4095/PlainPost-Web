@@ -9,9 +9,6 @@
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
-        window.onload = () => { document.getElementById("back").addEventListener("click", () => { window.document.href = "/account"; }); };
-    </script>
 </head>
 <body>
     <div id="container">
@@ -21,7 +18,7 @@
         <a href="service">Termos de Serviço</a><br>
         <a href="report">Sobre as denúncias</a><br><br>
             
-        <button id="back" type="button">Retornar</button>
+        <button id="back" href="/account" type="button">Retornar</button>
     </div>
 </body>
 </html>
