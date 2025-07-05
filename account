@@ -40,7 +40,7 @@
             <button id="signout" type="submit">🚪 Encerrar Sessão</button>
             <button id="signoff" type="submit">🗑️ Apagar Conta</button>
         </div>
-        <button id="changepass" type="submit">🔑 Trocar Senha</button>
+        <button id="changepass" type="submit">🔑 Trocar Senha</button><br><br>
 
         <br><a href="docs">Documentos</a><br>
         <div id="acoes" class="acoes-flutuante">
