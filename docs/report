@@ -17,7 +17,18 @@
     <div id="container">
         <h2>Sobre as denúncias</h2><br>
 
-        
+        <p></p>
+        <p><b>1.</b> Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</p>
+        <p><b>2.</b> Não denuncie o mesmo caso várias vezes;</p>
+        <p><b>3.</b> </p>
+        <p><b>4.</b> </p>
+        <p><b>5.</b> </p>
+        <p><b>6.</b> </p>
+        <p><b>7.</b> </p>
+        <p><b>8.</b> </p>
+        <p><b>9.</b> </p>
+        <p><b>10.</b> </p><br>
+            
         <button id="back" type="button">Retornar</button>
     </div>
 </body>

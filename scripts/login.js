@@ -9,6 +9,11 @@ async function autenticar(api) {
     if (!username || !password) { Swal.fire({ title: "Campos obrigatórios", text: "Preencha todos os campos.", icon: "warning" }); return; }
     if (!captchaCheckbox.checked) { Swal.fire({ title: "Verificação necessária", text: "Marque a caixa 'Não sou um robô' para continuar.", icon: "warning" }); return; }
 
+    if (api === "signup") {
+        const { value: accepted } = await Swal.fire({ title: "Aceite os Termos", html: `Você concorda com nossa <a href="docs/policy" target="_blank">Política de Privacidade</a> e <a href="docs/service" target="_blank">Termos de Serviço</a>?<br><br><input type="checkbox" id="termos" /><label for="termos"> Eu concordo</label>`, icon: "question", confirmButtonText: "Continuar", preConfirm: () => { const checkbox = document.getElementById("termos"); if (!checkbox.checked) { Swal.showValidationMessage("Você precisa aceitar os termos para continuar."); return false; } return true; } });
+        if (!accepted) return;
+    }
+
     try {
         const resposta = await fetch("https://archsource.xyz/api/" + api, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username, password }) });
 
