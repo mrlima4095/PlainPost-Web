@@ -19,7 +19,7 @@ async function autenticar(api) {
 
         if (resposta.status === 200 || resposta.status === 201) { window.location.href = "/"; } 
         else if (resposta.status === 401) { Swal.fire({ title: "Erro", text: "Usuário ou senha incorretos!", icon: "error" }); usernameInput.value = ""; passwordInput.value = ""; } 
-        else if (resposta.status === 409) { Swal.fire({ title: "Erro", text: "Este nome de usuário já está em uso!", icon: "error"}); }
+        else if (resposta.status === 409) { Swal.fire({ title: "Erro", text: "Este nome de usuário esta indisponível!", icon: "error"}); }
         
         captchaCheckbox.checked = false;
     } 
