@@ -68,7 +68,7 @@
             
             <div id="acoes" style="align: center;">
                 <button id="report" type="submit">🚩 Enviar denúncia</button>
-                <button id="back" type="submit">⬅️ Retornar</button>
+                <button id="back" type="button">⬅️ Retornar</button>
             </div>
         </form>
     </div>
