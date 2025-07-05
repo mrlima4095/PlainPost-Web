@@ -18,7 +18,23 @@ function mostrarAjuda() {
 window.onload = () => {
     const buttons = {
         report: async () => {
-            const response = await fetch("https://archsource.xyz/api/report", { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(report) });
+            const tipo = document.getElementById("tipo").value;
+            const target = document.getElementById("id_denunciado").value.trim();
+            const description = document.getElementById("descricao").value.trim();
+            const links = document.getElementById("provas").value.trim();
+            const date = document.getElementById("data").value;
+            const time = document.getElementById("hora").value;
+            const notRobot = document.getElementById("not-robot").checked;
+
+            if (!notRobot) {
+                Swal.fire("⚠️", "Por favor, confirme que você não é um robô.", "warning");
+                return;
+            }
+
+            if (!tipo || !target || !description || !date) { Swal.fire({ title: "Campos obrigatórios", text: "Preencha todos os campos.", icon: "warning" }); return; }
+            if (!notRobot.checked) { Swal.fire({ title: "Verificação necessária", text: "Marque a caixa 'Não sou um robô' para continuar.", icon: "warning" }); return; }
+            
+            const response = await fetch("https://archsource.xyz/api/report", { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: tipo, target: target, sender: "", description: description, links: links, date: date, time: time}) });
 
             const result = await response.json();
             
