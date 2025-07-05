@@ -69,7 +69,7 @@
 
             <p><strong>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</strong></p><a href="/docs/report">Ler mais sobre denúncias</a><br><br>
             
-            <div id="acoes">
+            <div id="acoes" style="align: center;">
                 <button id="report" type="submit">🚩 Enviar denúncia</button>
                 <button id="back" type="submit">⬅️ Retornar</button>
             </div>
