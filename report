@@ -41,18 +41,18 @@
 
             <div id="ajuda" class="info-text"></div>
 
-            <label for="id_denunciado">ID do usuário denunciado</label>
+            <label for="id_denunciado">ID do usuário denunciado *</label>
             <input type="text" id="id_denunciado" name="id_denunciado" placeholder="Apenas contas do PlainPost" required>
 
-            <label for="descricao">Descreva o ocorrido</label>
+            <label for="descricao">Descreva o ocorrido *</label>
             <textarea id="descricao" name="descricao" placeholder="Explique detalhadamente o que aconteceu." required></textarea>
 
-            <label for="provas">Links com provas (opcional)</label>
+            <label for="provas">Links com provas</label>
             <input type="url" id="provas" name="provas" placeholder="https://exemplo.com/prova">
 
             <div class="row">
                 <div>
-                    <label for="data">Data do ocorrido</label>
+                    <label for="data">Data do ocorrido *</label>
                     <input type="date" id="data" name="data" required>
                 </div>
                 <div>
