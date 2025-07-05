@@ -44,7 +44,7 @@
 
         <br><a href="docs">Documentos</a><br>
         <div id="acoes" class="acoes-flutuante">
-            <button id="back" type="submit">⬅️ Retornar</button>
+            <button id="back" type="submit">⬅️</button>
         </div>
     </div>
 </body>
