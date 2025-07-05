@@ -36,7 +36,7 @@
                 <option value="mail">Mensagem</option>
                 <option value="mural">Mural</option>
                 <option value="file">Arquivo do BinDrop</option>
-                <option value="short_link">Link curto para locais inseguros</option>
+                <option value="short_link">Link curto para locais suspeitos</option>
                 <option value="others">Outros</option>
             </select>
 
