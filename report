@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Denunciar usuário</title>
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PlainPost</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -20,13 +20,14 @@
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="scripts/report.js" defer></script>
 </head>
 <body>
     <div id="container">
-        <h2>Denunciar Conteúdo</h2>
-
-
-        <form action="/api/report" method="POST">
+        <header>
+            <h2>Denunciar Conteúdo</h2>
+        </header>
+        <form>
             <label for="tipo">O que você deseja denunciar?</label>
             <select id="tipo" name="tipo" required onchange="mostrarAjuda()">
                 <option value="" disabled selected>Selecione uma opção</option>
@@ -72,23 +73,5 @@
         </form>
     </div>
 
-    <script>
-        function mostrarAjuda() {
-            const tipo = document.getElementById("tipo").value;
-            const ajuda = document.getElementById("ajuda");
-            ajuda.style.display = "block";
-
-            const mensagens = {
-                mensagem: "Ao denunciar uma mensagem é importante que você não apague ela, pois durante a investigação verificaremos ela em nosso banco de dados. Apagá-la atrapalhará a investigação e o caso pode ser desconsiderado.",
-                mural: "Recomendamos que envie fotos com a página carregada e, se conseguir, salve o HTML e envie o link da cópia. Isso ajudará nas investigações caso o denunciado altere a página.",
-                arquivo_bdrop: "Cole o link do arquivo como prova. Se não souber a quem o arquivo pertence, preencha o campo de denunciado como 'desconhecido'.",
-                link_curto: "Cole o link como prova. Se não souber a quem ele pertence, preencha o campo de denunciado como 'desconhecido'.",
-                outros: ""
-            };
-
-            ajuda.textContent = mensagens[tipo] || "";
-            if (!mensagens[tipo]) ajuda.style.display = "none";
-        }
-    </script>
 </body>
 </html>
