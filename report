@@ -26,7 +26,7 @@
     <div id="container">
         <header>
             <h2>Denunciar Conteúdo</h2><br>
-            <p><b>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</b></p><p><a href="/docs/report">Ler mais sobre denúncias</a></p>
+            <p><b>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</b><br><a href="/docs/report">Ler mais sobre denúncias</a></p>
             <p>* Campo obrigatorio</p>
         </header>
         <form>
