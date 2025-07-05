@@ -28,12 +28,16 @@
                 <input type="checkbox" id="not-robot" />
                 <label for="not-robot">Não sou um robô</label>
             </div><br />
+            <div id="captcha">
+                <input type="checkbox" id="accept-terms" />
+                <label for="accept-terms">Li e concordo com a <a href="docs/policy">Política de Privacidade</a> e os <br><a href="docs/service">Termos de serviço</a>.</label>
+            </div>
 
             <div id="acoes">
                 <button type="button">Entrar</button>
                 <button type="button">Registrar-se</button>
             </div>
-            <br><a href="docs/policy">Política de Privacidade</a>
+            
         </form>
     </div>
 </body>
