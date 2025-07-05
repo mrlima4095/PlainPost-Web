@@ -21,7 +21,7 @@ window.onload = () => {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const tipo = document.getElementById("tipo").value;
+        const type = document.getElementById("tipo").value;
         const target = document.getElementById("id_denunciado").value.trim();
         const description = document.getElementById("descricao").value.trim();
         const links = document.getElementById("provas").value.trim();
@@ -32,7 +32,7 @@ window.onload = () => {
         if (!tipo || !target || !description || !date) { Swal.fire({ title: "Campos obrigatórios", text: "Preencha todos os campos.", icon: "warning" }); return; }
         if (!notRobot) { Swal.fire({ title: "Verificação necessária", text: "Marque a caixa 'Não sou um robô' para continuar.", icon: "warning" }); return; }
 
-        const response = await fetch("https://archsource.xyz/api/report", { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: tipo, target: target, description: description, links: links, date, time }) });
+        const response = await fetch("https://archsource.xyz/api/report", { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type, target, description, links: links, date, time }) });
 
         if (response.status === 200) { Swal.fire({ title: 'Sua denúncia foi enviada', text: 'Agradecemos sua denúncia!', icon: 'success' }); form.reset(); } 
         else if (response.status === 401) { await Swal.fire({ title: 'Erro', text: 'Você precisa estar logado para realizar uma denúncia!', icon: 'error' }); window.location.href = "/login"; }
