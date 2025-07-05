@@ -25,12 +25,7 @@ window.onload = () => {
             const date = document.getElementById("data").value;
             const time = document.getElementById("hora").value;
             const notRobot = document.getElementById("not-robot").checked;
-
-            if (!notRobot) {
-                Swal.fire("⚠️", "Por favor, confirme que você não é um robô.", "warning");
-                return;
-            }
-
+            
             if (!tipo || !target || !description || !date) { Swal.fire({ title: "Campos obrigatórios", text: "Preencha todos os campos.", icon: "warning" }); return; }
             if (!notRobot.checked) { Swal.fire({ title: "Verificação necessária", text: "Marque a caixa 'Não sou um robô' para continuar.", icon: "warning" }); return; }
             
