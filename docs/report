@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PlainPost</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="../stylesheet" href="style.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -15,7 +15,7 @@
 </head>
 <body>
     <div id="container">
-        <h2>Política de Privacidade</h2><br>
+        <h2>Sobre as denúncias</h2><br>
 
         
         <button id="back" type="button">Retornar</button>
