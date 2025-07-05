@@ -4,8 +4,8 @@ function mostrarAjuda() {
     ajuda.style.display = "block";
 
     const mensagens = {
-        mail: "Ao denunciar uma mensagem é importante que você não apague ela, pois durante a investigação verificaremos ela em nosso banco de dados. Apagá-la atrapalhará a investigação e o caso pode ser desconsiderado.",
-        mural: "Recomendamos que envie fotos com a página carregada e, se conseguir, salve o HTML e envie o link da cópia. Isso ajudará nas investigações caso o denunciado altere a página.",
+        mail: "Ao denunciar uma mensagem, salvamos todas as mensagens da sua caixa de entrada que foi enviada pelo denunciado. Cole o conteúdo da mensagem em que você esta denunciando em \"Descreva o ocorrido\" e certifique-se de que a mensagem original não foi apagada da sua caixa de entrada.",
+        mural: "Ao denunciar um mural, salvamos uma cópia dele. Se você demorar muito em fazer a denúncia o usuário pode mudar o mural e/ ou apagar o arquivo o que pode atrapalhar as investigações.",
         file: "Cole o link do arquivo como prova. Se não souber a quem o arquivo pertence, preencha o campo de denunciado como 'desconhecido'.",
         short_link: "Cole o link como prova. Se não souber a quem ele pertence, preencha o campo de denunciado como 'desconhecido'.",
         others: ""
