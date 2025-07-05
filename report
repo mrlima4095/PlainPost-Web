@@ -26,6 +26,7 @@
     <div id="container">
         <header>
             <h2>Denunciar Conteúdo</h2>
+            <p><b>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</b><a href="/docs/report">Ler mais sobre denúncias</a></p><br><br>
             <p>* Campo obrigatorio</p>
         </header>
         <form>
@@ -65,8 +66,6 @@
                 <label for="not-robot">Não sou um robô</label>
             </div><br><br>
 
-            <p><strong>Não iremos responder a denúncia. As informações que enviar vão ser usadas para efeitos de investigação, e entraremos em contato contigo caso sejam necessários mais detalhes. Recomendamos também que bloqueie o usuário.</strong></p><a href="/docs/report">Ler mais sobre denúncias</a><br><br>
-            
             <div id="acoes" style="align: center;">
                 <button id="report" type="submit">🚩 Enviar denúncia</button>
                 <button id="back" type="button">⬅️ Retornar</button>
