@@ -60,10 +60,10 @@
                     <input type="time" id="hora" name="hora">
                 </div>
             </div>
-
-            
+            <div id="acoes">
                 <input type="checkbox" name="captcha" required>
                 <label for="captcha">Eu não sou um robô</label>
+            </div>
 
             <br><br>
 
