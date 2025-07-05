@@ -32,7 +32,7 @@
             <button id="unblock" type="submit">✅ Desbloquear</button>
         </div>
         <button id="view_blocks" type="submit">📛 Bloqueados</button>
-        <button id="report" type="submit">Denunciar usuário</button>
+        <button id="report" type="submit">🚩 Denunciar usuário</button>
 
 
         <br><h3>🔒 Segurança da Conta</h3><br>
