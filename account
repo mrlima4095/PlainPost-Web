@@ -31,7 +31,8 @@
             <button id="block" type="submit">🚫 Bloquear Usuário</button>
             <button id="unblock" type="submit">✅ Desbloquear</button>
         </div>
-        <button id="view_blocks" type="submit">📛 Bloqueados</button><a href="report">Denunciar usuário</a>
+        <button id="view_blocks" type="submit">📛 Bloqueados</button>
+        <br><a href="report">Denunciar usuário</a><br>
 
         <br><h3>🔒 Segurança da Conta</h3><br>
         <div class="acoes">
