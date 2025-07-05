@@ -34,13 +34,10 @@ window.onload = () => {
 
         const response = await fetch("https://archsource.xyz/api/report", { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: tipo, target: target, description: description, links: links, date, time }) });
 
-        const result = await response.json();
-        const status = response.status;
-
-        if (status === 200) { Swal.fire({ title: 'Sua denúncia foi enviada', text: 'Agradecemos sua denúncia!', icon: 'success' }); form.reset(); } 
-        else if (status === 401) { await Swal.fire({ title: 'Erro', text: 'Você precisa estar logado para realizar uma denúncia!', icon: 'error' }); window.location.href = "/login"; }
-        else if (status === 404) Swal.fire({ title: 'Erro', text: 'A conta a ser denunciada não existe!', icon: 'error' }); 
-        else if (status === 405) Swal.fire({ title: 'Erro', text: 'Só é possível denunciar usuários do PlainPost!', icon: 'error' }); 
+        if (response.status === 200) { Swal.fire({ title: 'Sua denúncia foi enviada', text: 'Agradecemos sua denúncia!', icon: 'success' }); form.reset(); } 
+        else if (response.status === 401) { await Swal.fire({ title: 'Erro', text: 'Você precisa estar logado para realizar uma denúncia!', icon: 'error' }); window.location.href = "/login"; }
+        else if (response.status === 404) Swal.fire({ title: 'Erro', text: 'A conta a ser denunciada não existe!', icon: 'error' }); 
+        else if (response.status === 405) Swal.fire({ title: 'Erro', text: 'Só é possível denunciar usuários do PlainPost!', icon: 'error' }); 
         else Swal.fire({ title: 'Erro', text: result.response || 'Erro ao denunciar.', icon: 'error' }); 
     });
 
