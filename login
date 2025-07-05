@@ -33,7 +33,7 @@
                 <button type="button">Entrar</button>
                 <button type="button">Registrar-se</button>
             </div>
-            <br><div id="acoes"><a href="docs/policy">Política de Privacidade</a><a href="docs/service">Termos de serviço</a></div>
+            <br><a href="docs/policy">Política de Privacidade</a>
         </form>
     </div>
 </body>
