@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PlainPost</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        window.onload = () => { document.getElementById("back").addEventListener("click", () => { if (document.referrer) { window.location.href = document.referrer; } else { window.location.href = '/'; } }); };
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h2>Termos de serviço</h2><br>
+
+        <p></p>
+        <p><b>1.</b> Você pode enviar mensagens entre usuários do PlainPost e de outros serviços de mensagens;</p>
+        <p><b>2.</b> Não nos diz respeito como você usa as moedas virtuais disponibilizadas em nossos serviços;</p>
+        <p><b>3.</b> Caso algum usuário realize a compra de moedas virtuais e estorne o pagamento pelo banco, este pode ter TODAS suas moedas removidas e/ ou sua conta suspensa permanentemente.</p>
+        <p><b>4.</b> O BinDrop possui o limite máximo por arquivo de 100 MB;</p>
+        <p><b>5.</b> Arquivos carregados maiores que 20 MB, expiram em 5 horas, você pode pagar moedas virtuais em troca de mais tempo de vida;</p>
+        <p><b>6.</b> Após você apagar um arquivo do BinDrop ele é permanentemente deletado de nossos servidores, sem possibilidade de alguma de recuperação;</p>
+        <p><b>7.</b> Cada mensagem enviada ao Agente S. custa 1 moeda virtual;</p>
+        <p><b>8.</b> Caso ocorra uma falha de sistema, sua moeda é automaticamente devolvida;</p>
+        <p><b>9.</b> Se você fizer uma pergunta ao Agente S. e ele não respondeu corretamente, como uma redação ou pesquisa, notifique a conta 'admin' sobre, e não limpe o histórico pois avaliaremos e podemos devolver sua moeda virtual;</p>
+        <p><b>10.</b> O Agente S. é treinado para não responder sobre atividades ilegais e atitudes que prejudiquem outros ou a si mesmo. Neste caso nem perca seu tempo pedindo a avaliação do histórico pois não devolveremos nenhuma moeda;</p>
+        <p><b>11.</b> Gerar links curtos para paginas de conteúdo adulto, ilegal e com conteúdo malicioso pode causa a suspensão permanente da conta.</p>
+        <p><b>12.</b> </p>
+        <br>
+            
+        <button id="back" type="button">Retornar</button>
+    </div>
+</body>
+</html>
