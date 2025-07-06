@@ -223,7 +223,6 @@ window.onload = () => {
                 cancelButtonText: 'Cancelar',
                 inputValidator: (value) => { if (!value) return 'A senha não pode estar vazia!'; if (value.length < 4) return 'A senha deve ter pelo menos 4 caracteres.'; }
             });
-
             if (!confirmed) return;
 
             const { status } = await fetchRequest("changepass", { newpass });
