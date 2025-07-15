@@ -295,7 +295,7 @@ window.onload = () => {
         const texto = el.dataset.fullContent?.trim() || "";
         const messageId = el.dataset.messageId;
 
-        const match = texto.match(/^\[(\d{2}:\d{2}) (\d{2}\/\d{2}\/\d{4}) - ([^\]]+)\] (.+)$/);
+        const match = texto.match(/^\[(\d{2}:\d{2}) (\d{2}\/\d{2}\/\d{4}) - ([^\]]+)\] ([\s\S]+)$/);
         if (!match) return;
 
         const [, hora, data, autor, conteudo] = match;
