@@ -23,8 +23,17 @@ async function refreshInbox(fetchRequest) {
         for (const msg of response) {
             const msgDiv = document.createElement("div");
             msgDiv.className = "mensagem";
-            msgDiv.innerText = msg.content;
             msgDiv.dataset.messageId = msg.id;
+            msgDiv.dataset.fullContent = msg.content;
+
+            const content = msg.content;
+            if (content.length > 64) {
+                const preview = content.substring(0, 64);
+                msgDiv.innerHTML = `${preview}... <span class="ver-mais" style="color:#007BFF; cursor:pointer;">[Ver mais]</span>`;
+            } else {
+                msgDiv.innerText = content;
+            }
+
             inbox.appendChild(msgDiv);
         }
     }
