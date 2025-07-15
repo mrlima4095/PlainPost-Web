@@ -292,7 +292,7 @@ window.onload = () => {
         const el = e.target;
         if (!el || !el.classList.contains("mensagem")) return;
 
-        const texto = el.textContent.trim();
+        const texto = el.dataset.fullContent?.trim() || "";
         const messageId = el.dataset.messageId;
 
         const match = texto.match(/^\[(\d{2}:\d{2}) (\d{2}\/\d{2}\/\d{4}) - ([^\]]+)\] (.+)$/);
